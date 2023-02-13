@@ -1,9 +1,27 @@
+//Components
+import Footer from "./shared/Components/footer/footer";
+import Header from "./shared/Components/header/header"
+// Styleds
+import GlobalStyled from "./Styles/global";
+
 function App() {
 
   return (
-    <div className="text-3xl font-bold underline">
-      <h3>Hello World!</h3>
-    </div>
+    <>
+      <GlobalStyled />
+      
+      <header>
+        <Header />
+      </header>
+
+      <main>
+        <h4>teste</h4>
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+    </>
   )
 }
 
