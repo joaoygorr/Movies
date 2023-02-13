@@ -9,18 +9,12 @@ function App() {
   return (
     <>
       <GlobalStyled />
-      
-      <header>
-        <Header />
-      </header>
-
+      <Header />
       <main>
         <h4>teste</h4>
       </main>
 
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   )
 }
