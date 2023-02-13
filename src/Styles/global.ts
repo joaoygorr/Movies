@@ -1,0 +1,19 @@
+import { createGlobalStyle } from "styled-components";
+
+export default createGlobalStyle`
+    * {
+        margin: 0; 
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    #root main {
+        flex: 1 1 0;
+    }
+`;
