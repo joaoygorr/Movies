@@ -7,13 +7,14 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
-    #root {
+    .mainContent {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
+   
 
-    #root main {
+    .mainContent  main {
         flex: 1 1 0;
     }
 `;
