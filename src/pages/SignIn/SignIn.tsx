@@ -5,23 +5,29 @@ import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled
 const SignIn = () => {
     return (
         <ContainerSignIn>
-            <BoxSignIn className="grid grid-cols-1 grid-rows-3">
+            <BoxSignIn className="grid grid-cols-1 grid-rows-4">
+                <div>
+                    <h1 className="title">
+                        login
+                        <hr className="mt-3" />
+                    </h1>
+                </div>
                 <BoxInput>
                     <label>
                         usuário
-                        <input className="required:border-red-500" type="email" name="email" placeholder="you@example.com" />
+                        <input className="required:border-red-500 focus:ring-0" type="email" name="email" placeholder="you@example.com" />
                     </label>
                 </BoxInput>
 
                 <BoxInput>
                     <label>
                         senha
-                        <input className="required:border-red-500" type="password" name="password" />
+                        <input className="required:border-red-500 focus:ring-0" type="password" name="password" placeholder="you@example.com" />
                     </label>
                 </BoxInput>
 
                 <BoxButton>
-                    <Button typeButton="submit" textButton="entrar" classButton="bg-cyan-500" />
+                    <Button typeButton="submit" textButton="entrar" classButton="bg-indigo-700" />
                 </BoxButton>
             </BoxSignIn>
         </ContainerSignIn>
