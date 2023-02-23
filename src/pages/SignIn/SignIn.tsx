@@ -14,15 +14,15 @@ const SignIn = () => {
                 </div>
                 <BoxInput>
                     <label>
-                        usuário
-                        <input className="required:border-red-500 focus:ring-0" type="email" name="email" placeholder="you@example.com" />
+                        usuário*
+                        <input className="required:border-red-500 focus:ring-0" type="email" name="email" placeholder="Digite seu email..." />
                     </label>
                 </BoxInput>
 
                 <BoxInput>
                     <label>
-                        senha
-                        <input className="required:border-red-500 focus:ring-0" type="password" name="password" placeholder="you@example.com" />
+                        senha*
+                        <input className="required:border-red-500 focus:ring-0" type="password" name="password" placeholder="Digite sua senha..." />
                     </label>
                 </BoxInput>
 
