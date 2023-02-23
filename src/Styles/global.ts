@@ -7,6 +7,10 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
+    #root { 
+        background-color: #f3f3f3;
+    }
+
     .mainContent {
         display: flex;
         flex-direction: column;
