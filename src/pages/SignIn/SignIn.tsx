@@ -15,7 +15,7 @@ const SignIn = () => {
                 <BoxInput>
                     <label>
                         usuário*
-                        <input className="required:border-red-500 focus:ring-0" type="email" name="email" placeholder="Digite seu email..." />
+                        <input className="required:border-red-500 focus:ring-0" type="text" name="user" placeholder="Digite seu usuário..." />
                     </label>
                 </BoxInput>
 
