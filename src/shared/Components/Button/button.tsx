@@ -2,7 +2,7 @@ type Props = {
     typeButton: "submit" | "button" | "reset" | undefined;
     classButton: string;
     textButton: string;
-    clickButton?: (prop?: any, b?: any) => any;
+    clickButton?: () => any;
 }
 
 export const Button = ({ typeButton, classButton, textButton, clickButton }: Props) => {
