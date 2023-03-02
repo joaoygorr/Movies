@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 //api
 import { Instance } from "../../api/api";
 // interface
-import { IToken } from "../Interfaces/IToken";
 import { ISession } from "../Interfaces/ISession";
 
 
@@ -17,25 +16,19 @@ const getToken = async () => {
         .then(json => token = json);
 
     return token;
-}
+};
 
 
-const postSession = (data: string) => {
+const postSession = async (data: string) => {
     const dataToken = { request_token: data };
+
     const requestOptions: RequestInit = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToken)
     }
-
-    useEffect(() => {
-        try {
-            fetch(`${baseUrl}/authentication/session/new?api_key=${key}`, requestOptions);
-        } catch (error) {
-            console.log("🚀 ~ file: Session.ts:40 ~ useEffect ~ error:", error);
-        }
-    }, [])
-}
+    await fetch(`${baseUrl}/authentication/session/new?api_key=${key}`, requestOptions);
+};
 
 const postSessionWithLogin = (data: ISession) => {
     const requestOptions: RequestInit = {

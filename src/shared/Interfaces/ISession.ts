@@ -1,5 +1,5 @@
 export interface ISession {
     username: string, 
     password: string, 
-    request_token: string
+    request_token: string | undefined
 }

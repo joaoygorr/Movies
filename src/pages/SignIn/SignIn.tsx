@@ -5,11 +5,12 @@ import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled
 //class 
 import { Session } from "../../shared/Classes/session.class";
 //service
-import { SessionService } from "../../shared/services/Session";
+import { SessionService } from "../../shared/Services/Session";
 
 const SignIn = () => {
     const [user, setUser] = useState("");
     const [passoword, setPassword] = useState("");
+    const [token, setToken] = useState("");
 
     const handleChangeUser = (event: ChangeEvent<HTMLInputElement>) => {
         setUser(event.currentTarget.value);
@@ -21,12 +22,12 @@ const SignIn = () => {
 
     const handleSubmit = () => {
         const { getToken, postSession, postSessionWithLogin } = SessionService;
-        const token = getToken()
-        console.log("🚀 ~ file: SignIn.tsx:25 ~ handleSubmit ~ token:", token)
 
-        // const loginUser = new Session(user, passoword, token);
-        // postSessionWithLogin(loginUser)
-    }
+        getToken().then(json => setToken(json.request_token));
+        const loginUser = new Session(user, passoword, token);
+        
+        postSessionWithLogin(loginUser);
+    };
 
     return (
         <ContainerSignIn>
