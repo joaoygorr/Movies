@@ -5,7 +5,7 @@ import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled
 //class 
 import { Session } from "../../shared/Classes/session.class";
 //service
-import { SessionService } from "../../shared/Services/Session";
+import { SessionService } from "../../shared/services/Session";
 
 const SignIn = () => {
     const [user, setUser] = useState("");
@@ -25,7 +25,7 @@ const SignIn = () => {
 
         getToken().then(json => setToken(json.request_token));
         const loginUser = new Session(user, passoword, token);
-        
+
         postSessionWithLogin(loginUser);
     };
 
