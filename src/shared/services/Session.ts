@@ -8,9 +8,16 @@ import { ISession } from "../Interfaces/ISession";
 
 const { baseUrl, key } = Instance;
 
-const getToken = useCallback(async () => {
-    
-})
+const getToken = async () => {
+    let token: any;
+    const { baseUrl, key } = Instance;
+
+    await fetch(`${baseUrl}/authentication/token/new?api_key=${key}`)
+        .then(data => data.json())
+        .then(json => token = json);
+
+    return token;
+}
 
 
 const postSession = (data: string) => {
