@@ -1,32 +1,25 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState } from "react";
 //Styled
 import { Button } from "../../shared/Components/Button/button";
 import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled";
-//class 
-import { Session } from "../../shared/Classes/session.class";
 //service
 import { SessionService } from "../../shared/services/Session";
+//hoks
+import useForm from "../../shared/hooks/useForm";
 
 const SignIn = () => {
-    const [user, setUser] = useState("");
-    const [passoword, setPassword] = useState("");
     const [token, setToken] = useState("");
-
-    const handleChangeUser = (event: ChangeEvent<HTMLInputElement>) => {
-        setUser(event.currentTarget.value);
-    };
-
-    const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.currentTarget.value);
-    };
+    const [{ value }, handleChange] = useForm();
 
     const handleSubmit = () => {
         const { getToken, postSession, postSessionWithLogin } = SessionService;
+        getToken().then(json => console.log(json.request_token));
+    
 
-        getToken().then(json => setToken(json.request_token));
-        const loginUser = new Session(user, passoword, token);
+        value.request_token = token;
+        console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ value:", value)
 
-        postSessionWithLogin(loginUser);
+        // postSessionWithLogin(value);
     };
 
     return (
@@ -44,9 +37,9 @@ const SignIn = () => {
                         <input
                             className="required:border-red-500 focus:ring-0"
                             type="text"
-                            name="user"
+                            name="username"
                             placeholder="Digite seu usuário..."
-                            onChange={(event) => handleChangeUser(event)}
+                            onChange={handleChange}
                         />
                     </label>
                 </BoxInput>
@@ -59,7 +52,7 @@ const SignIn = () => {
                             type="password"
                             name="password"
                             placeholder="Digite sua senha..."
-                            onChange={(event) => handleChangePassword(event)}
+                            onChange={handleChange}
                         />
                     </label>
                 </BoxInput>
