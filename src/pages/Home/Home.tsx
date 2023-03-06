@@ -1,6 +1,5 @@
 //Components
-import Footer from "../../shared/Components/footer/footer";
-import Header from "../../shared/Components/header/header"
+import { Footer, Header } from "@/shared/Components";
 // Styleds
 
 function Home() {
@@ -8,7 +7,7 @@ function Home() {
   return (
     <div className="mainContent">
       <Header />
-      
+
       <main>
         <h4>ddeste</h4>
       </main>
