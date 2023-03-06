@@ -1,6 +1,6 @@
 import { Nav, MobileMenu, BoxLinks } from "./header.styled";
 
-export default function Header() {
+export const Header = () => {
     return (
         <header>
             <Nav>
