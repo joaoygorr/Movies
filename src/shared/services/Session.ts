@@ -1,27 +1,22 @@
-//api
 import { Instance } from "../../api/api";
-// interface
-import { ISession } from "../Interfaces/ISession";
+import { ISession } from "@/shared/Interfaces";
+import { Console } from "console";
 
 const { baseUrl, key } = Instance;
 
-const getToken = async () => {
-    let token: any;
+const getToken = () => {
     const { baseUrl, key } = Instance;
 
     try {
-        await fetch(`${baseUrl}/authentication/token/new?api_key=${key}`)
-            .then(data => data.json())
-            .then(json => token = json);
+        return fetch(`${baseUrl}/authentication/token/new?api_key=${key}`)
+            .then(data => data.json());
     } catch (error) {
         console.log("🚀 ~ file: Session.ts:18 ~ getToken ~ error:", error)
     }
-
-    return token;
 };
 
 
-const postSession = async (data: string) => {
+const postSession = (data: string) => {
     const dataToken = { request_token: data };
 
     const requestOptions: RequestInit = {
@@ -31,7 +26,7 @@ const postSession = async (data: string) => {
     };
 
     try {
-        await fetch(`${baseUrl}/authentication/session/new?api_key=${key}`, requestOptions);
+        fetch(`${baseUrl}/authentication/session/new?api_key=${key}`, requestOptions)
     } catch (error) {
         console.log("🚀 ~ file: Session.ts:33 ~ postSession ~ error:", error);
     }
@@ -45,8 +40,14 @@ const postSessionWithLogin = (data: ISession) => {
     }
 
     try {
-        fetch(`${baseUrl}/authentication/token/validate_with_login?api_key=${key}`, requestOptions);
-        console.log("login (postSessionWithLogin): ", requestOptions);
+        fetch(`${baseUrl}/authentication/token/validate_with_login?api_key=${key}`, requestOptions)
+            .then(res => {
+                if (res.ok) {
+                    postSession(data.request_token)
+                } 
+                
+            })
+
     } catch (error) {
         console.log("🚀 ~ file: Session.ts:40 ~ useEffect ~ error:", error);
     }

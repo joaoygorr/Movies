@@ -1,25 +1,24 @@
-import { useState } from "react";
+import { Button } from "@/shared/Components";
 //Styled
-import { Button } from "../../shared/Components/Button/button";
 import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled";
 //service
 import { SessionService } from "../../shared/services/Session";
 //hoks
 import useForm from "../../shared/hooks/useForm";
+import { IToken } from "@/shared/Interfaces";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
-    const [token, setToken] = useState("");
     const [{ value }, handleChange] = useForm();
 
     const handleSubmit = () => {
-        const { getToken, postSession, postSessionWithLogin } = SessionService;
-        getToken().then(json => console.log(json.request_token));
-    
-
-        value.request_token = token;
-        console.log("🚀 ~ file: SignIn.tsx:20 ~ handleSubmit ~ value:", value)
-
-        // postSessionWithLogin(value);
+        const { getToken, postSessionWithLogin } = SessionService;
+        getToken()?.then((token: IToken) => {
+            value.request_token = token.request_token;
+        });
+        
+        postSessionWithLogin(value);
     };
 
     return (
@@ -61,6 +60,7 @@ const SignIn = () => {
                     <Button typeButton="submit" textButton="entrar" clickButton={handleSubmit} classButton="bg-indigo-700" />
                 </BoxButton>
             </BoxSignIn>
+            <ToastContainer />
         </ContainerSignIn>
     )
 }
