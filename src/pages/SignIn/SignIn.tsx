@@ -2,7 +2,7 @@ import { Button } from "@/shared/Components";
 //Styled
 import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled";
 //service
-import { SessionService } from "../../shared/services/Session";
+import { SessionService } from "../../shared/services/SessionService";
 //hoks
 import useForm from "../../shared/hooks/useForm";
 import { IToken } from "@/shared/Interfaces";

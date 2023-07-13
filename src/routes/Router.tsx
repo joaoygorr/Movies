@@ -1,6 +1,6 @@
 // config router 
 import { Routes, Route } from "react-router-dom";
-import { Auth } from "../auth/auth";
+import { Auth } from "../context/auth/auth";
 // Pages 
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
