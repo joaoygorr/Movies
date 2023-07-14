@@ -1,68 +1,46 @@
-import { Button } from "@/shared/Components";
-//Styled
-import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled";
-//service
-import { SessionService } from "../../shared/services/SessionService";
-//hoks
-import useForm from "../../shared/hooks/useForm";
-import { IToken } from "@/shared/Interfaces";
-import { ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+// //Styled
+// import { BoxButton, BoxInput, BoxSignIn, ContainerSignIn } from "./SignIn.styled";
 
-const SignIn = () => {
-    const [{ value }, handleChange] = useForm();
+// const SignIn = () => {
+//     return (
+//         <ContainerSignIn>
+//             <BoxSignIn className="grid grid-cols-1 grid-rows-4">
+//                 <div>
+//                     <h1 className="title">
+//                         login
+//                         <hr className="mt-3" />
+//                     </h1>
+//                 </div>
+//                 <BoxInput>
+//                     <label>
+//                         usuário*
+//                         <input
+//                             className="required:border-red-500 focus:ring-0"
+//                             type="text"
+//                             name="username"
+//                             placeholder="Digite seu usuário..."
+//                         />
+//                     </label>
+//                 </BoxInput>
 
-    const handleSubmit = () => {
-        const { getToken, postSessionWithLogin } = SessionService;
-        getToken()?.then((token: IToken) => {
-            value.request_token = token.request_token;
-        });
-        
-        postSessionWithLogin(value);
-    };
+//                 <BoxInput>
+//                     <label>
+//                         senha*
+//                         <input
+//                             className="required:border-red-500 focus:ring-0"
+//                             type="password"
+//                             name="password"
+//                             placeholder="Digite sua senha..."
+//                         />
+//                     </label>
+//                 </BoxInput>
 
-    return (
-        <ContainerSignIn>
-            <BoxSignIn className="grid grid-cols-1 grid-rows-4">
-                <div>
-                    <h1 className="title">
-                        login
-                        <hr className="mt-3" />
-                    </h1>
-                </div>
-                <BoxInput>
-                    <label>
-                        usuário*
-                        <input
-                            className="required:border-red-500 focus:ring-0"
-                            type="text"
-                            name="username"
-                            placeholder="Digite seu usuário..."
-                            onChange={handleChange}
-                        />
-                    </label>
-                </BoxInput>
+//                 <BoxButton>
+//                     <Button typeButton="submit" textButton="entrar" classButton="bg-indigo-700" />
+//                 </BoxButton>
+//             </BoxSignIn>
+//         </ContainerSignIn>
+//     )
+// }
 
-                <BoxInput>
-                    <label>
-                        senha*
-                        <input
-                            className="required:border-red-500 focus:ring-0"
-                            type="password"
-                            name="password"
-                            placeholder="Digite sua senha..."
-                            onChange={handleChange}
-                        />
-                    </label>
-                </BoxInput>
-
-                <BoxButton>
-                    <Button typeButton="submit" textButton="entrar" clickButton={handleSubmit} classButton="bg-indigo-700" />
-                </BoxButton>
-            </BoxSignIn>
-            <ToastContainer />
-        </ContainerSignIn>
-    )
-}
-
-export default SignIn;
+// export default SignIn;
