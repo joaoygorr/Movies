@@ -10,15 +10,4 @@ export default createGlobalStyle`
     #root { 
         background-color: #f3f3f3;
     }
-
-    .mainContent {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-   
-
-    .mainContent  main {
-        flex: 1 1 0;
-    }
 `;
