@@ -12,9 +12,11 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
+    "primereact": "^9.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": ">=16.8.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6"
