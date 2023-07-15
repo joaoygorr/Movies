@@ -1,19 +1,17 @@
-//Components
-import { Footer, Header } from "@/shared/Components";
-// Styleds
+import { CarouselComponent } from "./carousel/carousel";
+import { BoxContainer, BoxTopRated, BoxMain } from "./home.styled";
 
 function Home() {
-
   return (
-    <div className="mainContent">
-      <Header />
+    <BoxContainer>
+      <BoxMain>
 
-      <main>
-        <h4>ddeste</h4>
-      </main>
+        <BoxTopRated>
+          <CarouselComponent />
+        </BoxTopRated>
 
-      <Footer />
-    </div>
+      </BoxMain>
+    </BoxContainer >
   )
 }
 
