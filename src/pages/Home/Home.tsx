@@ -1,4 +1,3 @@
-import { CarouselComponent } from "./carousel/carousel";
 import { BoxContainer, BoxTopRated, BoxMain } from "./home.styled";
 
 function Home() {
@@ -7,7 +6,6 @@ function Home() {
       <BoxMain>
 
         <BoxTopRated>
-          <CarouselComponent />
         </BoxTopRated>
 
       </BoxMain>
