@@ -8,6 +8,9 @@ import { Footer, Header } from "@/shared/Components";
 import { QueryClientProvider, QueryClient } from "react-query";
 import './Styles/global.css';
 import "react-toastify/dist/ReactToastify.css";
+import 'primeicons/primeicons.css';
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 
 const queryClient = new QueryClient();
 
