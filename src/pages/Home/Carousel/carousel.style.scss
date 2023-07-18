@@ -1,0 +1,37 @@
+.boxContentCarousel {
+    .p-carousel-items-container {
+        .boxCard {
+            margin: 0 .5rem;
+
+            .boxContentMovie {
+                position: relative;
+
+                .boxStar {
+                    position: absolute;
+                    top: -1%;
+                    left: -2.4%;
+                    bottom: 0;
+
+                    .pi-bookmark-fill {
+                        position: relative;
+                        font-size: 4.5rem;
+                        color: #701515;
+
+                        .pi-star-fill {
+                            color: #daa520;
+                            font-size: 1.5rem;
+                            position: absolute; 
+                            top: 14%;
+                            left: 32%;
+                            bottom: 0;
+
+                            h3 {
+                                font-size: 1.3rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

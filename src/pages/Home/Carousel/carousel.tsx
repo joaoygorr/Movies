@@ -16,24 +16,27 @@ export const CarouselComponent = () => {
             <div className="boxCard">
                 <div className="boxContentMovie">
                     <div className="boxImage">
-                        <img src={"https://image.tmdb.org/t/p/original" + item.backdrop_path} />
+                        <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} />
                     </div>
 
-                    <div className="boxTitle">
-                        <h1>{item.title}</h1>
+                    <div className="boxStar">
+                        <i className="pi pi-bookmark-fill">
+                            <i className="pi pi-star-fill"><h3>{item.vote_average}</h3> </i>
+                        </i>
                     </div>
+
                 </div>
             </div>
         )
     }
 
     if (isLoading) {
-        return <ProgressSpinner />;
+        return <div className='flex justify-center items-center'><ProgressSpinner /></div>;
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto">
-            <Carousel value={data?.results} itemTemplate={template} numVisible={1} numScroll={1} autoplayInterval={3000} />
+        <div className="boxContentCarousel">
+            <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} />
         </div>
     )
 }
