@@ -2,7 +2,6 @@ import { CarouselComponent } from "./Carousel/carousel";
 import "./home.style.scss";
 
 function Home() {
-
   return (
     <main className="boxContainer">
       <div className="boxContent mx-auto">
