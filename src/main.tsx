@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './routes/Router';
-import GlobalStyled from "./Styles/global";
+import "./Styles/global.scss"
 import { ToastContainer } from 'react-toastify';
 import { Footer, Header } from "@/shared/Components";
 import { QueryClientProvider, QueryClient } from "react-query";
-import './Styles/global.css';
+import './Styles/tailwind.css';
 import "react-toastify/dist/ReactToastify.css";
 import 'primeicons/primeicons.css';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -18,7 +18,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyled />
         <ToastContainer />
         <Header />
           <Router />

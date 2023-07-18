@@ -2,8 +2,8 @@ import { IMovie, IResponse } from '@/shared/Interfaces';
 import { MovieService } from '@/shared/services/movieService';
 import { Carousel } from 'primereact/carousel';
 import { useQuery } from 'react-query';
-import { BoxCard, BoxImage, BoxContent, BoxTitle, Img } from './carousel.styled';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import "./carousel.style.scss";
 
 export const CarouselComponent = () => {
     const { data, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
@@ -13,17 +13,17 @@ export const CarouselComponent = () => {
 
     const template = (item: IMovie) => {
         return (
-            <BoxCard>
-                <BoxContent>
-                    <BoxImage>
-                        <Img src={"https://image.tmdb.org/t/p/original" + item.backdrop_path} />
-                    </BoxImage>
+            <div className="boxCard">
+                <div className="boxContentMovie">
+                    <div className="boxImage">
+                        <img src={"https://image.tmdb.org/t/p/original" + item.backdrop_path} />
+                    </div>
 
-                    <BoxTitle>
+                    <div className="boxTitle">
                         <h1>{item.title}</h1>
-                    </BoxTitle>
-                </BoxContent>
-            </BoxCard>
+                    </div>
+                </div>
+            </div>
         )
     }
 
@@ -33,8 +33,7 @@ export const CarouselComponent = () => {
 
     return (
         <div className="max-w-screen-xl mx-auto">
-            <Carousel value={data?.results} itemTemplate={template} numVisible={1} numScroll={1} autoplayInterval={3000}/>
-
+            <Carousel value={data?.results} itemTemplate={template} numVisible={1} numScroll={1} autoplayInterval={3000} />
         </div>
     )
 }

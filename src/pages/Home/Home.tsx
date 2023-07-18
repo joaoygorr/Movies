@@ -1,18 +1,16 @@
-import { BoxContainer, BoxTopRated, BoxMain } from "./home.styled";
 import { CarouselComponent } from "./Carousel/carousel";
+import "./home.style.scss";
 
 function Home() {
- 
+
   return (
-    <BoxContainer>
-      <BoxMain>
-
-        <BoxTopRated>
+    <main className="boxContainer">
+      <div className="boxContent">
+        <div className="boxTopRated">
           <CarouselComponent />
-        </BoxTopRated>
-
-      </BoxMain>
-    </BoxContainer >
+        </div>
+      </div>
+    </main>
   )
 }
 
