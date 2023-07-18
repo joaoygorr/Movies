@@ -5,10 +5,10 @@ function Home() {
 
   return (
     <main className="boxContainer">
-      <div className="boxContent">
-        <div className="boxTopRated">
+      <div className="boxContent mx-auto">
+        <section className="boxTopRated">
           <CarouselComponent />
-        </div>
+        </section>
       </div>
     </main>
   )
