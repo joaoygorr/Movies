@@ -36,7 +36,7 @@ export const CarouselComponent = () => {
 
     return (
         <div className="boxContentCarousel">
-            <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} />
+            <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={5000}/>
         </div>
     )
 }
