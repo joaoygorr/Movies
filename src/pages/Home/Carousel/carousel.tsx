@@ -4,18 +4,20 @@ import { Carousel } from 'primereact/carousel';
 import { useQuery } from 'react-query';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import "./carousel.style.scss";
+import { Dialog } from '@/shared/Components';
+import { useState } from 'react';
 
 export const CarouselComponent = () => {
     const { data, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
         const response = MovieService.getPopularMovie();
         return response;
-    }, {
-        staleTime: 1000 * 60
-    })
+    }, { staleTime: 1000 * 60 });
+
+    const [movie, setMovie] = useState<IMovie>();
 
     const template = (item: IMovie) => {
         return (
-            <div className="boxCard">
+            <div className="boxCard" onClick={() => setMovie(item)}>
                 <div className="boxContentMovie">
                     <div className="boxImage">
                         <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} />
@@ -35,9 +37,14 @@ export const CarouselComponent = () => {
         return <div className='flex justify-center items-center'><ProgressSpinner /></div>;
     }
 
+    function teste() { }
     return (
         <div className="boxContentCarousel">
             <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={9000} />
+
+            <Dialog.Root header={movie?.title!} onHide={teste} visible={false}>
+                <Dialog.Description />
+            </Dialog.Root>
         </div>
     )
 }
