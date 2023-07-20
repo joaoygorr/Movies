@@ -14,10 +14,16 @@ export const CarouselComponent = () => {
     }, { staleTime: 1000 * 60 });
 
     const [movie, setMovie] = useState<IMovie>();
+    const [toggle, setToggle] = useState<boolean>(false);
+
+    function showDialog(movie: IMovie) {
+        setMovie(movie);
+        setToggle(true);
+    }
 
     const template = (item: IMovie) => {
         return (
-            <div className="boxCard" onClick={() => setMovie(item)}>
+            <div className="boxCard" onClick={() => showDialog(item)}>
                 <div className="boxContentMovie">
                     <div className="boxImage">
                         <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} />
@@ -37,13 +43,11 @@ export const CarouselComponent = () => {
         return <div className='flex justify-center items-center'><ProgressSpinner /></div>;
     }
 
-    function teste() { }
     return (
         <div className="boxContentCarousel">
             <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={9000} />
 
-            <Dialog.Root header={movie?.title!} onHide={teste} visible={false}>
-                <Dialog.Description />
+            <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle}>
             </Dialog.Root>
         </div>
     )
