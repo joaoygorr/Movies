@@ -11,7 +11,7 @@ type DialogRootProps = {
 
 export const DialogRoot = ({ children, header, visible, onHide }: DialogRootProps) => {
     return (
-        <Dialog header={header} draggable={false} visible={visible} onHide={onHide} footer={DialogFooter}>
+        <Dialog header={header} draggable={false} visible={visible} onHide={onHide} footer={DialogFooter} style={{ width: '30%' }}>
             {children}
         </Dialog>
     )
