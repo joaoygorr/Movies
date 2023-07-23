@@ -6,6 +6,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import "./carousel.style.scss";
 import { Dialog } from '@/shared/Components';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const CarouselComponent = () => {
     const { data, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
@@ -15,6 +16,7 @@ export const CarouselComponent = () => {
 
     const [movie, setMovie] = useState<IMovie>();
     const [toggle, setToggle] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     function showDialog(movie: IMovie) {
         setMovie(movie);
@@ -49,6 +51,10 @@ export const CarouselComponent = () => {
 
             <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle}>
                 <Dialog.Description description={movie?.overview || ""} image={movie?.backdrop_path} />
+
+                <Dialog.Footer className='flex justify-center items-center'>
+                    <button className="bg-sky-600 p-3 rounded-full capitalize font-semibold	text-base font-sans text-white" onClick={() => navigate(`/film/${movie?.id}`)}>ver mais...</button>
+                </Dialog.Footer>
             </Dialog.Root>
         </div>
     )
