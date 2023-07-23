@@ -1,7 +1,14 @@
-export const DialogFooter = () => {
+import { ReactNode } from "react"
+
+type DialogFooterProps = {
+    children: ReactNode,
+    className: string
+}
+
+export const DialogFooter = ({ children, className }: DialogFooterProps) => {
     return (
-        <div className="flex justify-center items-center">
-            <button className="bg-sky-600 p-3 rounded-full capitalize font-semibold	text-base font-sans text-white">ver mais...</button>
+        <div className={className}>
+            {children}
         </div>
     )
 }
