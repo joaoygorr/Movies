@@ -7,12 +7,12 @@ const getTopRated = async (): Promise<IResponse<IMovie[]>> => {
 };
 
 const getPopularMovie = async (): Promise<IResponse<IMovie[]>> => {
-    const popularMovie = await instance.get("https://api.themoviedb.org/3/movie/popular");
+    const popularMovie = await instance.get("/movie/popular");
     return popularMovie.data;
 };
 
 const getDetails = async (movieId: number): Promise<IDetails> => {
-    const movie = await instance.get(`https://api.themoviedb.org/3/movie/${movieId}`);
+    const movie = await instance.get(`/movie/${movieId}`);
     return movie.data;
 }
 
