@@ -4,8 +4,11 @@ import axios from "axios"
 
 export const instance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
+    params: {
+        language: "pt-br"
+    },
     headers: {
-        "accept": "application/json",
+        Accept: "application/json",
         Authorization: `Bearer ${import.meta.env.VITE_TOKEN_READ_API}`
     }
 })
