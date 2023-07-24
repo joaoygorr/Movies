@@ -6,7 +6,7 @@ export interface IDetails {
         name: string,
         poster_path: string,
         backdrop_path: string
-    },
+    } | null,
     budget: number,
     genres: [
         {
