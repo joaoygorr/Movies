@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const CarouselComponent = () => {
-    const { data, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
+    const { data: movieList, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
         const response = MovieService.getPopularMovie();
         return response;
     }, { staleTime: 1000 * 60 });
@@ -33,7 +33,7 @@ export const CarouselComponent = () => {
 
                     <div className="boxStar">
                         <i className="pi pi-bookmark-fill">
-                            <i className="pi pi-star-fill"><h3>{item.vote_average}</h3></i>
+                            <i className="pi pi-star-fill text-center"><h3>{item.vote_average}%</h3></i>
                         </i>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ export const CarouselComponent = () => {
 
     return (
         <div className="boxContentCarousel">
-            <Carousel value={data?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={9000} />
+            <Carousel value={movieList?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3}  />
 
             <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle}>
                 <Dialog.Description description={movie?.overview || ""} image={movie?.backdrop_path} />
