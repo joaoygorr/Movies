@@ -1,0 +1,55 @@
+.box-container {
+    .box-details {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        .box-image {
+            .p-image {
+                img {
+                    border-radius: 2%;
+                }
+            }
+        }
+
+        .box-content-details {
+            .box-title {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                h1 {
+                    font-weight: 700;
+                }
+
+                span {
+                    font-weight: 400;
+                    opacity: .8;
+                }
+            }
+
+            .box-infos {
+                .box-tagLine {
+                    opacity: .7;
+                    font-size: 1.1rem;
+                    font-weight: 400;
+                    font-style: italic;
+
+                }
+
+                .box-sinopse {
+                    font-weight: 600;
+                    font-size: 1.3rem;
+                    text-transform: capitalize;
+                    margin-top: .625rem;
+                }
+
+                .box-overview {
+                    p {
+                        text-align: justify;
+                    }
+                }
+            }
+        }
+    }
+}
