@@ -36,7 +36,7 @@ export interface IDetails {
             name: string
         }
     ],
-    release_date: Date | string,
+    release_date: string,
     revenue: number,
     runtime: number,
     spoken_languages: [
