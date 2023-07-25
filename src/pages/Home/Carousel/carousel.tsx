@@ -1,5 +1,5 @@
 import { IMovie, IResponse } from '@/shared/Interfaces';
-import { MovieService } from '@/shared/services/movieService';
+import { MovieService } from '@/shared/services';
 import { Carousel } from 'primereact/carousel';
 import { useQuery } from 'react-query';
 import { ProgressSpinner } from 'primereact/progressspinner';
