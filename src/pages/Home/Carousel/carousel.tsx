@@ -47,7 +47,7 @@ export const CarouselComponent = () => {
 
     return (
         <div className="boxContentCarousel">
-            <Carousel value={movieList?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3}  />
+            <Carousel value={movieList?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={9000} />
 
             <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle}>
                 <Dialog.Description description={movie?.overview || ""} image={movie?.backdrop_path} />
