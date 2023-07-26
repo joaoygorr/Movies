@@ -26,7 +26,7 @@ export const CarouselComponent = () => {
     const template = (item: IMovie) => {
         return (
             <div className="boxCard" onClick={() => showDialog(item)}>
-                <div className="boxContentMovie">
+                <div className="boxContentMovie hover:cursor-pointer">
                     <div className="boxImage">
                         <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} />
                     </div>
@@ -53,7 +53,7 @@ export const CarouselComponent = () => {
                 <Dialog.Description description={movie?.overview || ""} image={movie?.backdrop_path} />
 
                 <Dialog.Footer className='flex justify-center items-center'>
-                    <button className="bg-sky-600 p-3 rounded-full capitalize font-semibold	text-base font-sans text-white" onClick={() => navigate(`/film/${movie?.id}`)}>ver mais...</button>
+                    <button className="bg-sky-600 p-3 rounded-full capitalize font-semibold	text-base font-sans text-white mt-5" onClick={() => navigate(`/film/${movie?.id}`)}>ver mais...</button>
                 </Dialog.Footer>
             </Dialog.Root>
         </div>
