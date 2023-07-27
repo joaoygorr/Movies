@@ -3,7 +3,7 @@ import "./filmDetails.style.scss";
 import { Film } from "./components";
 import { useFilm } from "./hook/useFilm";
 
-    export const FilmDetails = () => {
+export const FilmDetails = () => {
     const { credits, details, videos } = useFilm();
 
     return (
