@@ -1,4 +1,4 @@
-import { TextBreak } from "@/shared/utils/textBreak"
+import { TextBreak } from "@/shared/utils"
 
 type DialogDescriptionProps = {
     description: string | undefined,
