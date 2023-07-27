@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Image } from 'primereact/image';
 import "./filmDetails.style.scss";
 import { Film } from "./components";
+import { ReturnHours, ReturnDate } from "@/shared/utils";
 
 export const FilmDetails = () => {
     const { id } = useParams();
@@ -17,11 +18,8 @@ export const FilmDetails = () => {
 
     const [details, credits] = detailAndCredit ? detailAndCredit : [undefined, undefined];
 
-    const year: string = details?.release_date || "";
-    const hours = details?.runtime ? (details.runtime / 60).toFixed(1) : 0;
-
     return (
-        <div className="max-w-screen-xl mx-auto box-container" >
+        <div className="box-container" >
             <Film.Root>
                 <div className="box-image">
                     <Image src={"https://image.tmdb.org/t/p/w500" + details?.poster_path} alt="poster filme" preview={true} />
@@ -30,8 +28,8 @@ export const FilmDetails = () => {
                 <div className="box-content-details"  >
                     <div className="box-title">
                         <h1>{details?.title}</h1>
-                        <span className="year">({year.split("-")[0]}) </span>
-                        <span className="hours">• {hours.toString().replace(".", ",")}h</span>
+                        <span className="year">({ReturnDate(details?.release_date || "").year}) </span>
+                        <span className="hours">• {ReturnHours(details?.runtime || 0)}</span>
                     </div>
 
                     <div className="box-genres">
