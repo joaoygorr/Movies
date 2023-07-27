@@ -11,67 +11,19 @@
         }
     }
 
-    .box-content-details {
-        width: 50rem;
+    .box-genres {
+        margin: .625rem 0;
+        font-size: 1rem;
+        display: flex;
 
-        .box-title {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            font-size: 2.2rem;
-
-            h1 {
-                font-weight: 700;
-            }
-
-            .year {
-                font-weight: 400;
-                opacity: .8;
-            }
-
-            .hours {
-                font-size: 1.1rem;
-                font-weight: 400;
-            }
-        }
-
-        .box-genres {
-            margin: .625rem 0;
-            font-size: 1rem;
-            display: flex;
-
-            span {
-                margin: 0 .2rem;
-                background-color: #211c1c;
-                border-radius: 2rem;
-                padding: .2rem .8rem;
-                text-transform: capitalize;
-                font-weight: 400;
-                border: 1px solid #717171;
-            }
-        }
-
-        .box-infos {
-            .box-tagLine {
-                opacity: .7;
-                font-size: 1.1rem;
-                font-weight: 400;
-                font-style: italic;
-            }
-
-            .box-sinopse {
-                font-weight: 600;
-                font-size: 1.3rem;
-                text-transform: capitalize;
-                margin-top: .625rem;
-            }
-
-            .box-overview {
-                p {
-                    text-align: justify;
-                    font-size: 1rem;
-                }
-            }
+        span {
+            margin: 0 .2rem;
+            background-color: #211c1c;
+            border-radius: 2rem;
+            padding: .2rem .8rem;
+            text-transform: capitalize;
+            font-weight: 400;
+            border: 1px solid #717171;
         }
     }
 }
