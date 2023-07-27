@@ -1,5 +1,5 @@
 import { IMovie, IResponse } from '@/shared/Interfaces';
-import { MovieService } from '@/shared/services';
+import { MovieListService } from '@/shared/services';
 import { Carousel } from 'primereact/carousel';
 import { useQuery } from 'react-query';
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const CarouselComponent = () => {
     const { data: movieList, isLoading } = useQuery<IResponse<IMovie[]>>("movies", () => {
-        const response = MovieService.getPopularMovie();
+        const response = MovieListService.getPopularMovie();
         return response;
     }, { staleTime: 1000 * 60 });
 
