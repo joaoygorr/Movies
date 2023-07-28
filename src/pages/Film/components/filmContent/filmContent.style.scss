@@ -1,0 +1,63 @@
+.box-genres {
+    margin: .625rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .genre {
+        display: flex;
+        align-items: center;
+
+        span {
+            margin: 0 .2rem;
+            background-color: #211c1c;
+            border-radius: 2rem;
+            padding: .2rem .8rem;
+            text-transform: capitalize;
+            font-weight: 400;
+            border: 1px solid #717171;
+        }
+    }
+
+    .pulse {
+        background-color: rgb(2, 104, 2);
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            border: 2px solid black;
+            border-radius: 50%;
+            left: 1462px;
+            right: 395px;
+            top: 176px;
+            bottom: 702px;
+            animation: animate 1.5s linear infinite;
+        }
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}

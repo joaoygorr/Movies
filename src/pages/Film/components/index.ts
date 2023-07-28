@@ -1,3 +1,4 @@
+import { FilmContent } from "./filmContent/filmContent";
 import { FilmFooter } from "./filmFooter/filmFooter";
 import { FilmHeader } from "./filmHeader/filmHeader";
 import { FilmInformation } from "./filmInformation/filmInformation";
@@ -7,5 +8,6 @@ export const Film = {
     Root: FilmRoot,
     Information: FilmInformation,
     Header: FilmHeader,
-    Footer: FilmFooter
+    Footer: FilmFooter,
+    Content: FilmContent
 }

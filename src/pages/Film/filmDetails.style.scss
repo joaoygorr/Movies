@@ -1,29 +1,18 @@
 .box-container {
     background: linear-gradient(270deg, rgba(92, 76, 105) 0%, rgba(39, 31, 31) 100%);
 
-    .box-image {
-        width: 267px;
-        height: 400px;
-
-        img {
-            border-radius: 2%;
-            background-size: cover;
-        }
-    }
-
-    .box-genres {
-        margin: .625rem 0;
-        font-size: 1rem;
+    .box-header-details {
         display: flex;
+        justify-content: space-evenly;
 
-        span {
-            margin: 0 .2rem;
-            background-color: #211c1c;
-            border-radius: 2rem;
-            padding: .2rem .8rem;
-            text-transform: capitalize;
-            font-weight: 400;
-            border: 1px solid #717171;
+        .box-image {
+            width: 267px;
+            height: 400px;
+
+            img {
+                border-radius: 2%;
+                background-size: cover;
+            }
         }
     }
 }
