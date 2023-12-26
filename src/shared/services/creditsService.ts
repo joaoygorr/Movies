@@ -1,4 +1,4 @@
-import { ICredits } from "../Interfaces/iCredits";
+import { ICredits } from "../Interfaces/ICredits";
 import { instance } from "./api/api"
 
 const getCredits = async (movieId: number): Promise<ICredits> => {
