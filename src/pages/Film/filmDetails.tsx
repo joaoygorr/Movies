@@ -7,7 +7,7 @@ export const FilmDetails = () => {
     const { credits, details, videos } = useFilm();
 
     return (
-        <div className="box-container" >
+        <div className="box-container">
             <Film.Root>
                 <div className="box-header-details">
                     <div className="box-image">

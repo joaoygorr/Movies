@@ -22,42 +22,41 @@
 
     .pulse {
         background-color: rgb(2, 104, 2);
-        width: 3rem;
-        height: 3rem;
+        width: 3.4rem;
+        height: 3.4rem;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        position: relative;
+
 
         &::before,
         &::after {
             content: "";
-            display: block;
             position: absolute;
-            border: 2px solid black;
             border-radius: 50%;
-            left: 1462px;
-            right: 395px;
-            top: 176px;
-            bottom: 702px;
-            animation: animate 1.5s linear infinite;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(2, 104, 2);
+            z-index: 1;
+            opacity: .7;
+        }
+
+        &::before { 
+            animation: pulse 2s ease-out infinite;
+        }
+
+        &::after {
+            animation: pulse 2s 1s ease-out infinite;
         }
     }
 }
 
-@keyframes animate {
-    0% {
-        transform: scale(.5);
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1.2);
+@keyframes pulse {
+    100%{
+        transform: scale(2.5);
         opacity: 0;
     }
 }
