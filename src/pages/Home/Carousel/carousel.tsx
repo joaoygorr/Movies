@@ -49,7 +49,7 @@ export const CarouselComponent = () => {
         <div className="boxContentCarousel">
             <Carousel value={movieList?.results} circular={true} showIndicators={false} itemTemplate={template} numVisible={3} numScroll={3} autoplayInterval={9000} />
 
-            <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle}>
+            <Dialog.Root header={movie?.title!} onHide={() => setToggle(false)} visible={toggle} width='30%'>
                 <Dialog.Description description={movie?.overview || ""} image={movie?.backdrop_path} />
 
                 <Dialog.Footer className='flex justify-center items-center'>
