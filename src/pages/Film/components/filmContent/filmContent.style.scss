@@ -30,7 +30,7 @@
         align-items: center;
         cursor: pointer;
         position: relative;
-
+        z-index: 0;
 
         &::before,
         &::after {
@@ -40,11 +40,11 @@
             height: 100%;
             width: 100%;
             background-color: rgb(2, 104, 2);
-            z-index: 1;
+            z-index: -1;
             opacity: .7;
         }
 
-        &::before { 
+        &::before {
             animation: pulse 2s ease-out infinite;
         }
 
@@ -52,10 +52,23 @@
             animation: pulse 2s 1s ease-out infinite;
         }
     }
+
+}
+
+.p-dialog-mask {
+    .p-dialog {
+        .p-dialog-header { 
+            background-color: #000;
+            color: #e5e7eb;
+        }
+        .p-dialog-content {
+            padding: 0;
+        }
+    }
 }
 
 @keyframes pulse {
-    100%{
+    100% {
         transform: scale(2.5);
         opacity: 0;
     }
