@@ -17,7 +17,7 @@ export const FilmDetails = () => {
                     <Film.Information>
                         <Film.Header title={details?.title || ""} release_date={details?.release_date || ""} runtime={details?.runtime || 0} />
 
-                        <Film.Content genres={details?.genres} />
+                        <Film.Content genres={details?.genres} videos={videos}/>
 
                         <Film.Footer overview={details?.overview || ""} tagline={details?.tagline || ""} />
                     </Film.Information>
