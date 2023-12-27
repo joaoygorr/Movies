@@ -6,11 +6,12 @@ type DialogRootProps = {
     header: string,
     visible: boolean,
     onHide: () => void,
+    width: string
 }
 
-export const DialogRoot = ({ children, header, visible, onHide }: DialogRootProps) => {
+export const DialogRoot = ({ children, header, visible, onHide, width }: DialogRootProps) => {
     return (
-        <Dialog header={header} draggable={false} visible={visible} onHide={onHide} style={{ width: '30%' }}>
+        <Dialog header={header} draggable={false} visible={visible} onHide={onHide} style={{ width: width }}>
             {children}
         </Dialog>
     )
