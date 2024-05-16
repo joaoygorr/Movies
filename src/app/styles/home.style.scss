@@ -1,0 +1,24 @@
+.box {
+    padding: 4rem 1rem 0 1rem;
+    margin: 0 auto;
+
+    .popular-movies {
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #f97316;
+        }
+    }
+
+    .now-playing-movies {
+        padding: 6rem 0;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #f97316;
+        }
+    }
+}

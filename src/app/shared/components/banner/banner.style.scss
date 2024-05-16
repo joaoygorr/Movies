@@ -1,0 +1,33 @@
+.movie {
+    margin-top: 2rem;
+
+    .detail-movie {
+        margin-top: .5rem;
+
+        .title-movie {
+            font-size: 1.125rem;
+            margin-top: .5rem;
+
+            &:hover {
+                color: #d1d5db;
+            }
+        }
+
+        .specification {
+            display: flex;
+            align-items: center;
+            font-size: .875rem;
+            margin-top: .25rem;
+            color: #9ca3af;
+
+            .pi-star-fill {
+                color: #f97316;
+            }
+        }
+
+        .genre {
+            color: #9ca3af;
+            font-size: .875rem;
+        }
+    }
+}
