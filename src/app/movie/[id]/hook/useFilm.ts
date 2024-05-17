@@ -10,25 +10,33 @@ type Data = {
 
 export const useFilm = (idMovie: string) => {
     const [data, setData] = useState<Data | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            const [details, videos] = await Promise.all([
-                movieApi.findByMovie(idMovie),
-                movieApi.findByVideoMovie(idMovie, "videos")
-            ]);
-            console.log('detalhes', details);
-            
-            setData({
-                details: details,
-                video: videos.results
-            });
+            setLoading(true);
+            try {
+                const [details, videos] = await Promise.all([
+                    movieApi.findByMovie(idMovie),
+                    movieApi.findByVideoMovie(idMovie, "videos")
+                ]);
+                console.log('detalhes', details);
+
+                setData({
+                    details: details,
+                    video: videos.results
+                });
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchData();
     }, [idMovie]);
 
-    return data;
-}; 
+    return { data, loading };
+};
 
 

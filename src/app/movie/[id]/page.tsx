@@ -3,9 +3,10 @@ import { IGenre, IParams } from "@/app/shared/interfaces";
 import { useFilm } from "./hook/useFilm";
 import { formatDate, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
+import { Loading } from "@/app/shared/components/loading/loading";
 
 export default function MovieDetails(movie: IParams) {
-    const data = useFilm(movie.params.id);
+    const {data, loading} = useFilm(movie.params.id);
 
     const formatGenres = (genres: IGenre[]) => {
         return genres?.map((genre) => {
@@ -13,6 +14,9 @@ export default function MovieDetails(movie: IParams) {
         }).join(' - ');
     };
 
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className="movie-info">
