@@ -1,9 +1,32 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IListMovie} from "@/app/shared/interfaces";
+import { IGenre, IGenreList, IListMovie } from "@/app/shared/interfaces";
+import { useEffect, useState } from "react";
+import { genreApi } from "../../api/api";
 
 export default function Banner({ movies }: { movies: IListMovie[] | undefined }) {
+    const [data, setData] = useState<IGenreList<IGenre>>();
+    const [genreIds, setGenreIds] = useState<number[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await genreApi.findAllGenre();
+                setData(data);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, [movies]);
+
+    function filterGenres(genre: string[]) {
+        const genreFiltered = data?.genres.filter(e => genre.includes(e.id));
+
+        return genreFiltered?.map(value => { return value.name }).join(', ');
+    }
 
     return (
         <>
@@ -20,7 +43,7 @@ export default function Banner({ movies }: { movies: IListMovie[] | undefined })
                             <span className="mx-2">|</span>
                             <span>{formatDate(new Date(movie?.release_date)).modelOne}</span>
                         </div>
-                        <span className="genre">teste, teste, teste</span>
+                        <span className="genre">{filterGenres(movie?.genre_ids)}</span>
                     </div>
                 </div>
             ))}
