@@ -1,7 +1,7 @@
 export interface IListMovie { 
     adult: boolean,
     backdrop_path: string, 
-    genre_Ids: number[],
+    genre_ids: string[],
     id: number, 
     original_language: string,
     original_title: string,
