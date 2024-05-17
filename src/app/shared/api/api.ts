@@ -1,4 +1,4 @@
-import { IListMovie, IMovie, IResponse, IVideo } from "@/app/shared/interfaces";
+import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
 export class Api {
@@ -71,10 +71,24 @@ export class Api {
         } catch (error) {
             return Promise.reject(error);
         }
-    }
+    };
+
+    async findAllGenre(): Promise<IGenreList<IGenre>> {
+        try {
+            const { data } = await this.api.get("/movie/list");
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    };
 }
 
 /**
  * Api Movie
  */
 export const movieApi = new Api("/movie");
+
+/**
+ * Api Genre
+ */
+export const genreApi = new Api("/genre");
