@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### 🚧 PROJECT IN PROGRESS 🚧
 
-## Getting Started
+# Movies
 
-First, run the development server:
+Project created for study
+
+## ✔️ Technologies used
+The following tools were used in the construction of the project:
+#### **Website**  ([Nextjs](https://nextjs.org/)  +  [TypeScript](https://www.typescriptlang.org/))
+
+-   **[Prime Icons](https://primeng.org/icons)**
+-   **[Axios](https://axios-http.com/ptbr/docs/intro)**
+-   **[Tailwindcss](https://tailwindcss.com/)**
+
+## 🛠️ Open and run the project
+
+#### 🧭 Running the web application (Frontend)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Install the dependencies
+$ npm install or yarn 
+
+# Run the application in development mode
+$ npm run dev or yarn dev
+
+# The application will open on the port: 3000 - go to http://localhost:3000
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributors
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://www.linkedin.com/in/jo%C3%A3o-ygor-ramalho-9b5b18219/">
+            <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/82791430?v=4" width="100px;"/>
+            <br/>
+            <sub><b>João Ygor</b></sub>
+        </a>
+        <br/>
+      <a href="https://github.com/joaoygorr" />
+        @joaoygorr
+      </a>
+        <br/>Developer
+    </td>
+  </tr>
+</table>
