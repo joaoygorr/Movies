@@ -6,7 +6,7 @@ import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
 
 export default function MovieDetails(movie: IParams) {
-    const {data, loading} = useFilm(movie.params.id);
+    const { data, loading } = useFilm(movie.params.id);
 
     const formatGenres = (genres: IGenre[]) => {
         return genres?.map((genre) => {
@@ -45,6 +45,15 @@ export default function MovieDetails(movie: IParams) {
                         <h4>Elenco Popular</h4>
                         <div className="crew">
 
+                        </div>
+                    </div>
+
+                    <div className="box-button">
+                        <div>
+                            <button type="button" className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
+                                <i className="pi pi-caret-right"></i>
+                                <span className="ml-2">Play Trailer</span>
+                            </button>
                         </div>
                     </div>
                 </div>
