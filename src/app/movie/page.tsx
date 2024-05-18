@@ -4,6 +4,7 @@ import Banner from "../shared/components/banner/banner";
 import { movieApi } from "../shared/api/api";
 import { useEffect, useState } from "react";
 import { IListMovie } from "../shared/interfaces";
+import { Loading } from "../shared/components/loading/loading";
 
 type Movies = {
     popular: IListMovie[],
@@ -12,9 +13,11 @@ type Movies = {
 
 export default function HomePage() {
     const [movies, setMovies] = useState<Movies>();
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         async function fetchData() {
+            setLoading(true);
             try {
                 const [popularMovie, nowPlaingMovie] = await Promise.all([movieApi.listPopularMovie('popular'), movieApi.listNowPlayingMovie('now_playing')]);
                 setMovies({
@@ -23,10 +26,16 @@ export default function HomePage() {
                 });
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoading(false);
             }
         }
         fetchData();
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <main>
