@@ -4,9 +4,12 @@ import { useFilm } from "./hook/useFilm";
 import { formatDate, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
+import { Modal } from "@/app/shared/components/modal/modal";
+import { useState } from "react";
 
 export default function MovieDetails(movie: IParams) {
     const { data, loading } = useFilm(movie.params.id);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
 
     const formatGenres = (genres: IGenre[]) => {
         return genres?.map((genre) => {
@@ -50,7 +53,7 @@ export default function MovieDetails(movie: IParams) {
 
                     <div className="box-button">
                         <div>
-                            <button type="button" className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
+                            <button type="button" onClick={() => setIsVisible(true)} className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
                                 <i className="pi pi-caret-right"></i>
                                 <span className="ml-2">Play Trailer</span>
                             </button>
@@ -58,6 +61,7 @@ export default function MovieDetails(movie: IParams) {
                     </div>
                 </div>
             </div>
+            {isVisible && (<Modal video={data?.video!} hidden={setIsVisible}/>)}
         </div>
     )
 }
