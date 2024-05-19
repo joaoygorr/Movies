@@ -20,7 +20,6 @@ export const useFilm = (idMovie: string) => {
                     movieApi.findByMovie(idMovie),
                     movieApi.findByTrailerMovie(idMovie, "videos")
                 ]);
-                console.log('detalhes', details);
 
                 setData({
                     details: details,
