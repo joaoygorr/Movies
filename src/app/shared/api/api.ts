@@ -64,7 +64,7 @@ export class Api {
      * @param url Path variable
      * @returns Return video movie
      */
-    async findByVideoMovie(id: string, url: string): Promise<IResponse<IVideo>> {
+    async findByTrailerMovie(id: string, url: string): Promise<IVideo> {
         try {
             const { data } = await this.api.get(`/${id}/${url}`);
             return data;
@@ -73,6 +73,9 @@ export class Api {
         }
     };
 
+    /**
+     * @returns Return list genres
+     */
     async findAllGenre(): Promise<IGenreList<IGenre>> {
         try {
             const { data } = await this.api.get("/movie/list");
@@ -92,3 +95,10 @@ export const movieApi = new Api("/movie");
  * Api Genre
  */
 export const genreApi = new Api("/genre");
+
+/**
+ * Api Video
+ */
+
+export const videoApi = new Api("");
+
