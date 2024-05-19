@@ -7,7 +7,6 @@ import { genreApi } from "../../api/api";
 
 export default function Banner({ movies }: { movies: IListMovie[] | undefined }) {
     const [data, setData] = useState<IGenreList<IGenre>>();
-    const [genreIds, setGenreIds] = useState<number[]>([]);
 
     useEffect(() => {
         async function fetchData() {
