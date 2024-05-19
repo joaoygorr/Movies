@@ -18,13 +18,13 @@ export const useFilm = (idMovie: string) => {
             try {
                 const [details, videos] = await Promise.all([
                     movieApi.findByMovie(idMovie),
-                    movieApi.findByVideoMovie(idMovie, "videos")
+                    movieApi.findByTrailerMovie(idMovie, "videos")
                 ]);
                 console.log('detalhes', details);
 
                 setData({
                     details: details,
-                    video: videos.results
+                    video: videos
                 });
             } catch (error) {
                 console.log(error);
