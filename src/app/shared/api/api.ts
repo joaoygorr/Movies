@@ -1,4 +1,4 @@
-import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo } from "@/app/shared/interfaces";
+import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo, ICast } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
 export class Api {
@@ -84,6 +84,21 @@ export class Api {
             return Promise.reject(error);
         }
     };
+
+    /**
+     * @param id cast Id
+     * @param url Path variable
+     * @returns Return video cast
+    */
+    async findByCast(id: string, url: string): Promise<ICast> {
+        try {
+            const { data } = await this.api.get(`/${id}/${url}`);
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    };
+
 }
 
 /**
@@ -101,4 +116,9 @@ export const genreApi = new Api("/genre");
  */
 
 export const videoApi = new Api("");
+
+/**
+ * Api Cast
+ */
+export const castApi = new Api("/movie");
 
