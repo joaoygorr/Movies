@@ -19,7 +19,7 @@ export const Cast = ({ param }: { param: string }) => {
         <div className="movie-cast">
             <div className="container cast-box">
                 <h2>Elenco</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div>
                     <Slider {...settings}>
                         {data?.cast.map((c, k) => (
                             <div className="mt-8" key={k}>
