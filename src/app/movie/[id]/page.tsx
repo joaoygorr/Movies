@@ -65,7 +65,7 @@ export default function MovieDetails(movie: IParams) {
                 </div>
                 {isVisible && (<Modal video={data?.video!} hidden={setIsVisible} />)}
             </div>
-            <Cast />
+            <Cast param={movie.params.id} />
         </div>
     )
 }
