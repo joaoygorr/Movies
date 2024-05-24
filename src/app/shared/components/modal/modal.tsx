@@ -11,7 +11,7 @@ export const Modal = ({ video, hidden }: { video: IVideo, hidden: (visible: bool
                     </div>
                     <div className="modal-body">
                         <div className="modal-children responsive-container">
-                            <iframe src={`https://www.youtube.com/embed/${video.results[0].key}`} allow="autoplay; encrypted-media" allowFullScreen />
+                            <iframe src={`https://www.youtube.com/embed/${video.results[0].key}?autoplay=1`} allow="autoplay; encrypted-media" allowFullScreen />
                         </div>
                     </div>
                 </div>
