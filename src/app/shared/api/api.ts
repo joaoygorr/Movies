@@ -1,4 +1,4 @@
-import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo, ICast } from "@/app/shared/interfaces";
+import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo, ICast, IImage } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
 export class Api {
@@ -99,6 +99,25 @@ export class Api {
         }
     };
 
+    /**
+     * @param id cast Id
+     * @param url Path variable
+     * @returns Return video cast
+    */
+    async findImagesMovie(id: string, url: string): Promise<IImage> {
+        try {
+            const { data } = await this.api.get(`/${id}/${url}`, {
+                params: {
+                    include_image_language: "en",
+                    language: ""
+                },
+            });
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    };
+
 }
 
 /**
@@ -121,4 +140,9 @@ export const videoApi = new Api("");
  * Api Cast
  */
 export const castApi = new Api("/movie");
+
+/**
+ * Api Image
+ */
+export const imageApi = new Api("/movie");
 
