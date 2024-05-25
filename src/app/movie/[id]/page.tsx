@@ -7,6 +7,7 @@ import { Loading } from "@/app/shared/components/loading/loading";
 import { Modal } from "@/app/shared/components/modal/modal";
 import { useState } from "react";
 import { Cast } from "@/app/shared/components/cast/cast";
+import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
 
 export default function MovieDetails(movie: IParams) {
     const { data, loading } = useFilm(movie.params.id);
@@ -66,6 +67,7 @@ export default function MovieDetails(movie: IParams) {
                 {isVisible && (<Modal video={data?.video!} hidden={setIsVisible} />)}
             </div>
             <Cast param={movie.params.id} />
+            <ImageMovie param={movie.params.id} />
         </div>
     )
 }
