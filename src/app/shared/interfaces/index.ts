@@ -6,3 +6,4 @@ export { type IParams } from "./IParams";
 export { type IMovie } from "./IMovie";
 export { type IVideo } from "./IVideo";
 export { type ICast } from "./ICast";
+export { type IImage } from "./IImage";
