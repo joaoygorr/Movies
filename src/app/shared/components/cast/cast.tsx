@@ -15,13 +15,15 @@ export const Cast = ({ param }: { param: string }) => {
 
     const { data } = useCast(param);
 
+    const filteredImages = data?.cast.filter(i => i.profile_path !== null);
+
     return (
         <div className="movie-cast">
             <div className="container cast-box">
                 <h2>Elenco</h2>
                 <div>
                     <Slider {...settings}>
-                        {data?.cast.map((c, k) => (
+                        {filteredImages?.map((c, k) => (
                             <div className="mt-8" key={k}>
                                 <a href="#">
                                     <img src={"https://image.tmdb.org/t/p/w300" + c.profile_path} alt="poster elenco" className="hover:opacity-75 transition ease-in-out duration-150" />
