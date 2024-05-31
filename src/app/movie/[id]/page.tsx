@@ -47,13 +47,6 @@ export default function MovieDetails(movie: IParams) {
                             <span className="text-gray-400 mt-8">{data?.details?.tagline}</span>
                         )}
                         <p>{data?.details?.overview}</p>
-                        <div className="popular">
-                            <h4>Elenco Popular</h4>
-                            <div className="crew">
-
-                            </div>
-                        </div>
-
                         <div className="box-button">
                             <div>
                                 <button type="button" onClick={() => setIsVisible(true)} className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
