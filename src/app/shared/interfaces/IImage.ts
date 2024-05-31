@@ -1,5 +1,8 @@
 export interface IImage {
-    backdrops: Image[]
+    id: string,
+    backdrops: Image[],
+    logos: Image[],
+    posters: Image[]
 }
 
 type Image = {
