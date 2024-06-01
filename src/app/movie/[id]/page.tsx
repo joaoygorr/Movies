@@ -55,7 +55,7 @@ export default function MovieDetails(movie: IParams) {
                                         <span className="ml-2">Play Trailer</span>
                                     </button>
                                 ) : (
-                                    <button disabled={true} type="button" onClick={() => setIsVisible(true)} className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
+                                    <button disabled={true} type="button" className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
                                         <i className="pi pi-ban"></i>
                                         <span className="ml-2">Sem Trailer</span>
                                     </button>
