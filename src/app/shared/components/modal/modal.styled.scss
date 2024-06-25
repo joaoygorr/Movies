@@ -8,6 +8,7 @@
     overflow-y: auto;
     align-items: center;
     display: flex;
+    z-index: 1000;
 
     .modal {
         margin: 0 auto;
