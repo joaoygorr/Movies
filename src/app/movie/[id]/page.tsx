@@ -49,16 +49,12 @@ export default function MovieDetails(movie: IParams) {
                         <p>{data?.details?.overview || "Sem Informação"}</p>
                         <div className="box-button">
                             <div>
-                                {data?.video.results.length! > 0 ? (
+                                {data?.video.results.length! > 0 && (
                                     <button type="button" onClick={() => setIsVisible(true)} className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
                                         <i className="pi pi-caret-right"></i>
                                         <span className="ml-2">Play Trailer</span>
                                     </button>
-                                ) : (
-                                    <button disabled={true} type="button" className="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
-                                        <i className="pi pi-ban"></i>
-                                        <span className="ml-2">Sem Trailer</span>
-                                    </button>
+                                    
                                 )}
                             </div>
                         </div>
