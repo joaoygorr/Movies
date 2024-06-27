@@ -10,6 +10,11 @@
 
         .image {
             margin-top: 2rem;
+            
+            img {
+                border-radius: .6rem;
+                max-width: 80%;
+            }
         }
     }
 }
