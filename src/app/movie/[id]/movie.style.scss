@@ -42,3 +42,19 @@
         }
     }
 }
+
+@media(max-width: 767px) {
+    .movie-info {
+        .movie-box {
+            align-items: center;
+            justify-items: center;
+
+            .details {
+                text-align: center;
+                .detail-genre-date {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

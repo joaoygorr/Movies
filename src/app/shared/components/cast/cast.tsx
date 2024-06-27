@@ -11,6 +11,15 @@ export const Cast = ({ param }: { param: string }) => {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
     }
 
     const { data } = useCast(param);
@@ -28,7 +37,7 @@ export const Cast = ({ param }: { param: string }) => {
                                 <a href="#">
                                     <img src={"https://image.tmdb.org/t/p/w300" + c.profile_path} alt="poster elenco" className="hover:opacity-75 transition ease-in-out duration-150" />
                                 </a>
-                                <div className="mt-2">
+                                <div className="info-cast">
                                     <a href="#" className="hover:text-gray:300">{c.original_name}</a>
                                     <div className="text-gray-400">{c.character}</div>
                                 </div>

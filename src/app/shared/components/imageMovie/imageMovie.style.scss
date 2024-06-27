@@ -10,10 +10,22 @@
 
         .image {
             margin-top: 2rem;
-            
+
             img {
                 border-radius: .6rem;
                 max-width: 80%;
+            }
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    .movie-image {
+        .image-box {
+            .image {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }

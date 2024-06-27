@@ -41,3 +41,18 @@
         }
     }
 }
+
+@media(max-width: 767px) {
+    .movie-cast {
+        .cast-box {
+            .slider-box {
+                .cast {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+            }
+        }
+    }
+}
