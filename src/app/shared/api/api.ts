@@ -108,7 +108,7 @@ export class Api {
         try {
             const { data } = await this.api.get(`/${id}/${url}`, {
                 params: {
-                    include_image_language: "en",
+                    include_image_language: "pt",
                     language: ""
                 },
             });
