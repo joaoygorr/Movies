@@ -22,10 +22,7 @@ const handleApiError = (error: any): never => {
 export class Api {
     private api: AxiosInstance;
 
-    /**
-     * @param url Routes end-Points
-     */
-    constructor(url: string) {
+    constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
     };
 
@@ -35,6 +32,7 @@ export class Api {
             return data;
         } catch (error) {
             handleApiError(error);
+            throw error;
         }
     }
 
@@ -70,8 +68,9 @@ export class Api {
     }
 
 }
-export const movieApi = new Api("/movie");
+
+export const movieApi = new Api();
 export const genreApi = new Api("/genre");
-export const videoApi = new Api("");
-export const castApi = new Api("/movie");
-export const imageApi = new Api("/movie");
+export const videoApi = new Api();
+export const castApi = new Api();
+export const imageApi = new Api();
