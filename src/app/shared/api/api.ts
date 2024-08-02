@@ -1,6 +1,24 @@
 import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo, ICast, IImage } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
+const createApiInstance = (url: string): AxiosInstance => {
+    return axios.create({
+        baseURL: process.env.NEXT_PUBLIC_URL + url,
+        params: {
+            language: "pt-br"
+        },
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_READ_API}`
+        }
+    });
+};
+
+const handleApiError = (error: any): never => {
+    console.error(error);
+    throw new Error(error.response?.data?.message || 'An unexpected error occurred');
+};
+
 export class Api {
     private api: AxiosInstance;
 
@@ -8,141 +26,52 @@ export class Api {
      * @param url Routes end-Points
      */
     constructor(url: string) {
-        this.api = axios.create({
-            baseURL: process.env.NEXT_PUBLIC_URL + url,
-            params: {
-                language: "pt-br"
-            },
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_READ_API}`
-            }
-        })
+        this.api = createApiInstance(url);
     };
 
-    /**
-     * @param id Movie Id
-     * @returns Return list movie
-     */
+    private async getRequest<T>(endpoint: string, params = {}): Promise<T> {
+        try {
+            const { data } = await this.api.get(endpoint, { params });
+            return data;
+        } catch (error) {
+            handleApiError(error);
+        }
+    }
+
     async findByMovie(id: string): Promise<IMovie> {
-        try {
-            const { data } = await this.api.get(id);
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IMovie>(id);
+    }
 
-    /**
-     * @param url Path variable
-     * @returns Return list popular movie
-     */
     async listPopularMovie(url: string): Promise<IResponse<IListMovie[]>> {
-        try {
-            const { data } = await this.api.get(`/${url}`);
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IResponse<IListMovie[]>>(url);
+    }
 
-    /**
-     * @param url Path variable
-     * @returns Return list Now Playing
-     */
     async listNowPlayingMovie(url: string): Promise<IResponse<IListMovie[]>> {
-        try {
-            const { data } = await this.api.get(`/${url}`);
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IResponse<IListMovie[]>>(url);
+    }
 
-    /**
-     * @param id Movie Id
-     * @param url Path variable
-     * @returns Return video movie
-     */
     async findByTrailerMovie(id: string, url: string): Promise<IVideo> {
-        try {
-            const { data } = await this.api.get(`/${id}/${url}`);
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IVideo>(`${id}/${url}`);
+    }
 
-    /**
-     * @returns Return list genres
-     */
     async findAllGenre(): Promise<IGenreList<IGenre>> {
-        try {
-            const { data } = await this.api.get("/movie/list");
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IGenreList<IGenre>>("/movie/list");
+    }
 
-    /**
-     * @param id cast Id
-     * @param url Path variable
-     * @returns Return video cast
-    */
     async findByCast(id: string, url: string): Promise<ICast> {
-        try {
-            const { data } = await this.api.get(`/${id}/${url}`);
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<ICast>(`${id}/${url}`);
+    }
 
-    /**
-     * @param id cast Id
-     * @param url Path variable
-     * @returns Return video cast
-    */
     async findImagesMovie(id: string, url: string): Promise<IImage> {
-        try {
-            const { data } = await this.api.get(`/${id}/${url}`, {
-                params: {
-                    include_image_language: "pt",
-                    language: ""
-                },
-            });
-            return data;
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    };
+        return this.getRequest<IImage>(`${id}/${url}`, {
+            include_image_language: "pt",
+            language: ""
+        });
+    }
 
 }
-
-/**
- * Api Movie
- */
 export const movieApi = new Api("/movie");
-
-/**
- * Api Genre
- */
 export const genreApi = new Api("/genre");
-
-/**
- * Api Video
- */
-
 export const videoApi = new Api("");
-
-/**
- * Api Cast
- */
 export const castApi = new Api("/movie");
-
-/**
- * Api Image
- */
 export const imageApi = new Api("/movie");
-
