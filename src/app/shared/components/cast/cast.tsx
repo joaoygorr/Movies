@@ -17,6 +17,8 @@ export const Cast = ({ param }: { param: string }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    dots: false,
+                    arrows: false,
                 }
             }
         ]
@@ -34,11 +36,11 @@ export const Cast = ({ param }: { param: string }) => {
                     <Slider {...settings}>
                         {filteredImages?.map((c, k) => (
                             <div className="cast" key={k}>
-                                <a href="#">
+                                <a href={`/cast/${c.id}`}>
                                     <img src={"https://image.tmdb.org/t/p/w300" + c.profile_path} alt="poster elenco" className="hover:opacity-75 transition ease-in-out duration-150" />
                                 </a>
                                 <div className="info-cast">
-                                    <a href="#" className="hover:text-gray:300">{c.original_name}</a>
+                                    <a href={`/cast/${c.id}`} className="hover:text-gray:300">{c.original_name}</a>
                                     <div className="text-gray-400">{c.character}</div>
                                 </div>
                             </div>
