@@ -5,7 +5,8 @@ import {
     IResponse,
     IVideo,
     ICast,
-    IImage
+    IImage,
+    IActorDetails
 } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
@@ -58,6 +59,10 @@ export class Api {
         return this.getRequest<IResponse<IListMovie[]>>(url);
     }
 
+    async findByPeaple(url: string): Promise<IActorDetails> {
+        return this.getRequest<IActorDetails>(url);
+    }
+
     async findByTrailerMovie(id: string, url: string): Promise<IVideo> {
         return this.getRequest<IVideo>(`${id}/${url}`);
     }
@@ -81,5 +86,5 @@ export class Api {
 export const movieApi = new Api();
 export const genreApi = new Api("/genre");
 export const videoApi = new Api();
-export const castApi = new Api();
+export const castApi = new Api("/person");
 export const imageApi = new Api();
