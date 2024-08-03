@@ -1,4 +1,12 @@
-import { IGenresResponse, IListMovie, IMovie, IResponse, IVideo, ICast, IImage } from "@/app/shared/interfaces";
+import {
+    IGenresResponse,
+    IListMovie,
+    IMovie,
+    IResponse,
+    IVideo,
+    ICast,
+    IImage
+} from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
 const createApiInstance = (url: string): AxiosInstance => {
@@ -16,7 +24,9 @@ const createApiInstance = (url: string): AxiosInstance => {
 
 const handleApiError = (error: any): never => {
     console.error(error);
-    throw new Error(error.response?.data?.message || 'An unexpected error occurred');
+    throw new Error(
+        error.response?.data?.message || "An unexpected error occurred"
+    );
 };
 
 export class Api {
@@ -24,7 +34,7 @@ export class Api {
 
     constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
-    };
+    }
 
     private async getRequest<T>(endpoint: string, params = {}): Promise<T> {
         try {
@@ -66,7 +76,6 @@ export class Api {
             language: ""
         });
     }
-
 }
 
 export const movieApi = new Api();

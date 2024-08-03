@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 
 type Data = {
-    [key: string]: any
-}
+    [key: string]: any;
+};
 
 type ApiCall<T> = {
-    key: string,
-    call: () => Promise<T>
-}
+    key: string;
+    call: () => Promise<T>;
+};
 
 export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
     const [data, setData] = useState<T | null>(null);
@@ -18,7 +18,9 @@ export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const results = await Promise.all(apiCalls.map(api => api.call()));
+                const results = await Promise.all(
+                    apiCalls.map((api) => api.call())
+                );
                 const newData: Data = {};
                 results.forEach((result, index) => {
                     newData[apiCalls[index].key] = result;

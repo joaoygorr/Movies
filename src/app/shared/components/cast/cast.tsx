@@ -2,7 +2,10 @@ import "./cast.style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useCast } from "./hook/useCast";
+import { useMemo } from "react";
+import { movieApi } from "../../api/api";
+import { useFetchData } from "../../hook/useFetchData";
+import { ICast } from "../../interfaces";
 
 export const Cast = ({ param }: { param: string }) => {
     const settings = {
@@ -18,15 +21,30 @@ export const Cast = ({ param }: { param: string }) => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     dots: false,
-                    arrows: false,
+                    arrows: false
                 }
             }
         ]
-    }
+    };
 
-    const { data } = useCast(param);
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "cast",
+                call: () => movieApi.findByCast(param, "credits")
+            }
+        ],
+        [param]
+    );
 
-    const filteredImages = data?.cast.filter(i => i.profile_path !== null);
+    const { data } = useFetchData<ICast>(apiCalls);
+    console.log(data);
+
+    const cast = data?.cast;
+
+    const filteredImages = cast?.cast.filter(
+        (i: ICast) => i.profile_path !== null
+    );
 
     return (
         <div className="movie-cast">
@@ -37,11 +55,25 @@ export const Cast = ({ param }: { param: string }) => {
                         {filteredImages?.map((c, k) => (
                             <div className="cast" key={k}>
                                 <a href={`/cast/${c.id}`}>
-                                    <img src={"https://image.tmdb.org/t/p/w300" + c.profile_path} alt="poster elenco" className="hover:opacity-75 transition ease-in-out duration-150" />
+                                    <img
+                                        src={
+                                            "https://image.tmdb.org/t/p/w300" +
+                                            c.profile_path
+                                        }
+                                        alt="poster elenco"
+                                        className="hover:opacity-75 transition ease-in-out duration-150"
+                                    />
                                 </a>
                                 <div className="info-cast">
-                                    <a href={`/cast/${c.id}`} className="hover:text-gray:300">{c.original_name}</a>
-                                    <div className="text-gray-400">{c.character}</div>
+                                    <a
+                                        href={`/cast/${c.id}`}
+                                        className="hover:text-gray:300"
+                                    >
+                                        {c.original_name}
+                                    </a>
+                                    <div className="text-gray-400">
+                                        {c.character}
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -49,5 +81,5 @@ export const Cast = ({ param }: { param: string }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
