@@ -1,0 +1,15 @@
+.info {
+    border-bottom-width: 1px;
+    border-color: #2d3748;
+
+    .info-box {
+        padding: 4rem 1rem;
+        margin: 0 auto;
+
+        .info-image {
+            img {
+                border-radius: .6rem;
+            }
+        }
+    }
+}
