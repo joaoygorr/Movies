@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { useMemo } from "react";
 import { movieApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
-import { ICast } from "../../interfaces";
+import { ICast, ICastResponse } from "../../interfaces";
 
 export const Cast = ({ param }: { param: string }) => {
     const settings = {
@@ -37,14 +37,10 @@ export const Cast = ({ param }: { param: string }) => {
         [param]
     );
 
-    const { data } = useFetchData<ICast>(apiCalls);
-    console.log(data);
+    const { data } = useFetchData<{ cast: ICastResponse }>(apiCalls);
+    const cast = data?.cast.cast || [];
 
-    const cast = data?.cast;
-
-    const filteredImages = cast?.cast.filter(
-        (i: ICast) => i.profile_path !== null
-    );
+    const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
 
     return (
         <div className="movie-cast">
