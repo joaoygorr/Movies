@@ -1,23 +1,33 @@
 "use client";
-import { IGenre, IParams } from "@/app/shared/interfaces";
-import { useFilm } from "./hook/useFilm";
+import { IGenre, IMovie, IParams, IVideo } from "@/app/shared/interfaces";
 import { formatDate, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
 import { Modal } from "@/app/shared/components/modal/modal";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Cast } from "@/app/shared/components/cast/cast";
 import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/app/shared/components/layoutComponent";
+import { movieApi } from "@/app/shared/api/api";
+import { useFetchData } from "@/app/shared/hook/useFetchData";
 
 export default function MovieDetails(movie: IParams) {
-    const { data, loading } = useFilm(movie.params.id);
+    const apiCalls = useMemo(() => [
+        {
+            key: "details",
+            call: () => movieApi.findByMovie(movie.params.id)
+        },
+        {
+            key: "video",
+            call: () => movieApi.findByTrailerMovie(movie.params.id, "videos")
+        }
+    ], [movie.params.id]);
+
+    const { data, loading } = useFetchData<{ details: IMovie, video: IVideo }>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     const formatGenres = (genres: IGenre[]) => {
-        return genres?.map((genre) => {
-            return genre.name
-        }).join(' - ');
+        return genres?.map((genre) => genre.name).join(' - ');
     };
 
     if (loading) {

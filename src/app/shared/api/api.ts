@@ -1,4 +1,4 @@
-import { IGenre, IGenreList, IListMovie, IMovie, IResponse, IVideo, ICast, IImage } from "@/app/shared/interfaces";
+import { IGenresResponse, IListMovie, IMovie, IResponse, IVideo, ICast, IImage } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
 const createApiInstance = (url: string): AxiosInstance => {
@@ -52,8 +52,8 @@ export class Api {
         return this.getRequest<IVideo>(`${id}/${url}`);
     }
 
-    async findAllGenre(): Promise<IGenreList<IGenre>> {
-        return this.getRequest<IGenreList<IGenre>>("/movie/list");
+    async findAllGenre(): Promise<IGenresResponse> {
+        return this.getRequest<IGenresResponse>("/movie/list");
     }
 
     async findByCast(id: string, url: string): Promise<ICast> {

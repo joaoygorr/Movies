@@ -1,8 +1,15 @@
-export interface IGenre {
-    id: string,
-    name: string
+// Interface para um gênero individual
+interface IGenre {
+    id: number;
+    name: string;
 }
 
-export interface IGenreList<IGenre> {
-    genres: IGenre[]
+// Interface para o objeto interno com a lista de gêneros
+interface IGenresInnerResponse {
+    genres: IGenre[];
+}
+
+// Interface para a resposta da API que contém o objeto interno
+interface IGenresResponse {
+    genres: IGenresInnerResponse;
 }

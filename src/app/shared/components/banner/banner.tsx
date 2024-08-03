@@ -1,35 +1,30 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IGenre, IGenreList, IListMovie } from "@/app/shared/interfaces";
-import { useEffect, useState } from "react";
+import { IGenre, IGenresResponse, IListMovie, IResponse } from "@/app/shared/interfaces";
+import { useMemo } from "react";
 import { genreApi } from "../../api/api";
+import { useFetchData } from "../../hook/useFetchData";
 
-export default function Banner({ movies }: { movies: IListMovie[] | undefined }) {
-    const [data, setData] = useState<IGenreList<IGenre>>();
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await genreApi.findAllGenre();
-                setData(data);
-
-            } catch (error) {
-                console.log(error);
-            }
+export default function Banner({ movies }: { movies: IResponse<IListMovie[]> | undefined }) {
+    const apiCalls = useMemo(() => [
+        {
+            key: "genres",
+            call: () => genreApi.findAllGenre()
         }
-        fetchData();
-    }, [movies]);
+    ], [movies]);
+
+    const { data, loading } = useFetchData<IGenresResponse>(apiCalls);
+    const response = data?.genres;
 
     function filterGenres(genre: string[]) {
-        const genreFiltered = data?.genres.filter(e => genre.includes(e.id));
-
-        return genreFiltered?.map(value => { return value.name }).join(', ');
+        const genreFiltered = response?.genres?.filter((e: IGenre) => genre.includes(e.id));
+        return genreFiltered?.map((value: IGenre) => { return value.name }).join(', ');
     }
 
     return (
         <>
-            {movies?.map((movie, key) => (
+            {movies?.results?.map((movie, key) => (
                 <div className="movie" key={key}>
                     <Link href={`/movie/${movie.id}`}>
                         <img src={"https://image.tmdb.org/t/p/w500" + movie?.poster_path} alt="poster filme" className="hover:opacity-75 transition ease-in-out duration-150" />
