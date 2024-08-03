@@ -1,9 +1,9 @@
 import { IGenre } from "./IGenre";
 
 export interface IGenresResponse {
-  genres: IGenresInnerResponse;
+    genres: IGenresInnerResponse;
 }
 
 interface IGenresInnerResponse {
-  genres: IGenre[];
+    genres: IGenre[];
 }
