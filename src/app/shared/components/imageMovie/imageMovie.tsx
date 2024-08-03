@@ -1,10 +1,25 @@
-import { useImage } from "./hook/useImage";
+import { useMemo } from "react";
 import "./imageMovie.style.scss";
+import { imageApi } from "../../api/api";
+import { useFetchData } from "../../hook/useFetchData";
+import { IImage } from "../../interfaces";
 
 export const ImageMovie = ({ param }: { param: string }) => {
-    const { data } = useImage(param);
-    const filteredElements = data?.posters.slice(5, 17);
-    
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "posters",
+                call: () => imageApi.findImagesMovie(param, "images")
+            }
+        ],
+        [param]
+    );
+
+    const { data } = useFetchData<{ posters: IImage }>(apiCalls);
+    const posters = data?.posters;
+
+    const filteredElements = posters?.posters.slice(5, 17);
+
     return (
         <div className="movie-image">
             <div className="container image-box">
@@ -12,11 +27,18 @@ export const ImageMovie = ({ param }: { param: string }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                     {filteredElements?.map((image, key) => (
                         <div className="image" key={key}>
-                            <img src={"https://image.tmdb.org/t/p/w500" + image.file_path} alt="" className="hover:opacity-75 transition ease-in-out duration-150" />
+                            <img
+                                src={
+                                    "https://image.tmdb.org/t/p/w500" +
+                                    image.file_path
+                                }
+                                alt="posters"
+                                className="hover:opacity-75 transition ease-in-out duration-150"
+                            />
                         </div>
                     ))}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
