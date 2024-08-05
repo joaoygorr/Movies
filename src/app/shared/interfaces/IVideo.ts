@@ -1,5 +1,5 @@
 export interface IVideo {
-    id: number;
+    id?: number;
     results: [
         {
             iso_639_1: string;

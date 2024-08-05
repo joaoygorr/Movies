@@ -1,3 +1,5 @@
+import { ICastResponse } from "./ICastResponse";
+
 interface IExternalIds {
     freebase_mid: string;
     freebase_id: string | null;
@@ -27,4 +29,5 @@ export interface IActorDetails {
     popularity: number;
     profile_path: string;
     external_ids: IExternalIds;
+    movie_credits: ICastResponse[];
 }

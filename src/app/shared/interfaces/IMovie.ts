@@ -1,4 +1,6 @@
+import { ICastResponse } from "./ICastResponse";
 import { IGenre } from "./IGenre";
+import { IVideo } from "./IVideo";
 
 export interface IMovie {
     adult: boolean;
@@ -49,4 +51,6 @@ export interface IMovie {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    videos: IVideo;
+    credits: ICastResponse;
 }

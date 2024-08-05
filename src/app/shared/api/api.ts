@@ -63,10 +63,6 @@ export class Api {
         return this.getRequest<IActorDetails>(url);
     }
 
-    async findByTrailerMovie(id: string, url: string): Promise<IVideo> {
-        return this.getRequest<IVideo>(`${id}/${url}`);
-    }
-
     async findAllGenre(): Promise<IGenresResponse> {
         return this.getRequest<IGenresResponse>("/movie/list");
     }
@@ -85,6 +81,5 @@ export class Api {
 
 export const movieApi = new Api();
 export const genreApi = new Api("/genre");
-export const videoApi = new Api();
 export const castApi = new Api("/person");
 export const imageApi = new Api();

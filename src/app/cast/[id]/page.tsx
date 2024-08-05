@@ -14,7 +14,7 @@ export default function CastDetails(cast: IParams) {
                 key: "details",
                 call: () =>
                     castApi.findByPeaple(
-                        `${cast.params.id}?append_to_response=external_ids`
+                        `${cast.params.id}?append_to_response=external_ids,movie_credits`
                     )
             }
         ],

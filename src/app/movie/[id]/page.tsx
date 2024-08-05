@@ -16,20 +16,16 @@ export default function MovieDetails(movie: IParams) {
         () => [
             {
                 key: "details",
-                call: () => movieApi.findByMovie(movie.params.id)
-            },
-            {
-                key: "video",
                 call: () =>
-                    movieApi.findByTrailerMovie(movie.params.id, "videos")
+                    movieApi.findByMovie(
+                        `${movie.params.id}?append_to_response=credits,videos,images`
+                    )
             }
         ],
         [movie.params.id]
     );
 
-    const { data, loading } = useFetchData<{ details: IMovie; video: IVideo }>(
-        apiCalls
-    );
+    const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     const formatGenres = (genres: IGenre[]) => {
@@ -39,6 +35,7 @@ export default function MovieDetails(movie: IParams) {
     if (loading) {
         return <Loading />;
     }
+    console.log(data);
 
     return (
         <div>
@@ -81,7 +78,7 @@ export default function MovieDetails(movie: IParams) {
                     <p>{data?.details?.overview || "Sem Informação"}</p>
                     <div className="box-button">
                         <div>
-                            {data?.video.results.length! > 0 && (
+                            {data?.details?.videos.results.length! > 0 && (
                                 <button
                                     type="button"
                                     onClick={() => setIsVisible(true)}
@@ -95,7 +92,10 @@ export default function MovieDetails(movie: IParams) {
                     </div>
                 </Layout.Details>
                 {isVisible && (
-                    <Modal video={data?.video!} hidden={setIsVisible} />
+                    <Modal
+                        video={data?.details?.videos!}
+                        hidden={setIsVisible}
+                    />
                 )}
             </Layout.Root>
             <Cast param={movie.params.id} />
