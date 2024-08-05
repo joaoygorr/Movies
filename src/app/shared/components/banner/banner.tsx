@@ -1,25 +1,43 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IGenre, IGenresResponse, IListMovie, IResponse } from "@/app/shared/interfaces";
+import {
+    IGenre,
+    IGenresResponse,
+    IListMovie,
+    IResponse
+} from "@/app/shared/interfaces";
 import { useMemo } from "react";
 import { genreApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
 
-export default function Banner({ movies }: { movies: IResponse<IListMovie[]> | undefined }) {
-    const apiCalls = useMemo(() => [
-        {
-            key: "genres",
-            call: () => genreApi.findAllGenre()
-        }
-    ], [movies]);
+export default function Banner({
+    movies
+}: {
+    movies: IResponse<IListMovie[]> | undefined;
+}) {
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "genres",
+                call: () => genreApi.findAllGenre()
+            }
+        ],
+        [movies]
+    );
 
-    const { data, loading } = useFetchData<IGenresResponse>(apiCalls);
+    const { data } = useFetchData<IGenresResponse>(apiCalls);
     const response = data?.genres;
 
     function filterGenres(genre: string[]) {
-        const genreFiltered = response?.genres?.filter((e: IGenre) => genre.includes(e.id));
-        return genreFiltered?.map((value: IGenre) => { return value.name }).join(', ');
+        const genreFiltered = response?.genres?.filter((e: IGenre) =>
+            genre.includes(e.id)
+        );
+        return genreFiltered
+            ?.map((value: IGenre) => {
+                return value.name;
+            })
+            .join(", ");
     }
 
     return (
@@ -27,20 +45,41 @@ export default function Banner({ movies }: { movies: IResponse<IListMovie[]> | u
             {movies?.results?.map((movie, key) => (
                 <div className="movie" key={key}>
                     <Link href={`/movie/${movie.id}`}>
-                        <img src={"https://image.tmdb.org/t/p/w500" + movie?.poster_path} alt="poster filme" className="hover:opacity-75 transition ease-in-out duration-150" />
+                        <img
+                            src={
+                                "https://image.tmdb.org/t/p/w500" +
+                                movie?.poster_path
+                            }
+                            alt="poster filme"
+                            className="hover:opacity-75 transition ease-in-out duration-150"
+                        />
                     </Link>
                     <div className="detail-movie">
-                        <Link href={`/movie/${movie.id}`} className="title-movie">{movie.title}</Link>
+                        <Link
+                            href={`/movie/${movie.id}`}
+                            className="title-movie"
+                        >
+                            {movie.title}
+                        </Link>
                         <div className="specification">
                             <i className="pi pi-star-fill" />
-                            <span className="ml-1">{Math.trunc(movie?.vote_average * 10) + "%"}</span>
+                            <span className="ml-1">
+                                {Math.trunc(movie?.vote_average * 10) + "%"}
+                            </span>
                             <span className="mx-2">|</span>
-                            <span>{formatDate(new Date(movie?.release_date)).modelOne}</span>
+                            <span>
+                                {
+                                    formatDate(new Date(movie?.release_date))
+                                        .modelOne
+                                }
+                            </span>
                         </div>
-                        <span className="genre">{filterGenres(movie?.genre_ids)}</span>
+                        <span className="genre">
+                            {filterGenres(movie?.genre_ids)}
+                        </span>
                     </div>
                 </div>
             ))}
         </>
-    )
-};
+    );
+}
