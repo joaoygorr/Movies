@@ -1,3 +1,13 @@
+.info-social-media {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+
+    i {
+        width: 1.5rem;
+    }
+}
+
 .details-peaple {
     display: flex;
     flex-wrap: wrap;

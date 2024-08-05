@@ -4,7 +4,8 @@ import { Layout } from "@/app/shared/components/layoutComponent";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
 import { IActorDetails, IParams } from "@/app/shared/interfaces";
 import { formatDate } from "@/app/shared/utils";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import "./cast.style.scss";
 
 export default function CastDetails(cast: IParams) {
     const apiCalls = useMemo(
@@ -19,11 +20,33 @@ export default function CastDetails(cast: IParams) {
         ],
         [cast.params.id]
     );
+    const [socialMedia, setSocialMedia] = useState<string[]>([]);
+    const [valueSocialMedia, setValueSocialMedia] = useState<string[]>([]);
+
     const { data } = useFetchData<{ details: IActorDetails }>(apiCalls);
     const details = data?.details;
 
     const yearsOld =
         new Date().getFullYear() - parseInt(details?.birthday.split("-")[0]!);
+
+    useEffect(() => {
+        if (details?.external_ids) {
+            const excludeKeys = ["freebase", "imdb", "tvrage", "wikidata"];
+
+            const nonNullEntries = Object.entries(details.external_ids).filter(
+                ([key, value]) =>
+                    value !== null && !excludeKeys.includes(key.split("_")[0])
+            );
+
+            const listSocialMedia = Array.from(
+                new Set(nonNullEntries.map(([key]) => key.split("_")[0]))
+            );
+
+            const socialMediaValues = nonNullEntries.map(([_, value]) => value);
+            setValueSocialMedia(socialMediaValues);
+            setSocialMedia(listSocialMedia);
+        }
+    }, [details?.external_ids]);
 
     return (
         <div>
@@ -36,7 +59,21 @@ export default function CastDetails(cast: IParams) {
                     alt="poster cast"
                     className="w-76"
                 >
-                    <ul className="info-social-media"></ul>
+                    <ul className="info-social-media">
+                        {socialMedia?.map((media, i) => (
+                            <li className={i > 0 ? "ml-6" : ""}>
+                                <a
+                                    href={`https://${media}.com/${
+                                        media === "tiktok" ? "@" : ""
+                                    }${valueSocialMedia[i]}`}
+                                >
+                                    <i
+                                        className={`pi pi-${media} fill-current text-gray-400 hover:text-white`}
+                                    />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </Layout.Image>
 
                 <Layout.Details>
@@ -45,7 +82,7 @@ export default function CastDetails(cast: IParams) {
                     </h2>
 
                     <div className="details-peaple text-gray-400">
-                        <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4"></i>
+                        <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                         <span className="ml-2">
                             {formatDate(new Date(details?.birthday!)).modelOne}(
                             {yearsOld} anos) em {details?.place_of_birth}
