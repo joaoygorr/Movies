@@ -3,7 +3,6 @@ import {
     IListMovie,
     IMovie,
     IResponse,
-    IVideo,
     ICast,
     IImage,
     IActorDetails
@@ -73,8 +72,7 @@ export class Api {
 
     async findImagesMovie(id: string, url: string): Promise<IImage> {
         return this.getRequest<IImage>(`${id}/${url}`, {
-            include_image_language: "pt",
-            language: ""
+            include_image_language: "pt"
         });
     }
 }

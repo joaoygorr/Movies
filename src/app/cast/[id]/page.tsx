@@ -84,8 +84,8 @@ export default function CastDetails(cast: IParams) {
                     <div className="details-peaple text-gray-400">
                         <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                         <span className="ml-2">
-                            {formatDate(new Date(details?.birthday!)).modelOne}(
-                            {yearsOld} anos) em {details?.place_of_birth}
+                            {formatDate(new Date(details?.birthday!)).modelOne}
+                            ({yearsOld} anos) em {details?.place_of_birth}
                         </span>
                     </div>
 

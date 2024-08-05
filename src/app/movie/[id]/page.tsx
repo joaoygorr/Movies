@@ -35,7 +35,6 @@ export default function MovieDetails(movie: IParams) {
     if (loading) {
         return <Loading />;
     }
-    console.log(data);
 
     return (
         <div>
