@@ -10,7 +10,9 @@ export const Header = () => {
                         <li className="md:ml-6 md:mt-0 mt-3 logo">
                             <Link href={"/"}>
                                 <i className="pi pi-video" />
-                                <span className="hover:text-gray-300">The Movie</span>
+                                <span className="hover:text-gray-300">
+                                    The Movie
+                                </span>
                             </Link>
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
@@ -24,7 +26,11 @@ export const Header = () => {
 
                     <div className="flex flex-col md:flex-row box-search">
                         <div className="relative mt-3 md:mt-0">
-                            <input type="search" placeholder="Pesquisar..." className="focus:outline-none focus:shadow-outline" />
+                            <input
+                                type="search"
+                                placeholder="Pesquisar..."
+                                className="focus:outline-none focus:shadow-outline"
+                            />
                         </div>
                     </div>
                 </div>
