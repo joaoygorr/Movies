@@ -8,22 +8,25 @@ import { Loading } from "../shared/components/loading/loading";
 import { useFetchData } from "../shared/hook/useFetchData";
 
 type Movies = {
-    popular: IResponse<IListMovie[]>,
-    nowPlaying: IResponse<IListMovie[]>
-}
+    popular: IResponse<IListMovie[]>;
+    nowPlaying: IResponse<IListMovie[]>;
+};
 
 export default function HomePage() {
-    const apiCalls = useMemo(() => [
-        {
-            key: "popular",
-            call: () => movieApi.listPopularMovie('popular')
-        },
-        {
-            key: "nowPlaying",
-            call: () => movieApi.listNowPlayingMovie('now_playing')
-        }
-    ], []);
-    
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "popular",
+                call: () => movieApi.listPopularMovie("popular")
+            },
+            {
+                key: "nowPlaying",
+                call: () => movieApi.listNowPlayingMovie("now_playing")
+            }
+        ],
+        []
+    );
+
     const { data, loading } = useFetchData<Movies>(apiCalls);
 
     if (loading) {
@@ -48,5 +51,5 @@ export default function HomePage() {
                 </section>
             </div>
         </main>
-    )
+    );
 }
