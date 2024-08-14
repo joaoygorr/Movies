@@ -1,16 +1,15 @@
 name: Build NextJS APP
 on: pull_request
 jobs:
-  build-NextJ-APP:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Using Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20.
-      - uses: Running Commands
-      - name: run install and build
-        run: |
-          yarn
-          yarn run build
+    build-NextJ-APP:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Using Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 20.
+            - name: run install and build
+              run: |
+                  yarn
+                  yarn run build
