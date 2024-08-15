@@ -12,9 +12,7 @@ import axios, { AxiosInstance } from "axios";
 const createApiInstance = (url: string): AxiosInstance => {
     return axios.create({
         baseURL: process.env.NEXT_PUBLIC_URL + url,
-        params: {
-            language: "pt-br"
-        },
+
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_READ_API}`
@@ -47,7 +45,9 @@ export class Api {
     }
 
     async findByMovie(id: string): Promise<IMovie> {
-        return this.getRequest<IMovie>(id);
+        return this.getRequest<IMovie>(id, {
+            language: "pt-br"
+        });
     }
 
     async listPopularMovie(url: string): Promise<IResponse<IListMovie[]>> {
@@ -59,7 +59,9 @@ export class Api {
     }
 
     async findByPeaple(url: string): Promise<IActorDetails> {
-        return this.getRequest<IActorDetails>(url);
+        return this.getRequest<IActorDetails>(url, {
+            language: "pt-br"
+        });
     }
 
     async findAllGenre(): Promise<IGenresResponse> {
@@ -71,9 +73,7 @@ export class Api {
     }
 
     async findImagesMovie(id: string, url: string): Promise<IImage> {
-        return this.getRequest<IImage>(`${id}/${url}`, {
-            include_image_language: "pt"
-        });
+        return this.getRequest<IImage>(`${id}/${url}`);
     }
 }
 
