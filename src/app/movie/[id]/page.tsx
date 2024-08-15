@@ -1,11 +1,11 @@
 "use client";
-import { IGenre, IMovie, IParams, IVideo } from "@/app/shared/interfaces";
+import { IGenre, IMovie, IParams } from "@/app/shared/interfaces";
 import { formatDate, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
 import { Modal } from "@/app/shared/components/modal/modal";
 import { useMemo, useState } from "react";
-import { Cast } from "@/app/shared/components/cast/cast";
+import { Actors } from "@/app/shared/components/actors/actors";
 import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/app/shared/components/layoutComponent";
 import { movieApi } from "@/app/shared/api/api";
@@ -45,7 +45,9 @@ export default function MovieDetails(movie: IParams) {
                         data?.details?.poster_path
                     }
                     alt="poster movie"
+                    effect="blur"
                     className="w-64 lg:w-96"
+                    placeholderSrc={`https://image.tmdb.org/t/p/w500${data?.details?.poster_path}`}
                 />
 
                 <Layout.Details>
@@ -97,7 +99,7 @@ export default function MovieDetails(movie: IParams) {
                     />
                 )}
             </Layout.Root>
-            <Cast param={movie.params.id} />
+            <Actors param={movie.params.id} />
             <ImageMovie param={movie.params.id} />
         </div>
     );

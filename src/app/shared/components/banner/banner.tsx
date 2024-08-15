@@ -10,6 +10,7 @@ import {
 import { useMemo } from "react";
 import { genreApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Banner({
     movies
@@ -45,13 +46,16 @@ export default function Banner({
             {movies?.results?.map((movie, key) => (
                 <div className="movie" key={key}>
                     <Link href={`/movie/${movie.id}`}>
-                        <img
+                        <LazyLoadImage
+                            key={movie.poster_path}
                             src={
                                 "https://image.tmdb.org/t/p/w500" +
                                 movie?.poster_path
                             }
                             alt="poster filme"
+                            effect="blur"
                             className="hover:opacity-75 transition ease-in-out duration-150"
+                            placeholderSrc={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                         />
                     </Link>
                     <div className="detail-movie">
