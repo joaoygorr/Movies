@@ -36,7 +36,7 @@ export const ImageMovie = ({ param }: { param: string }) => {
                                 }
                                 effect="blur"
                                 alt="posters"
-                                className="hover:opacity-75 transition ease-in-out duration-150"
+                                wrapperClassName="hover:opacity-75 transition ease-in-out duration-150"
                                 placeholderSrc={`https://image.tmdb.org/t/p/w500${image.file_path}`}
                             />
                         </div>

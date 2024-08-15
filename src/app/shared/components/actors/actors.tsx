@@ -59,7 +59,7 @@ export const Actors = ({ param }: { param: string }) => {
                                         }
                                         alt="poster elenco"
                                         effect="blur"
-                                        className="hover:opacity-75 transition ease-in-out duration-150"
+                                        wrapperClassName="hover:opacity-75 transition ease-in-out duration-150"
                                         placeholderSrc={`https://image.tmdb.org/t/p/w300${c.profile_path}`}
                                     />
                                 </a>

@@ -54,7 +54,7 @@ export default function Banner({
                             }
                             alt="poster filme"
                             effect="blur"
-                            className="hover:opacity-75 transition ease-in-out duration-150"
+                            wrapperClassName="hover:opacity-75 transition ease-in-out duration-150"
                             placeholderSrc={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                         />
                     </Link>
