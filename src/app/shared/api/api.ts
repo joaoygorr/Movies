@@ -29,8 +29,6 @@ const handleApiError = (error: any): never => {
     );
 };
 
-// ts-prune-ignore-next
-
 export class Api {
     private api: AxiosInstance;
 

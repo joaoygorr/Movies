@@ -17,5 +17,4 @@ const config: Config = {
     },
     plugins: []
 };
-// ts-prune-ignore-next
 export default config;
