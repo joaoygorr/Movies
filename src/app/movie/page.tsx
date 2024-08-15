@@ -17,11 +17,11 @@ export default function HomePage() {
         () => [
             {
                 key: "popular",
-                call: () => movieApi.listPopularMovie("popular")
+                call: () => movieApi.listMovie("popular")
             },
             {
                 key: "nowPlaying",
-                call: () => movieApi.listNowPlayingMovie("now_playing")
+                call: () => movieApi.listMovie("now_playing")
             }
         ],
         []
