@@ -34,4 +34,4 @@ jobs:
                   key: ${{runner.os}}-${{hashFiles('**/yarn.lock')}}
 
             - name: Run ts-prune
-              run: yarn ts-prune --error
+              run: yarn find-deadcode
