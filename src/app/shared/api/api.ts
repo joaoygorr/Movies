@@ -50,12 +50,10 @@ export class Api {
         });
     }
 
-    async listPopularMovie(url: string): Promise<IResponse<IListMovie[]>> {
-        return this.getRequest<IResponse<IListMovie[]>>(url);
-    }
-
-    async listNowPlayingMovie(url: string): Promise<IResponse<IListMovie[]>> {
-        return this.getRequest<IResponse<IListMovie[]>>(url);
+    async listMovie(url: string): Promise<IResponse<IListMovie[]>> {
+        return this.getRequest<IResponse<IListMovie[]>>(url, {
+            language: "pt-br"
+        });
     }
 
     async findByPeaple(url: string): Promise<IActorDetails> {
@@ -65,7 +63,9 @@ export class Api {
     }
 
     async findAllGenre(): Promise<IGenresResponse> {
-        return this.getRequest<IGenresResponse>("/movie/list");
+        return this.getRequest<IGenresResponse>("/movie/list", {
+            language: "pt-br"
+        });
     }
 
     async findByCast(id: string, url: string): Promise<ICast> {
