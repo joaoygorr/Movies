@@ -1,21 +1,13 @@
-import { ReactNode } from "react";
+import { ImgHTMLAttributes, ReactNode } from "react";
 
-interface ImageRootProps {
-    src: string;
-    alt: string;
-    className: string;
+interface ImageRootProps extends ImgHTMLAttributes<HTMLImageElement> {
     children?: ReactNode;
 }
 
-export function ImageContent({
-    alt,
-    className,
-    src,
-    children
-}: ImageRootProps) {
+export function ImageContent({ children, ...props }: ImageRootProps) {
     return (
         <div className="flex-none info-image">
-            <img src={src} alt={alt} className={className} />
+            <img {...props} />
             {children}
         </div>
     );
