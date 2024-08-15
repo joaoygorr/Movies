@@ -18,4 +18,4 @@ jobs:
             - name: Install Dependencies and Run App
               run: |
                   yarn
-                  yarn dev
+                  yarn run build
