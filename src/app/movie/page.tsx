@@ -12,7 +12,7 @@ type Movies = {
     nowPlaying: IResponse<IListMovie[]>;
 };
 
-export default function HomePage() {
+export function HomePage() {
     const apiCalls = useMemo(
         () => [
             {
