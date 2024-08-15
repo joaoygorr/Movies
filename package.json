@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "find-deadcode": "ts-prune -e"
+        "find-deadcode": "ts-prune --error"
     },
     "dependencies": {
         "axios": "^1.7.4",
