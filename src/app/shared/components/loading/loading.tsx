@@ -9,5 +9,5 @@ export const Loading = () => {
                 <span></span>
             </div>
         </div>
-    )
-}
+    );
+};
