@@ -48,6 +48,18 @@ export default function CastDetails(cast: IParams) {
         }
     }, [details?.external_ids]);
 
+    const filteredDates = details?.movie_credits.crew
+        .filter(
+            (e, i, self) =>
+                e.release_date &&
+                i === self.findIndex((t) => t.title === e.title)
+        )
+        .sort(
+            (a, b) =>
+                parseInt(b.release_date.split("-")[0].trim()) -
+                parseInt(a.release_date.split("-")[0].trim())
+        );
+
     return (
         <div>
             <Layout.Root>
@@ -61,7 +73,7 @@ export default function CastDetails(cast: IParams) {
                 >
                     <ul className="info-social-media">
                         {socialMedia?.map((media, i) => (
-                            <li className={i > 0 ? "ml-6" : ""}>
+                            <li className={i > 0 ? "ml-6" : ""} key={i}>
                                 <a
                                     href={`https://${media}.com/${
                                         media === "tiktok" ? "@" : ""
@@ -84,14 +96,30 @@ export default function CastDetails(cast: IParams) {
                     <div className="details-peaple text-gray-400">
                         <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                         <span className="ml-2">
-                            {formatDate(new Date(details?.birthday!)).modelOne}
-                            ({yearsOld} anos) em {details?.place_of_birth}
+                            {formatDate(new Date(details?.birthday!)).modelOne}(
+                            {yearsOld} anos) em {details?.place_of_birth}
                         </span>
                     </div>
 
                     <p className="text-gray-300 mt-8">{details?.biography}</p>
                 </Layout.Details>
             </Layout.Root>
+
+            <div className="credits border-b border-gray-800">
+                <div className="container mx-auto px-4 py-16">
+                    <h2 className="text-4xl font-semibold">Créditos</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+                        {filteredDates?.map((c, i) => (
+                            <span key={i}>
+                                {c?.release_date.split("-")[0]} ·{" "}
+                                <strong className="hover:underline">
+                                    <a href={`/movie/${c?.id}`}>{c?.title}</a>
+                                </strong>
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
