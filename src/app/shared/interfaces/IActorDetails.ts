@@ -29,5 +29,5 @@ export interface IActorDetails {
     popularity: number;
     profile_path: string;
     external_ids: IExternalIds;
-    movie_credits: ICastResponse[];
+    movie_credits: ICastResponse;
 }
