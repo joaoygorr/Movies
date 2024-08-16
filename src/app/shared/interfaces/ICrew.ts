@@ -10,4 +10,6 @@ export interface ICrew {
     credit_id: string;
     department: string;
     job: string;
+    release_date: string;
+    title: string;
 }
