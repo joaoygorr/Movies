@@ -13,3 +13,19 @@
         }
     }
 }
+
+
+@media(max-width: 767px) {
+    .info {
+        .info-box {
+            text-align: center;
+
+            .info-image {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}

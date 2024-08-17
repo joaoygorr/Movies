@@ -22,10 +22,15 @@
 @media(max-width: 767px) {
     .movie-image {
         .image-box {
+            text-align: center;
+
             .image {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                span {
+
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
         }
     }

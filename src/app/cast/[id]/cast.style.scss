@@ -15,3 +15,19 @@
     font-size: .875rem;
     margin-top: .3rem;
 }
+
+@media(max-width: 767px) {
+    .details-peaple {
+        span {
+            margin: 0;
+        }
+    }
+
+    .credits {
+        text-align: center;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}

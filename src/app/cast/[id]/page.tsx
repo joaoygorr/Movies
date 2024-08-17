@@ -27,7 +27,7 @@ export default function CastDetails(cast: IParams) {
     const details = data?.details;
 
     const yearsOld =
-        new Date().getFullYear() - parseInt(details?.birthday.split("-")[0]!);
+        new Date().getFullYear() - parseInt(details?.birthday?.split("-")[0]!);
 
     useEffect(() => {
         if (details?.external_ids) {
