@@ -39,14 +39,18 @@ export default function HomePage() {
                 <section className="popular-movies">
                     <h2 className="tracking-wider">filmes populares</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                        <Banner movies={data?.popular} />
+                        {data?.popular.results.map((movie, key) => (
+                            <Banner prop={movie} key={key} />
+                        ))}
                     </div>
                 </section>
 
                 <section className="now-playing-movies">
                     <h2 className="tracking-wider">em cartaz</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                        <Banner movies={data?.nowPlaying} />
+                        {data?.nowPlaying.results.map((movie, key) => (
+                            <Banner prop={movie} key={key} />
+                        ))}
                     </div>
                 </section>
             </div>

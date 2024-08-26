@@ -62,8 +62,8 @@ export class Api {
         });
     }
 
-    async findAllGenre(): Promise<IGenresResponse> {
-        return this.getRequest<IGenresResponse>("/movie/list", {
+    async findAllGenre(url: string): Promise<IGenresResponse> {
+        return this.getRequest<IGenresResponse>(url, {
             language: "pt-br"
         });
     }
