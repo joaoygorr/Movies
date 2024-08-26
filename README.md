@@ -26,6 +26,10 @@ $ npm run dev or yarn dev
 
 # The application will open on the port: 3000 - go to http://localhost:3000
 
+# Run the application in docker
+# Go to the project root and run:
+$ docker-compose up
+
 ```
 ## Contributors
 <table>
