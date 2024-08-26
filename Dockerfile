@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 # Instalar apenas as dependências necessárias para produção
-RUN yarn install --frozen-lockfile --production --silent
+RUN yarn install --frozen-lockfile --silent
 
 # Copiar o restante do código
 COPY . .
