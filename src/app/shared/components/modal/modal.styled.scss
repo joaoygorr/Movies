@@ -17,37 +17,6 @@
         .children {
             background-color: #1a202c;
             border-radius: .25rem;
-
-            .button-close {
-                display: flex;
-                justify-content: flex-end;
-                padding: .5rem 1rem 0 0;
-
-                button {
-                    font-size: 1.875rem;
-                    line-height: 1;
-
-                }
-            }
-
-            .modal-body {
-                padding: 2rem 2rem;
-
-                .modal-children {
-                    position: relative;
-                    overflow: hidden;
-                    padding-top: 56.25%;
-
-                    iframe {
-                        width: 100%;
-                        left: 0;
-                        top: 0;
-                        position: absolute;
-                        height: 100%;
-                        border: 0;
-                    }
-                }
-            }
         }
     }
 }
