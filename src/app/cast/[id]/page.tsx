@@ -48,7 +48,7 @@ export default function CastDetails(cast: IParams) {
         }
     }, [details?.external_ids]);
 
-    const filteredDates = details?.movie_credits.crew
+    const filteredDates = details?.movie_credits.cast
         .filter(
             (e, i, self) =>
                 e.release_date &&
@@ -111,9 +111,9 @@ export default function CastDetails(cast: IParams) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
                         {filteredDates?.map((c, i) => (
                             <span key={i}>
-                                {c?.release_date.split("-")[0]} ·{" "}
+                                {c?.release_date.split("-")[0]} ·
                                 <strong className="hover:underline">
-                                    <a href={`/movie/${c?.id}`}>{c?.title}</a>
+                                    <a href={`/movie/${c?.id}`}> {c?.title}</a>
                                 </strong>
                             </span>
                         ))}
