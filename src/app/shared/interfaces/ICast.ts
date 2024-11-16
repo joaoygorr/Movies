@@ -16,4 +16,5 @@ export interface ICast {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    profile_path: string;
 }
