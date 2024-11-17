@@ -93,16 +93,7 @@ export default function MovieDetails(movie: IParams) {
                     </div>
                 </Layout.Details>
                 {isVisible && (
-                    <Modal>
-                        <div className="button-close">
-                            <button
-                                type="button"
-                                onClick={() => setIsVisible(false)}
-                                className="hover:text-gray-300"
-                            >
-                                x
-                            </button>
-                        </div>
+                    <Modal hidden={setIsVisible}>
                         <div className="modal-body">
                             <div className="modal-children responsive-container">
                                 <iframe
