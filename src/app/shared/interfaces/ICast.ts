@@ -17,4 +17,6 @@ export interface ICast {
     vote_average: number;
     vote_count: number;
     profile_path: string;
+    original_name: string;
+    character: string;
 }
