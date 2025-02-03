@@ -1,16 +1,18 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IListMovie } from "@/app/shared/interfaces";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { IListMovie, ITvShows } from "../../interfaces";
 
-export default function Banner({
+type BannerProps<T> = {
+    prop: T;
+    genre: string;
+};
+
+export default function Banner<T extends IListMovie | ITvShows>({
     prop,
     genre
-}: {
-    prop: IListMovie;
-    genre: string;
-}) {
+}: BannerProps<T>) {
     return (
         <div className="movie">
             <Link href={`/movie/${prop?.id}`}>
@@ -25,7 +27,7 @@ export default function Banner({
             </Link>
             <div className="detail-movie">
                 <Link href={`/movie/${prop?.id}`} className="title-movie">
-                    {prop?.title}
+                    {"title" in prop ? prop.title : prop.name}
                 </Link>
                 <div className="specification">
                     <i className="pi pi-star-fill" />
@@ -34,7 +36,15 @@ export default function Banner({
                     </span>
                     <span className="mx-2">|</span>
                     <span>
-                        {formatDate(new Date(prop?.release_date!)).modelOne}
+                        {
+                            formatDate(
+                                new Date(
+                                    "release_date" in prop
+                                        ? prop?.release_date
+                                        : prop?.first_air_date
+                                )
+                            ).modelOne
+                        }
                     </span>
                 </div>
                 <span className="genre">{genre}</span>
