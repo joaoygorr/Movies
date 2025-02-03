@@ -1,37 +1,16 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IGenre, IGenresResponse, IListMovie } from "@/app/shared/interfaces";
-import { useMemo } from "react";
-import { genreApi } from "../../api/api";
-import { useFetchData } from "../../hook/useFetchData";
+import { IListMovie } from "@/app/shared/interfaces";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export default function Banner({ prop }: { prop: IListMovie | undefined }) {
-    const apiCalls = useMemo(
-        () => [
-            {
-                key: "genres",
-                call: () => genreApi.findAllGenre("/movie/list")
-            }
-        ],
-        [prop]
-    );
-
-    const { data } = useFetchData<IGenresResponse>(apiCalls);
-    const response = data?.genres;
-
-    function filterGenres(genre: string[]) {
-        const genreFiltered = response?.genres?.filter((e: IGenre) =>
-            genre?.includes(e.id)
-        );
-        return genreFiltered
-            ?.map((value: IGenre) => {
-                return value.name;
-            })
-            .join(", ");
-    }
-
+export default function Banner({
+    prop,
+    genre
+}: {
+    prop: IListMovie;
+    genre: string;
+}) {
     return (
         <div className="movie">
             <Link href={`/movie/${prop?.id}`}>
@@ -58,7 +37,7 @@ export default function Banner({ prop }: { prop: IListMovie | undefined }) {
                         {formatDate(new Date(prop?.release_date!)).modelOne}
                     </span>
                 </div>
-                <span className="genre">{filterGenres(prop?.genre_ids!)}</span>
+                <span className="genre">{genre}</span>
             </div>
         </div>
     );
