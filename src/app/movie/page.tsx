@@ -1,15 +1,21 @@
 "use client";
 import "../styles/home.style.scss";
 import Banner from "../shared/components/banner/banner";
-import { movieApi } from "../shared/api/api";
+import { genreApi, movieApi } from "../shared/api/api";
 import { useMemo } from "react";
-import { IListMovie, IResponse } from "../shared/interfaces";
+import {
+    IGenre,
+    IGenresResponse,
+    IListMovie,
+    IResponse
+} from "../shared/interfaces";
 import { Loading } from "../shared/components/loading/loading";
 import { useFetchData } from "../shared/hook/useFetchData";
 
 type Movies = {
     popular: IResponse<IListMovie[]>;
     nowPlaying: IResponse<IListMovie[]>;
+    genres: IGenresResponse;
 };
 
 export default function HomePage() {
@@ -22,15 +28,31 @@ export default function HomePage() {
             {
                 key: "nowPlaying",
                 call: () => movieApi.listMovie("now_playing")
+            },
+            {
+                key: "genres",
+                call: () => genreApi.findAllGenre("/movie/list")
             }
         ],
         []
     );
 
     const { data, loading } = useFetchData<Movies>(apiCalls);
-
     if (loading) {
         return <Loading />;
+    }
+
+    const genresResponse = data?.genres!;
+
+    function filterGenres(genre: string[]) {
+        const genreFiltered = genresResponse.genres?.filter((e: IGenre) =>
+            genre?.includes(e.id)
+        );
+        return genreFiltered
+            ?.map((value: IGenre) => {
+                return value.name;
+            })
+            .join(", ");
     }
 
     return (
@@ -40,7 +62,11 @@ export default function HomePage() {
                     <h2 className="tracking-wider">filmes populares</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {data?.popular.results.map((movie, key) => (
-                            <Banner prop={movie} key={key} />
+                            <Banner
+                                prop={movie}
+                                key={key}
+                                genre={filterGenres(movie.genre_ids)}
+                            />
                         ))}
                     </div>
                 </section>
@@ -49,7 +75,11 @@ export default function HomePage() {
                     <h2 className="tracking-wider">em cartaz</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {data?.nowPlaying.results.map((movie, key) => (
-                            <Banner prop={movie} key={key} />
+                            <Banner
+                                prop={movie}
+                                key={key}
+                                genre={filterGenres(movie.genre_ids)}
+                            />
                         ))}
                     </div>
                 </section>
