@@ -5,7 +5,8 @@ import {
     IResponse,
     ICast,
     IImage,
-    IActorDetails
+    IActorDetails,
+    ITvShows
 } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
@@ -56,6 +57,12 @@ export class Api {
         });
     }
 
+    async listTvShows(url: string): Promise<IResponse<ITvShows[]>> {
+        return this.getRequest<IResponse<ITvShows[]>>(url, {
+            language: "pt-br"
+        });
+    }
+
     async findByPeaple(url: string): Promise<IActorDetails> {
         return this.getRequest<IActorDetails>(url, {
             language: "pt-br"
@@ -81,3 +88,4 @@ export const movieApi = new Api();
 export const genreApi = new Api("/genre");
 export const castApi = new Api("/person");
 export const imageApi = new Api();
+export const tvShows = new Api("/tv");
