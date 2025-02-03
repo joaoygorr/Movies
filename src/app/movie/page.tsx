@@ -3,14 +3,10 @@ import "../styles/home.style.scss";
 import Banner from "../shared/components/banner/banner";
 import { genreApi, movieApi } from "../shared/api/api";
 import { useMemo } from "react";
-import {
-    IGenre,
-    IGenresResponse,
-    IListMovie,
-    IResponse
-} from "../shared/interfaces";
+import { IGenresResponse, IListMovie, IResponse } from "../shared/interfaces";
 import { Loading } from "../shared/components/loading/loading";
 import { useFetchData } from "../shared/hook/useFetchData";
+import { filterGenres } from "../shared/utils";
 
 type Movies = {
     popular: IResponse<IListMovie[]>;
@@ -18,7 +14,7 @@ type Movies = {
     genres: IGenresResponse;
 };
 
-export default function HomePage() {
+export default function PageMovies() {
     const apiCalls = useMemo(
         () => [
             {
@@ -27,7 +23,7 @@ export default function HomePage() {
             },
             {
                 key: "nowPlaying",
-                call: () => movieApi.listMovie("now_playing")
+                call: () => movieApi.listMovie("top_rated")
             },
             {
                 key: "genres",
@@ -44,41 +40,38 @@ export default function HomePage() {
 
     const genresResponse = data?.genres!;
 
-    function filterGenres(genre: string[]) {
-        const genreFiltered = genresResponse.genres?.filter((e: IGenre) =>
-            genre?.includes(e.id)
-        );
-        return genreFiltered
-            ?.map((value: IGenre) => {
-                return value.name;
-            })
-            .join(", ");
-    }
-
     return (
         <main>
             <div className="container box">
-                <section className="popular-movies">
+                <section className="popular">
                     <h2 className="tracking-wider">filmes populares</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {data?.popular.results.map((movie, key) => (
                             <Banner
                                 prop={movie}
                                 key={key}
-                                genre={filterGenres(movie.genre_ids)}
+                                genre={filterGenres(
+                                    movie.genre_ids,
+                                    genresResponse
+                                )}
                             />
                         ))}
                     </div>
                 </section>
 
-                <section className="now-playing-movies">
-                    <h2 className="tracking-wider">em cartaz</h2>
+                <section className="now-playing">
+                    <h2 className="tracking-wider">
+                        top filmes - mais bem avaliados
+                    </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {data?.nowPlaying.results.map((movie, key) => (
                             <Banner
                                 prop={movie}
                                 key={key}
-                                genre={filterGenres(movie.genre_ids)}
+                                genre={filterGenres(
+                                    movie.genre_ids,
+                                    genresResponse
+                                )}
                             />
                         ))}
                     </div>
