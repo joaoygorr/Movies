@@ -1,5 +1,5 @@
 "use client";
-import { IGenre, IMovie, IParams } from "@/app/shared/interfaces";
+import { IGenre, IMovie } from "@/app/shared/interfaces";
 import { formatDate, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
@@ -10,19 +10,22 @@ import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/app/shared/components/layoutComponent";
 import { movieApi } from "@/app/shared/api/api";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
+import { useParams } from "next/navigation";
 
-export default function MovieDetails(movie: IParams) {
+export default function MovieDetails() {
+    const movie = useParams();
+
     const apiCalls = useMemo(
         () => [
             {
                 key: "details",
                 call: () =>
                     movieApi.findByMovie(
-                        `${movie.params.id}?append_to_response=credits,videos,images`
+                        `${movie.id}?append_to_response=credits,videos,images`
                     )
             }
         ],
-        [movie.params.id]
+        [movie.id]
     );
 
     const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
@@ -106,8 +109,8 @@ export default function MovieDetails(movie: IParams) {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors param={movie.params.id} />
-            <ImageMovie param={movie.params.id} />
+            <Actors param={movie.id} />
+            <ImageMovie param={movie.id} />
         </div>
     );
 }
