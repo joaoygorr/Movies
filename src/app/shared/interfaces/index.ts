@@ -10,3 +10,4 @@ export { type IImage } from "./IImage";
 export { type ICrew } from "./ICrew";
 export { type ICastResponse } from "./ICastResponse";
 export { type IActorDetails } from "./IActorDetails";
+export { type ITvShows } from "./ITvShows";
