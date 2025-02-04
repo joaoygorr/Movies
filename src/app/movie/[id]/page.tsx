@@ -1,6 +1,6 @@
 "use client";
-import { IGenre, IMovie } from "@/app/shared/interfaces";
-import { formatDate, returnHours } from "@/app/shared/utils";
+import { IMovie } from "@/app/shared/interfaces";
+import { formatDate, formatGenres, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
 import { Modal } from "@/app/shared/components/modal/modal";
@@ -30,10 +30,6 @@ export default function MovieDetails() {
 
     const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
-    const formatGenres = (genres: IGenre[]) => {
-        return genres?.map((genre) => genre.name).join(" - ");
-    };
 
     if (loading) {
         return <Loading />;
@@ -110,7 +106,7 @@ export default function MovieDetails() {
                 )}
             </Layout.Root>
             <Actors param={String(movie.id)} />
-            <ImageMovie param={String(movie.id)} />
+            <ImageMovie param={String(movie.id)} urlApi="/movie" />
         </div>
     );
 }
