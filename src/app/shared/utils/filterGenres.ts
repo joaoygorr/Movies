@@ -1,7 +1,11 @@
-import { IGenre, IGenresResponse } from "../interfaces";
+import { IGenre } from "../interfaces";
 
-export function filterGenres(genre: string[], genresResponse: IGenresResponse) {
-    const genreFiltered = genresResponse.genres?.filter((e: IGenre) =>
+type Genres = {
+    genre: IGenre[];
+};
+
+export function filterGenres(genre: string[], genresResponse: Genres) {
+    const genreFiltered = genresResponse?.genre?.filter((e: IGenre) =>
         genre?.includes(e.id)
     );
     return genreFiltered
