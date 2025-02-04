@@ -5,7 +5,15 @@ import { useFetchData } from "../../hook/useFetchData";
 import { IImage } from "../../interfaces";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export const ImageMovie = ({ param }: { param: string }) => {
+export const ImageMovie = ({
+    param,
+    urlApi
+}: {
+    param: string;
+    urlApi: string;
+}) => {
+    imageApi.setUrl(urlApi);
+
     const apiCalls = useMemo(
         () => [
             {

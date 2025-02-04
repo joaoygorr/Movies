@@ -1,39 +1,33 @@
 "use client";
-import { IMovie } from "@/app/shared/interfaces";
-import { formatDate, formatGenres, returnHours } from "@/app/shared/utils";
-import "./movie.style.scss";
-import { Loading } from "@/app/shared/components/loading/loading";
-import { Modal } from "@/app/shared/components/modal/modal";
-import { useMemo, useState } from "react";
+import { tvShows } from "@/app/shared/api/api";
 import { Actors } from "@/app/shared/components/actors/actors";
 import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/app/shared/components/layoutComponent";
-import { movieApi } from "@/app/shared/api/api";
+import { Modal } from "@/app/shared/components/modal/modal";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
+import { ITvShow } from "@/app/shared/interfaces/ITvShow";
+import { formatDate, formatGenres } from "@/app/shared/utils";
 import { useParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import "./tvShow.style.scss";
 
-export default function MovieDetails() {
-    const movie = useParams();
+export default function TvShowDetails() {
+    const tvShow = useParams();
 
     const apiCalls = useMemo(
         () => [
             {
                 key: "details",
                 call: () =>
-                    movieApi.findByMovie(
-                        `${movie.id}?append_to_response=credits,videos,images`
+                    tvShows.findByTvShow(
+                        `${tvShow.id}?append_to_response=credits,videos,images`
                     )
             }
         ],
-        [movie.id]
+        [tvShow.id]
     );
-
-    const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
-    if (loading) {
-        return <Loading />;
-    }
+    const { data, loading } = useFetchData<{ details: ITvShow }>(apiCalls);
 
     return (
         <div>
@@ -48,9 +42,8 @@ export default function MovieDetails() {
                     className="w-64 lg:w-96"
                     placeholderSrc={`https://image.tmdb.org/t/p/w500${data?.details?.poster_path}`}
                 />
-
                 <Layout.Details>
-                    <h2 className="title md:mt-0">{data?.details?.title}</h2>
+                    <h2 className="title md:mt-0">{data?.details?.name}</h2>
                     <div className="detail-genre-date">
                         <i className="pi pi-star-fill" />
                         <span className="ml-1">
@@ -61,12 +54,10 @@ export default function MovieDetails() {
                         <span>
                             {
                                 formatDate(
-                                    new Date(data?.details?.release_date!)
+                                    new Date(data?.details?.first_air_date!)
                                 ).modelOne
                             }
                         </span>
-                        <span className="mx-2">|</span>
-                        <span>{returnHours(data?.details?.runtime!)}</span>
                         <span className="mx-2">|</span>
                         <span>{formatGenres(data?.details?.genres!)}</span>
                     </div>
@@ -105,8 +96,8 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors param={String(movie.id)} />
-            <ImageMovie param={String(movie.id)} urlApi="/movie" />
+            <Actors param={String(tvShow.id)} />
+            <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
         </div>
     );
 }

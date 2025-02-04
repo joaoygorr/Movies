@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import "./layout.style.scss";
 
 interface ContainerRootProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 export function ContainerContent({ children }: ContainerRootProps) {
@@ -12,5 +12,5 @@ export function ContainerContent({ children }: ContainerRootProps) {
                 {children}
             </div>
         </div>
-    )
+    );
 }

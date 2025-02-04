@@ -20,7 +20,14 @@ export const Header = () => {
                                 Filmes
                             </Link>
                         </li>
-                        <li className="md:ml-6 md:mt-0 mt-3">TV Shows</li>
+                        <li className="md:ml-6 md:mt-0 mt-3">
+                            <Link
+                                href={"/tvShows"}
+                                className="hover:text-gray-300"
+                            >
+                                TV Shows
+                            </Link>
+                        </li>
                         <li className="md:ml-6 md:mt-0 mt-3">Atores</li>
                     </ul>
 

@@ -2,24 +2,28 @@
 import { castApi } from "@/app/shared/api/api";
 import { Layout } from "@/app/shared/components/layoutComponent";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
-import { IActorDetails, IParams } from "@/app/shared/interfaces";
+import { IActorDetails } from "@/app/shared/interfaces";
 import { formatDate } from "@/app/shared/utils";
 import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
+import { useParams } from "next/navigation";
 
-export default function CastDetails(cast: IParams) {
+export default function CastDetails() {
+    const cast = useParams();
+
     const apiCalls = useMemo(
         () => [
             {
                 key: "details",
                 call: () =>
                     castApi.findByPeaple(
-                        `${cast.params.id}?append_to_response=external_ids,movie_credits`
+                        `${cast.id}?append_to_response=external_ids,movie_credits`
                     )
             }
         ],
-        [cast.params.id]
+        [cast.id]
     );
+
     const [socialMedia, setSocialMedia] = useState<string[]>([]);
     const [valueSocialMedia, setValueSocialMedia] = useState<string[]>([]);
 
