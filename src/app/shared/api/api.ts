@@ -9,6 +9,7 @@ import {
     IGenre
 } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
+import { ITvShow } from "../interfaces/ITvShow";
 
 const createApiInstance = (url: string): AxiosInstance => {
     return axios.create({
@@ -31,8 +32,16 @@ const handleApiError = (error: any): never => {
 export class Api {
     private api: AxiosInstance;
 
+    private url: string;
+
     constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
+        this.url = url;
+    }
+
+    setUrl(newUrl: string): void {
+        this.url = newUrl;
+        this.api = createApiInstance(newUrl);
     }
 
     private async getRequest<T>(endpoint: string, params = {}): Promise<T> {
@@ -47,6 +56,12 @@ export class Api {
 
     async findByMovie(id: string): Promise<IMovie> {
         return this.getRequest<IMovie>(id, {
+            language: "pt-br"
+        });
+    }
+
+    async findByTvShow(id: string): Promise<ITvShow> {
+        return this.getRequest<ITvShow>(id, {
             language: "pt-br"
         });
     }
