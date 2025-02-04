@@ -3,7 +3,7 @@ import "../styles/home.style.scss";
 import Banner from "../shared/components/banner/banner";
 import { genreApi, movieApi } from "../shared/api/api";
 import { useMemo } from "react";
-import { IGenresResponse, IListMovie, IResponse } from "../shared/interfaces";
+import { IGenre, IListMovie, IResponse } from "../shared/interfaces";
 import { Loading } from "../shared/components/loading/loading";
 import { useFetchData } from "../shared/hook/useFetchData";
 import { filterGenres } from "../shared/utils";
@@ -11,7 +11,7 @@ import { filterGenres } from "../shared/utils";
 type Movies = {
     popular: IResponse<IListMovie[]>;
     nowPlaying: IResponse<IListMovie[]>;
-    genres: IGenresResponse;
+    genres: IGenre[];
 };
 
 export default function PageMovies() {

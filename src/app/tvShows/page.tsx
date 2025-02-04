@@ -3,14 +3,14 @@ import { useMemo } from "react";
 import Banner from "../shared/components/banner/banner";
 import { filterGenres } from "../shared/utils";
 import { genreApi, tvShows } from "../shared/api/api";
-import { IGenresResponse, IResponse, ITvShows } from "../shared/interfaces";
+import { IGenre, IResponse, IListTvShows } from "../shared/interfaces";
 import { useFetchData } from "../shared/hook/useFetchData";
 import "../styles/home.style.scss";
 
 type TvShows = {
-    genres: IGenresResponse;
-    popular: IResponse<ITvShows[]>;
-    topRated: IResponse<ITvShows[]>;
+    genres: IGenre[];
+    popular: IResponse<IListTvShows[]>;
+    topRated: IResponse<IListTvShows[]>;
 };
 
 export default function PageTvShows() {

@@ -1,12 +1,12 @@
 import {
-    IGenresResponse,
     IListMovie,
     IMovie,
     IResponse,
     ICast,
     IImage,
     IActorDetails,
-    ITvShows
+    IListTvShows,
+    IGenre
 } from "@/app/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 
@@ -57,8 +57,8 @@ export class Api {
         });
     }
 
-    async listTvShows(url: string): Promise<IResponse<ITvShows[]>> {
-        return this.getRequest<IResponse<ITvShows[]>>(url, {
+    async listTvShows(url: string): Promise<IResponse<IListTvShows[]>> {
+        return this.getRequest<IResponse<IListTvShows[]>>(url, {
             language: "pt-br"
         });
     }
@@ -69,8 +69,8 @@ export class Api {
         });
     }
 
-    async findAllGenre(url: string): Promise<IGenresResponse> {
-        return this.getRequest<IGenresResponse>(url, {
+    async findAllGenre(url: string): Promise<IGenre[]> {
+        return this.getRequest<IGenre[]>(url, {
             language: "pt-br"
         });
     }

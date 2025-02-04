@@ -2,14 +2,14 @@ import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { IListMovie, ITvShows } from "../../interfaces";
+import { IListMovie, IListTvShows } from "../../interfaces";
 
 type BannerProps<T> = {
     prop: T;
     genre: string;
 };
 
-export default function Banner<T extends IListMovie | ITvShows>({
+export default function Banner<T extends IListMovie | IListTvShows>({
     prop,
     genre
 }: BannerProps<T>) {

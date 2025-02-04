@@ -1,4 +1,4 @@
-export interface ITvShows {
+export interface IListTvShows {
     adult: boolean;
     backdrop_path: string;
     genre_ids: string[];
