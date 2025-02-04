@@ -1,4 +1,5 @@
 import { IGenre } from "./IGenre";
+import { IVideo } from "./IVideo";
 
 export interface ITvShow {
     adult: boolean;
@@ -24,6 +25,9 @@ export interface ITvShow {
     overview: string;
     popularity: number;
     poster_path: string;
+    vote_average: number;
+    tagline: string;
+    videos: IVideo;
     production_companies: ProductionCompany[];
     production_countries: ProductionCountry[];
     seasons: Season[];
