@@ -15,7 +15,9 @@ export default function Banner<T extends IListMovie | IListTvShows>({
 }: BannerProps<T>) {
     return (
         <div className="movie">
-            <Link href={`/${"title" in prop ? "movie" : "tv"}/${prop?.id}`}>
+            <Link
+                href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
+            >
                 <LazyLoadImage
                     key={prop?.poster_path}
                     src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
@@ -27,7 +29,9 @@ export default function Banner<T extends IListMovie | IListTvShows>({
             </Link>
             <div className="detail-movie">
                 <Link
-                    href={`/${"title" in prop ? "movie" : "tv"}/${prop?.id}`}
+                    href={`/${"title" in prop ? "movie" : "tvShows"}/${
+                        prop?.id
+                    }`}
                     className="title-movie"
                 >
                     {"title" in prop ? prop.title : prop.name}
