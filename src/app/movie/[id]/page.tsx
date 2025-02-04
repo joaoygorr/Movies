@@ -109,8 +109,8 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors param={movie.id} />
-            <ImageMovie param={movie.id} />
+            <Actors param={String(movie.id)} />
+            <ImageMovie param={String(movie.id)} />
         </div>
     );
 }
