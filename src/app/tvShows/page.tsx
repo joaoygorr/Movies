@@ -8,7 +8,7 @@ import { useFetchData } from "../shared/hook/useFetchData";
 import "../styles/home.style.scss";
 
 type TvShows = {
-    genres: IGenre[];
+    genres: { genre: IGenre[] };
     popular: IResponse<IListTvShows[]>;
     topRated: IResponse<IListTvShows[]>;
 };
