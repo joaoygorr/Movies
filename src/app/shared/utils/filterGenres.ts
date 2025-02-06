@@ -1,11 +1,11 @@
 import { IGenre } from "../interfaces";
 
 type Genres = {
-    genre: IGenre[];
+    genres: IGenre[];
 };
 
 export function filterGenres(genre: string[], genresResponse: Genres) {
-    const genreFiltered = genresResponse?.genre?.filter((e: IGenre) =>
+    const genreFiltered = genresResponse?.genres?.filter((e: IGenre) =>
         genre?.includes(e.id)
     );
     return genreFiltered

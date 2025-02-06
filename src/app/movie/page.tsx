@@ -11,7 +11,7 @@ import { filterGenres } from "../shared/utils";
 type Movies = {
     popular: IResponse<IListMovie[]>;
     nowPlaying: IResponse<IListMovie[]>;
-    genres: { genre: IGenre[] };
+    genres: { genres: IGenre[] };
 };
 
 export default function PageMovies() {
