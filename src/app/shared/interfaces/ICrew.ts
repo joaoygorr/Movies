@@ -16,4 +16,11 @@ export interface ICrew {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    job?: string;
+    department?: string;
+    profile_path?: string;
+    original_name?: string;
+    name?: string;
+    know_for_department?: string;
+    gender?: number;
 }

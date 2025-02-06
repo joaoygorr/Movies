@@ -19,4 +19,8 @@ export interface ICast {
     profile_path: string;
     original_name: string;
     character: string;
+    order?: number;
+    name?: string;
+    known_for_departmen?: string;
+    gender?: number;
 }
