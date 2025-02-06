@@ -39,7 +39,9 @@ export default function CastDetails() {
 
             const nonNullEntries = Object.entries(details.external_ids).filter(
                 ([key, value]) =>
-                    value !== null && !excludeKeys.includes(key.split("_")[0])
+                    value !== null &&
+                    value !== "" &&
+                    !excludeKeys.includes(key.split("_")[0])
             );
 
             const listSocialMedia = Array.from(
