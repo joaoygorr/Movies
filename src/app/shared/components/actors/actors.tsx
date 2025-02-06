@@ -2,13 +2,10 @@ import "./actors.style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useMemo } from "react";
-import { movieApi } from "../../api/api";
-import { useFetchData } from "../../hook/useFetchData";
 import { ICast, ICastResponse } from "../../interfaces";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export const Actors = ({ param }: { param: string }) => {
+export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -28,18 +25,7 @@ export const Actors = ({ param }: { param: string }) => {
         ]
     };
 
-    const apiCalls = useMemo(
-        () => [
-            {
-                key: "cast",
-                call: () => movieApi.findByCast(param, "credits")
-            }
-        ],
-        [param]
-    );
-
-    const { data } = useFetchData<{ cast: ICastResponse }>(apiCalls);
-    const cast = data?.cast.cast || [];
+    const cast = data?.cast || [];
 
     const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
 
