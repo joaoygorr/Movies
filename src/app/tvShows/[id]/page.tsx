@@ -10,6 +10,12 @@ import { formatDate, formatGenres } from "@/app/shared/utils";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
+import { ICastResponse } from "@/app/shared/interfaces";
+
+type PropsTvShow = {
+    details: ITvShow;
+    cast: ICastResponse;
+};
 
 export default function TvShowDetails() {
     const tvShow = useParams();
@@ -22,12 +28,16 @@ export default function TvShowDetails() {
                     tvShows.findByTvShow(
                         `${tvShow.id}?append_to_response=credits,videos,images`
                     )
+            },
+            {
+                key: "cast",
+                call: () => tvShows.findByCast(String(tvShow.id), "credits")
             }
         ],
         [tvShow.id]
     );
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const { data, loading } = useFetchData<{ details: ITvShow }>(apiCalls);
+    const { data } = useFetchData<PropsTvShow>(apiCalls);
 
     return (
         <div>
@@ -96,7 +106,7 @@ export default function TvShowDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors param={String(tvShow.id)} />
+            <Actors data={data?.cast} />
             <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
         </div>
     );

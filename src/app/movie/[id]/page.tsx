@@ -1,5 +1,5 @@
 "use client";
-import { IMovie } from "@/app/shared/interfaces";
+import { ICastResponse, IMovie } from "@/app/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
 import { Loading } from "@/app/shared/components/loading/loading";
@@ -12,6 +12,11 @@ import { movieApi } from "@/app/shared/api/api";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
 
+type PropMovie = {
+    cast: ICastResponse;
+    details: IMovie;
+};
+
 export default function MovieDetails() {
     const movie = useParams();
 
@@ -23,12 +28,16 @@ export default function MovieDetails() {
                     movieApi.findByMovie(
                         `${movie.id}?append_to_response=credits,videos,images`
                     )
+            },
+            {
+                key: "cast",
+                call: () => movieApi.findByCast(String(movie.id), "credits")
             }
         ],
         [movie.id]
     );
 
-    const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
+    const { data, loading } = useFetchData<PropMovie>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     if (loading) {
@@ -105,7 +114,7 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors param={String(movie.id)} />
+            <Actors data={data?.cast} />
             <ImageMovie param={String(movie.id)} urlApi="/movie" />
         </div>
     );
