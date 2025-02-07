@@ -10,6 +10,7 @@ import { Layout } from "@/app/shared/components/layoutComponent";
 import { movieApi } from "@/app/shared/api/api";
 import { useFetchData } from "@/app/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
+import { SkeletonDetails } from "@/app/shared/components/skeletonLoading";
 
 type PropMovie = {
     cast: ICastResponse;
@@ -38,6 +39,10 @@ export default function MovieDetails() {
 
     const { data, loading } = useFetchData<PropMovie>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
+
+    if (loading) {
+        return <SkeletonDetails />;
+    }
 
     return (
         <div>

@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
 import { ICastResponse } from "@/app/shared/interfaces";
+import { SkeletonDetails } from "@/app/shared/components/skeletonLoading";
 
 type PropsTvShow = {
     details: ITvShow;
@@ -37,21 +38,25 @@ export default function TvShowDetails() {
         [tvShow.id]
     );
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const { data } = useFetchData<PropsTvShow>(apiCalls);
+    const { data, loading } = useFetchData<PropsTvShow>(apiCalls);
+
+    if (loading) {
+        return <SkeletonDetails />;
+    }
 
     return (
         <div>
             <Layout.Root>
-                <Layout.Image
-                    src={
-                        "https://image.tmdb.org/t/p/w500" +
-                        data?.details?.poster_path
-                    }
-                    alt="poster movie"
-                    effect="blur"
-                    className="w-64 lg:w-96"
-                    placeholderSrc={`https://image.tmdb.org/t/p/w500${data?.details?.poster_path}`}
-                />
+                <div className="flex-none image-tv">
+                    <img
+                        src={
+                            "https://image.tmdb.org/t/p/w500" +
+                            data?.details?.poster_path
+                        }
+                        alt="poster movie"
+                        className="w-64 lg:w-96"
+                    />
+                </div>
                 <Layout.Details>
                     <h2 className="title md:mt-0">{data?.details?.name}</h2>
                     <div className="detail-genre-date">
