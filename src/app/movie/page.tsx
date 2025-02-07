@@ -4,9 +4,9 @@ import Banner from "../shared/components/banner/banner";
 import { genreApi, movieApi } from "../shared/api/api";
 import { useMemo } from "react";
 import { IGenre, IListMovie, IResponse } from "../shared/interfaces";
-import { Loading } from "../shared/components/loading/loading";
 import { useFetchData } from "../shared/hook/useFetchData";
 import { filterGenres } from "../shared/utils";
+import { SkeletonMain } from "../shared/components/skeletonLoading";
 
 type Movies = {
     popular: IResponse<IListMovie[]>;
@@ -35,7 +35,7 @@ export default function PageMovies() {
 
     const { data, loading } = useFetchData<Movies>(apiCalls);
     if (loading) {
-        return <Loading />;
+        return <SkeletonMain />;
     }
 
     const genresResponse = data?.genres!;
