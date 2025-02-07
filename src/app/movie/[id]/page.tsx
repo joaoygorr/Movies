@@ -1,16 +1,16 @@
 "use client";
-import { ICastResponse, IMovie } from "@/app/shared/interfaces";
-import { formatDate, formatGenres, returnHours } from "@/app/shared/utils";
+import { ICastResponse, IMovie } from "@/shared/interfaces";
+import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
-import { Modal } from "@/app/shared/components/modal/modal";
+import { Modal } from "@/shared/components/modal/modal";
 import { useMemo, useState } from "react";
-import { Actors } from "@/app/shared/components/actors/actors";
-import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
-import { Layout } from "@/app/shared/components/layoutComponent";
-import { movieApi } from "@/app/shared/api/api";
-import { useFetchData } from "@/app/shared/hook/useFetchData";
+import { Actors } from "@/shared/components/actors/actors";
+import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
+import { Layout } from "@/shared/components/layoutComponent";
+import { movieApi } from "@/shared/api/api";
+import { useFetchData } from "@/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
-import { SkeletonDetails } from "@/app/shared/components/skeletonLoading";
+import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 
 type PropMovie = {
     cast: ICastResponse;

@@ -1,12 +1,12 @@
 "use client";
 import { useMemo } from "react";
-import Banner from "../shared/components/banner/banner";
-import { filterGenres } from "../shared/utils";
-import { genreApi, tvShows } from "../shared/api/api";
-import { IGenre, IResponse, IListTvShows } from "../shared/interfaces";
-import { useFetchData } from "../shared/hook/useFetchData";
-import "../styles/home.style.scss";
-import { SkeletonMain } from "../shared/components/skeletonLoading";
+import Banner from "../../shared/components/banner/banner";
+import { filterGenres } from "../../shared/utils";
+import { genreApi, tvShows } from "../../shared/api/api";
+import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
+import { useFetchData } from "../../shared/hook/useFetchData";
+import "../../styles/home.style.scss";
+import { SkeletonMain } from "../../shared/components/skeletonLoading";
 
 type TvShows = {
     genres: { genres: IGenre[] };

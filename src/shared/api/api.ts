@@ -7,7 +7,7 @@ import {
     IActorDetails,
     IListTvShows,
     IGenre
-} from "@/app/shared/interfaces";
+} from "@/shared/interfaces";
 import axios, { AxiosInstance } from "axios";
 import { ITvShow } from "../interfaces/ITvShow";
 

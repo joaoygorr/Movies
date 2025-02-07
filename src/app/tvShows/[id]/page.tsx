@@ -1,17 +1,17 @@
 "use client";
-import { tvShows } from "@/app/shared/api/api";
-import { Actors } from "@/app/shared/components/actors/actors";
-import { ImageMovie } from "@/app/shared/components/imageMovie/imageMovie";
-import { Layout } from "@/app/shared/components/layoutComponent";
-import { Modal } from "@/app/shared/components/modal/modal";
-import { useFetchData } from "@/app/shared/hook/useFetchData";
-import { ITvShow } from "@/app/shared/interfaces/ITvShow";
-import { formatDate, formatGenres } from "@/app/shared/utils";
+import { tvShows } from "@/shared/api/api";
+import { Actors } from "@/shared/components/actors/actors";
+import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
+import { Layout } from "@/shared/components/layoutComponent";
+import { Modal } from "@/shared/components/modal/modal";
+import { useFetchData } from "@/shared/hook/useFetchData";
+import { ITvShow } from "@/shared/interfaces/ITvShow";
+import { formatDate, formatGenres } from "@/shared/utils";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
-import { ICastResponse } from "@/app/shared/interfaces";
-import { SkeletonDetails } from "@/app/shared/components/skeletonLoading";
+import { ICastResponse } from "@/shared/interfaces";
+import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 
 type PropsTvShow = {
     details: ITvShow;

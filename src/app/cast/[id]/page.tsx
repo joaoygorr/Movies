@@ -1,9 +1,9 @@
 "use client";
-import { castApi } from "@/app/shared/api/api";
-import { Layout } from "@/app/shared/components/layoutComponent";
-import { useFetchData } from "@/app/shared/hook/useFetchData";
-import { IActorDetails } from "@/app/shared/interfaces";
-import { formatDate } from "@/app/shared/utils";
+import { castApi } from "@/shared/api/api";
+import { Layout } from "@/shared/components/layoutComponent";
+import { useFetchData } from "@/shared/hook/useFetchData";
+import { IActorDetails } from "@/shared/interfaces";
+import { formatDate } from "@/shared/utils";
 import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
 import { useParams } from "next/navigation";

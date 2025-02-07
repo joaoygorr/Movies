@@ -1,4 +1,4 @@
-import { formatDate } from "@/app/shared/utils";
+import { formatDate } from "@/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
 import { IListMovie, IListTvShows } from "../../interfaces";
