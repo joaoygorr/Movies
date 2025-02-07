@@ -2,7 +2,6 @@
 import { ICastResponse, IMovie } from "@/app/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/app/shared/utils";
 import "./movie.style.scss";
-import { Loading } from "@/app/shared/components/loading/loading";
 import { Modal } from "@/app/shared/components/modal/modal";
 import { useMemo, useState } from "react";
 import { Actors } from "@/app/shared/components/actors/actors";
@@ -39,10 +38,6 @@ export default function MovieDetails() {
 
     const { data, loading } = useFetchData<PropMovie>(apiCalls);
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
-    if (loading) {
-        return <Loading />;
-    }
 
     return (
         <div>
