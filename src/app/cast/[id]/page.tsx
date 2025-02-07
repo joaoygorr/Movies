@@ -7,6 +7,7 @@ import { formatDate } from "@/shared/utils";
 import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
 import { useParams } from "next/navigation";
+import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
 
 export default function CastDetails() {
     const cast = useParams();
@@ -27,7 +28,10 @@ export default function CastDetails() {
     const [socialMedia, setSocialMedia] = useState<string[]>([]);
     const [valueSocialMedia, setValueSocialMedia] = useState<string[]>([]);
 
-    const { data } = useFetchData<{ details: IActorDetails }>(apiCalls);
+    const { data, loading } = useFetchData<{ details: IActorDetails }>(
+        apiCalls
+    );
+
     const details = data?.details;
 
     const yearsOld =
@@ -53,6 +57,10 @@ export default function CastDetails() {
             setSocialMedia(listSocialMedia);
         }
     }, [details?.external_ids]);
+
+    if (loading) {
+        return <SkeletonDetailsActors />;
+    }
 
     const filteredDates = details?.movie_credits.cast
         .filter(
