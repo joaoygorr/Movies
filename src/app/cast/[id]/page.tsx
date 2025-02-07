@@ -69,14 +69,15 @@ export default function CastDetails() {
     return (
         <div>
             <Layout.Root>
-                <Layout.Image
-                    src={
-                        "https://image.tmdb.org/t/p/w300" +
-                        details?.profile_path
-                    }
-                    alt="poster cast"
-                    className="w-76"
-                >
+                <div className="flex-none image-cast">
+                    <img
+                        src={
+                            "https://image.tmdb.org/t/p/w300" +
+                            details?.profile_path
+                        }
+                        alt="poster cast"
+                        className="w-76"
+                    />
                     <ul className="info-social-media">
                         {socialMedia?.map((media, i) => (
                             <li className={i > 0 ? "ml-6" : ""} key={i}>
@@ -92,7 +93,7 @@ export default function CastDetails() {
                             </li>
                         ))}
                     </ul>
-                </Layout.Image>
+                </div>
 
                 <Layout.Details>
                     <h2 className="text-4xl mt-4 md:mt-0 font-semibold">

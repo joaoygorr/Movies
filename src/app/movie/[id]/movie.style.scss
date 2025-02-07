@@ -43,7 +43,21 @@ p {
     }
 }
 
+.image-movie {
+    img {
+        border-radius: .6rem;
+    }
+}
+
+
 @media(max-width: 767px) {
+    .image-movie {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .detail-genre-date {
         justify-content: center;
     }

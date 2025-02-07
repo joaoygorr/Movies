@@ -3,7 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
     const settings = {
@@ -38,15 +37,13 @@ export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
                         {filteredImages?.map((c, k) => (
                             <div className="cast" key={k}>
                                 <a href={`/cast/${c.id}`}>
-                                    <LazyLoadImage
+                                    <img
                                         src={
                                             "https://image.tmdb.org/t/p/w300" +
                                             c.profile_path
                                         }
                                         alt="poster elenco"
-                                        effect="blur"
-                                        wrapperClassName="hover:opacity-75 transition ease-in-out duration-150"
-                                        placeholderSrc={`https://image.tmdb.org/t/p/w300${c.profile_path}`}
+                                        className="hover:opacity-75 transition ease-in-out duration-150"
                                     />
                                 </a>
                                 <div className="info-cast">

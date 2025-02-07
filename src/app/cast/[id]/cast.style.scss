@@ -16,7 +16,20 @@
     margin-top: .3rem;
 }
 
+.image-cast {
+    img {
+        border-radius: .6rem;
+    }
+}
+
 @media(max-width: 767px) {
+    .image-cast {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .details-peaple {
         span {
             margin: 0;

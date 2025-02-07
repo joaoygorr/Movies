@@ -5,12 +5,6 @@
     .info-box {
         padding: 4rem 1rem;
         margin: 0 auto;
-
-        .info-image {
-            img {
-                border-radius: .6rem;
-            }
-        }
     }
 }
 
@@ -19,13 +13,6 @@
     .info {
         .info-box {
             text-align: center;
-
-            .info-image {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
         }
     }
 }

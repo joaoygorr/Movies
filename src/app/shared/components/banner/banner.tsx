@@ -1,7 +1,6 @@
 import { formatDate } from "@/app/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { IListMovie, IListTvShows } from "../../interfaces";
 
 type BannerProps<T> = {
@@ -18,13 +17,9 @@ export default function Banner<T extends IListMovie | IListTvShows>({
             <Link
                 href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
             >
-                <LazyLoadImage
-                    key={prop?.poster_path}
+                <img
                     src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
-                    alt="poster filme"
-                    effect="blur"
-                    wrapperClassName="hover:opacity-75 transition ease-in-out duration-150"
-                    placeholderSrc={`https://image.tmdb.org/t/p/w500${prop?.poster_path}`}
+                    alt="Poster"
                 />
             </Link>
             <div className="detail-movie">
