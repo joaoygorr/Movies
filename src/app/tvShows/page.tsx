@@ -1,20 +1,22 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Banner from "../../shared/components/banner/banner";
 import { filterGenres } from "../../shared/utils";
 import { genreApi, tvShows } from "../../shared/api/api";
 import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
 import { useFetchData } from "../../shared/hook/useFetchData";
 import "../../styles/home.style.scss";
-import { SkeletonMain } from "../../shared/components/skeletonLoading";
+import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 
 type TvShows = {
     genres: { genres: IGenre[] };
-    popular: IResponse<IListTvShows[]>;
-    topRated: IResponse<IListTvShows[]>;
+    series: IResponse<IListTvShows[]>;
 };
 
 export default function PageTvShows() {
+    const [activeButton, setActiveButton] = useState<number>(0);
+    const [activeRoute, setActiveRoute] = useState<string>("/airing_today");
+
     const apiCalls = useMemo(
         () => [
             {
@@ -22,48 +24,56 @@ export default function PageTvShows() {
                 call: () => genreApi.findAllGenre("/tv/list")
             },
             {
-                key: "popular",
-                call: () => tvShows.listTvShows("/popular")
-            },
-            {
-                key: "topRated",
-                call: () => tvShows.listTvShows("/top_rated")
+                key: "series",
+                call: () => tvShows.listTvShows(activeRoute)
             }
         ],
-        []
+        [activeRoute]
     );
 
     const { data, loading } = useFetchData<TvShows>(apiCalls);
 
-    if (loading) {
-        return <SkeletonMain />;
-    }
-
     const genreResponse = data?.genres!;
+
+    const buttons = [
+        { title: "No Ar Hoje", route: "/airing_today" },
+        { title: "Populares", route: "/popular" },
+        { title: "Melhores Avaliados", route: "/top_rated" }
+    ];
+
+    const handleSetValue = (index: number, route: string) => {
+        setActiveRoute(route);
+        setActiveButton(index);
+    };
 
     return (
         <div className="container box">
-            <section className="popular">
-                <h2 className="tracking-wider">séries de tv populares</h2>
+            <section className="content-list">
+                <div className="box-select">
+                    {buttons.map((button, index) => (
+                        <button
+                            key={index}
+                            className={`${
+                                activeButton === index ? "active" : ""
+                            }`}
+                            onClick={() => handleSetValue(index, button.route)}
+                        >
+                            {button.title}
+                        </button>
+                    ))}
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                    {data?.popular.results.map((tv, key) => (
+                    {loading &&
+                        Array(10)
+                            .fill(0)
+                            .map((_, e) => <SkeletonBanner key={e} />)}
+
+                    {data?.series.results.map((tv, key) => (
                         <Banner
                             prop={tv}
                             key={key}
                             genre={filterGenres(tv.genre_ids, genreResponse)}
-                        />
-                    ))}
-                </div>
-            </section>
-
-            <section className="now-playing">
-                <h2 className="tracking-wider">top séries de tv</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                    {data?.topRated.results.map((movie, key) => (
-                        <Banner
-                            prop={movie}
-                            key={key}
-                            genre={filterGenres(movie.genre_ids, genreResponse)}
                         />
                     ))}
                 </div>

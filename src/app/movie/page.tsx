@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
 import { useFetchData } from "../../shared/hook/useFetchData";
 import { filterGenres } from "../../shared/utils";
-import { SkeletonMain } from "../../shared/components/skeletonLoading";
+import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;
@@ -15,7 +15,7 @@ type Movies = {
 
 export default function PageMovies() {
     const [activeButton, setActiveButton] = useState<number>(0);
-    const [activeRoute, setActiveRoute] = useState<string>("now_playing");
+    const [activeRoute, setActiveRoute] = useState<string>("/now_playing");
 
     const apiCalls = useMemo(
         () => [
@@ -32,17 +32,14 @@ export default function PageMovies() {
     );
 
     const { data, loading } = useFetchData<Movies>(apiCalls);
-    if (loading) {
-        return <SkeletonMain />;
-    }
 
     const genresResponse = data?.genres!;
 
     const buttons = [
-        { title: "Em Cartaz", route: "now_playing" },
-        { title: "Populares", route: "popular" },
-        { title: "Melhores Avaliados", route: "top_rated" },
-        { title: "Em breve", route: "upcoming" }
+        { title: "Em Cartaz", route: "/now_playing" },
+        { title: "Populares", route: "/popular" },
+        { title: "Melhores Avaliados", route: "/top_rated" },
+        { title: "Em breve", route: "/upcoming" }
     ];
 
     const handleSetValue = (index: number, route: string) => {
@@ -53,7 +50,7 @@ export default function PageMovies() {
     return (
         <main>
             <div className="container box">
-                <section className="movies-list">
+                <section className="content-list">
                     <div className="box-select">
                         {buttons.map((button, index) => (
                             <button
@@ -70,6 +67,11 @@ export default function PageMovies() {
                         ))}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                        {loading &&
+                            Array(10)
+                                .fill(0)
+                                .map((_, e) => <SkeletonBanner key={e} />)}
+
                         {data?.movies.results.map((movie, key) => (
                             <Banner
                                 prop={movie}
