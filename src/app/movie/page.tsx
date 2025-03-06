@@ -18,19 +18,20 @@ export default function PageMovies() {
     const [activeButton, setActiveButton] = useState<number>(0);
     const [activeRoute, setActiveRoute] = useState<string>("/now_playing");
     const [items, setItems] = useState<IListMovie[]>([]);
+    const [page, setPage] = useState<number>(1);
 
     const apiCalls = useMemo(
         () => [
             {
                 key: "movies",
-                call: () => movieApi.listMovie(activeRoute)
+                call: () => movieApi.listMovie(`${activeRoute}?page=${page}`)
             },
             {
                 key: "genres",
                 call: () => genreApi.findAllGenre("/movie/list")
             }
         ],
-        [activeRoute]
+        [activeRoute, page]
     );
 
     const { data, loading } = useFetchData<Movies>(apiCalls);
@@ -98,10 +99,9 @@ export default function PageMovies() {
                 </section>
                 <Pagination
                     onSet={handleSetItems}
-                    page={data?.movies.page}
-                    totalPages={data?.movies.total_pages}
-                    totalItemsPage={data?.movies.results.length}
                     totalItemShow={items.length}
+                    moviePage={data?.movies}
+                    onPageChange={(value) => setPage(value)}
                 />
             </div>
         </main>
