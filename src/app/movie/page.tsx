@@ -2,11 +2,12 @@
 import "../../styles/home.style.scss";
 import Banner from "../../shared/components/banner/banner";
 import { genreApi, movieApi } from "../../shared/api/api";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
 import { useFetchData } from "../../shared/hook/useFetchData";
 import { filterGenres } from "../../shared/utils";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
+import Pagination from "@/shared/components/pagination/pagination";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;
@@ -16,6 +17,7 @@ type Movies = {
 export default function PageMovies() {
     const [activeButton, setActiveButton] = useState<number>(0);
     const [activeRoute, setActiveRoute] = useState<string>("/now_playing");
+    const [items, setItems] = useState<IListMovie[]>([]);
 
     const apiCalls = useMemo(
         () => [
@@ -47,6 +49,16 @@ export default function PageMovies() {
         setActiveButton(index);
     };
 
+    useEffect(() => {
+        if (!data?.movies) return;
+        setItems(data?.movies.results.slice(0, 10));
+    }, [data]);
+
+    const handleSetItems = (e: number) => {
+        if (!data?.movies) return;
+        setItems(data?.movies.results.slice(0, e));
+    };
+
     return (
         <main>
             <div className="container box">
@@ -72,7 +84,7 @@ export default function PageMovies() {
                                 .fill(0)
                                 .map((_, e) => <SkeletonBanner key={e} />)}
 
-                        {data?.movies.results.map((movie, key) => (
+                        {items.map((movie, key) => (
                             <Banner
                                 prop={movie}
                                 key={key}
@@ -84,6 +96,13 @@ export default function PageMovies() {
                         ))}
                     </div>
                 </section>
+                <Pagination
+                    onSet={handleSetItems}
+                    page={data?.movies.page}
+                    totalPages={data?.movies.total_pages}
+                    totalItemsPage={data?.movies.results.length}
+                    totalItemShow={items.length}
+                />
             </div>
         </main>
     );

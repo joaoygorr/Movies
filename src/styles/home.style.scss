@@ -25,6 +25,44 @@
             }
         }
     }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding: 3rem 0;
+
+        .pagination-body {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+
+            .select-items {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+            }
+
+            .arrows {
+                button {
+                    background-color: #1a2643;
+                    padding: .5rem;
+                    border-radius: .5rem;
+
+                    &:hover {
+                        background-color: #253567;
+                    }
+
+                    &:disabled {
+                        background-color: #A0A0A0;
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media(max-width: 767px) {
