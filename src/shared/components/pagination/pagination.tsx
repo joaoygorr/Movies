@@ -15,6 +15,8 @@ export default function Pagination({
 }: Props) {
     if (!moviePage) return;
 
+    const lastPage = Math.min(moviePage?.total_pages ?? 1, 500);
+
     const goToFirsPage = () => {
         onPageChange(1);
     };
@@ -32,7 +34,7 @@ export default function Pagination({
     };
 
     const goToLastPage = () => {
-        onPageChange(moviePage?.total_pages);
+        onPageChange(lastPage);
     };
 
     return (
@@ -53,7 +55,7 @@ export default function Pagination({
                 </div>
 
                 <span>
-                    Página {moviePage?.page} de {moviePage?.total_pages}
+                    Página {moviePage?.page} de {lastPage}
                 </span>
 
                 <div className="arrows space-x-1.5">
@@ -74,7 +76,7 @@ export default function Pagination({
                     </button>
 
                     <button
-                        disabled={moviePage?.page + 1 >= moviePage?.total_pages}
+                        disabled={moviePage?.page + 1 >= lastPage}
                         onClick={goToNextPage}
                     >
                         <i className="pi pi-angle-right" />
@@ -82,7 +84,7 @@ export default function Pagination({
                     </button>
 
                     <button
-                        disabled={moviePage?.page + 1 >= moviePage?.total_pages}
+                        disabled={moviePage?.page + 1 >= lastPage}
                         onClick={goToLastPage}
                     >
                         <i className="pi pi-angle-double-right" />
