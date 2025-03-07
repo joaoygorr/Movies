@@ -14,7 +14,7 @@ export const Header = () => {
     return (
         <header>
             <nav className="border-b border-gray-800">
-                <div className="container flex flex-col md:flex-row box-nav">
+                <div className="container flex flex-col md:flex-row box-nav gap-3">
                     <ul className="flex flex-col md:flex-row">
                         <li className="md:ml-6 md:mt-0 mt-3 logo">
                             <Link href={"/"}>
@@ -39,15 +39,7 @@ export const Header = () => {
                         </li>
                     </ul>
 
-                    <div className="flex flex-col md:flex-row box-search gap-3">
-                        <div className="relative mt-3 md:mt-0">
-                            <input
-                                type="search"
-                                placeholder="Pesquisar..."
-                                className="focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-
+                    <div className="language">
                         <div
                             className="selected-languages"
                             onClick={handleToggle}

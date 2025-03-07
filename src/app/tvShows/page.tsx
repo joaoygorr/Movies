@@ -20,6 +20,7 @@ export default function PageTvShows() {
     const [activeRoute, setActiveRoute] = useState<string>("/airing_today");
     const [items, setItems] = useState<IListTvShows[]>([]);
     const [page, setPage] = useState<number>(1);
+    const [search, setSearch] = useState("");
     const { language } = useAppContext();
 
     const apiCalls = useMemo(
@@ -44,6 +45,13 @@ export default function PageTvShows() {
     }, [data]);
 
     const genreResponse = data?.genres!;
+
+    const filteredData =
+        search?.length > 0
+            ? items.filter((serie) =>
+                  serie.name.toLowerCase().includes(search.toLowerCase())
+              )
+            : items;
 
     const buttons = [
         { title: "No Ar Hoje", route: "/airing_today" },
@@ -77,14 +85,21 @@ export default function PageTvShows() {
                         </button>
                     ))}
                 </div>
-
+                <div className="box-search">
+                    <input
+                        type="search"
+                        placeholder="Pesquisar..."
+                        className="focus:outline-none focus:shadow-outline"
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                     {loading &&
                         Array(10)
                             .fill(0)
                             .map((_, e) => <SkeletonBanner key={e} />)}
 
-                    {items.map((tv, key) => (
+                    {filteredData.map((tv, key) => (
                         <Banner
                             prop={tv}
                             key={key}
