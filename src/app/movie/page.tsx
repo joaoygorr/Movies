@@ -97,10 +97,11 @@ export default function PageMovies() {
                         ))}
                     </div>
                 </section>
+
                 <Pagination
                     onSet={handleSetItems}
                     totalItemShow={items.length}
-                    moviePage={data?.movies}
+                    dataPage={data?.movies}
                     onPageChange={(value) => setPage(value)}
                 />
             </div>

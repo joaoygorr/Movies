@@ -1,7 +1,7 @@
-import { IListMovie, IResponse } from "@/shared/interfaces";
+import { IListMovie, IListTvShows, IResponse } from "@/shared/interfaces";
 
 type Props = {
-    moviePage?: IResponse<IListMovie[]>;
+    dataPage?: IResponse<IListMovie[] | IListTvShows[]>;
     totalItemShow?: number;
     onSet: (item: number) => void;
     onPageChange: (value: number) => void;
@@ -10,27 +10,27 @@ type Props = {
 export default function Pagination({
     onSet,
     totalItemShow,
-    moviePage,
+    dataPage,
     onPageChange
 }: Props) {
-    if (!moviePage) return;
+    if (!dataPage) return;
 
-    const lastPage = Math.min(moviePage?.total_pages ?? 1, 500);
+    const lastPage = Math.min(dataPage?.total_pages ?? 1, 500);
 
     const goToFirsPage = () => {
         onPageChange(1);
     };
 
     const goToPreviousPage = () => {
-        if (moviePage?.page - 1 <= 0) return;
+        if (dataPage?.page - 1 <= 0) return;
 
-        onPageChange(moviePage?.page - 1);
+        onPageChange(dataPage?.page - 1);
     };
 
     const goToNextPage = () => {
-        if (moviePage?.page + 1 >= moviePage?.total_pages) return;
+        if (dataPage?.page + 1 >= dataPage?.total_pages) return;
 
-        onPageChange(moviePage?.page + 1);
+        onPageChange(dataPage?.page + 1);
     };
 
     const goToLastPage = () => {
@@ -40,7 +40,7 @@ export default function Pagination({
     return (
         <div className="pagination text-zinc-500">
             <span>
-                Exibindo {totalItemShow} de {moviePage?.results.length} itens
+                Exibindo {totalItemShow} de {dataPage?.results.length} itens
             </span>
 
             <div className="pagination-body">
@@ -55,12 +55,12 @@ export default function Pagination({
                 </div>
 
                 <span>
-                    Página {moviePage?.page} de {lastPage}
+                    Página {dataPage?.page} de {lastPage}
                 </span>
 
                 <div className="arrows space-x-1.5">
                     <button
-                        disabled={moviePage?.page - 1 <= 0}
+                        disabled={dataPage?.page - 1 <= 0}
                         onClick={goToFirsPage}
                     >
                         <i className="pi pi-angle-double-left" />
@@ -68,7 +68,7 @@ export default function Pagination({
                     </button>
 
                     <button
-                        disabled={moviePage?.page - 1 <= 0}
+                        disabled={dataPage?.page - 1 <= 0}
                         onClick={goToPreviousPage}
                     >
                         <i className="pi pi-angle-left" />
@@ -76,7 +76,7 @@ export default function Pagination({
                     </button>
 
                     <button
-                        disabled={moviePage?.page + 1 >= lastPage}
+                        disabled={dataPage?.page + 1 >= lastPage}
                         onClick={goToNextPage}
                     >
                         <i className="pi pi-angle-right" />
@@ -84,7 +84,7 @@ export default function Pagination({
                     </button>
 
                     <button
-                        disabled={moviePage?.page + 1 >= lastPage}
+                        disabled={dataPage?.page + 1 >= lastPage}
                         onClick={goToLastPage}
                     >
                         <i className="pi pi-angle-double-right" />
