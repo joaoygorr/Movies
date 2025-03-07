@@ -1,12 +1,14 @@
-### 🚧 PROJECT IN PROGRESS 🚧
+### 🚧 Project Completed 🚧
 
 # Movies
 
 Project created for study
 
 ## ✔️ Technologies used
+
 The following tools were used in the construction of the project:
-#### **Website**  ([Nextjs](https://nextjs.org/)  +  [TypeScript](https://www.typescriptlang.org/))
+
+#### **Website** ([Nextjs](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/))
 
 -   **[Prime Icons](https://primeng.org/icons)**
 -   **[Axios](https://axios-http.com/ptbr/docs/intro)**
@@ -19,7 +21,7 @@ The following tools were used in the construction of the project:
 ```bash
 
 # Install the dependencies
-$ npm install or yarn 
+$ npm install or yarn
 
 # Run the application in development mode
 $ npm run dev or yarn dev
@@ -31,7 +33,9 @@ $ npm run dev or yarn dev
 $ docker-compose up
 
 ```
+
 ## Contributors
+
 <table>
   <tr>
     <td align="center">
