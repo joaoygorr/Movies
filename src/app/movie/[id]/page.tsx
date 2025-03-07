@@ -4,7 +4,7 @@ import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
 import { useMemo, useState } from "react";
-import { Actors } from "@/shared/components/actors/sliderActors";
+import { Actors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { movieApi } from "@/shared/api/api";
