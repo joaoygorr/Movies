@@ -10,12 +10,10 @@ import { formatDate, formatGenres } from "@/shared/utils";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
-import { ICastResponse } from "@/shared/interfaces";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 
 type PropsTvShow = {
     details: ITvShow;
-    cast: ICastResponse;
 };
 
 export default function TvShowDetails() {
@@ -29,10 +27,6 @@ export default function TvShowDetails() {
                     tvShows.findByTvShow(
                         `${tvShow.id}?append_to_response=credits,videos,images`
                     )
-            },
-            {
-                key: "cast",
-                call: () => tvShows.findByCast(String(tvShow.id), "credits")
             }
         ],
         [tvShow.id]
@@ -111,7 +105,7 @@ export default function TvShowDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.cast} />
+            <Actors data={data?.details.credits!} />
             <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
         </div>
     );

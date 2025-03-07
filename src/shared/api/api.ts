@@ -32,8 +32,6 @@ const handleApiError = (error: any): never => {
 export class Api {
     private api: AxiosInstance;
 
-    private url: string;
-
     constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
         this.url = url;
@@ -88,10 +86,6 @@ export class Api {
         return this.getRequest<IGenre[]>(url, {
             language: "pt-br"
         });
-    }
-
-    async findByCast(id: string, url: string): Promise<ICast> {
-        return this.getRequest<ICast>(`${id}/${url}`);
     }
 
     async findImagesMovie(id: string, url: string): Promise<IImage> {

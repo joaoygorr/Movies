@@ -1,5 +1,5 @@
 "use client";
-import { ICastResponse, IMovie } from "@/shared/interfaces";
+import { IMovie } from "@/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
@@ -13,7 +13,6 @@ import { useParams } from "next/navigation";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 
 type PropMovie = {
-    cast: ICastResponse;
     details: IMovie;
 };
 
@@ -28,10 +27,6 @@ export default function MovieDetails() {
                     movieApi.findByMovie(
                         `${movie.id}?append_to_response=credits,videos,images`
                     )
-            },
-            {
-                key: "cast",
-                call: () => movieApi.findByCast(String(movie.id), "credits")
             }
         ],
         [movie.id]
@@ -114,7 +109,7 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.cast} />
+            <Actors data={data?.details.credits} />
             <ImageMovie param={String(movie.id)} urlApi="/movie" />
         </div>
     );
