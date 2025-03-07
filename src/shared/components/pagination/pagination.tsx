@@ -45,7 +45,7 @@ export default function Pagination({
 
             <div className="pagination-body">
                 <div className="select-items">
-                    <span>Rows per page</span>
+                    <span>Itens</span>
 
                     <select onChange={(e) => onSet(Number(e.target.value))}>
                         <option value="10">10</option>
@@ -54,7 +54,7 @@ export default function Pagination({
                     </select>
                 </div>
 
-                <span>
+                <span className="hidden lg:block">
                     Página {dataPage?.page} de {lastPage}
                 </span>
 
@@ -74,6 +74,10 @@ export default function Pagination({
                         <i className="pi pi-angle-left" />
                         <span className="sr-only">Previous page</span>
                     </button>
+
+                    <span className="lg:hidden">
+                        {dataPage?.page} de {lastPage}
+                    </span>
 
                     <button
                         disabled={dataPage?.page + 1 >= lastPage}

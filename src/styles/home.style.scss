@@ -86,12 +86,18 @@
                 display: grid;
                 grid-template-columns: 150px 150px;
                 gap: 0;
+            }
+        }
 
-                button {
-                    font-weight: 600;
-                    padding: 1rem 1.15rem;
-                    border-radius: var(--border-radius);
-                    transition: background-color 150ms ease-in-out;
+        .pagination {
+            flex-direction: column-reverse;
+
+            .pagination-body {
+                flex-direction: column-reverse;
+                gap: 1rem;
+
+                .select-items {
+                    margin-bottom: 1rem;
                 }
             }
         }
