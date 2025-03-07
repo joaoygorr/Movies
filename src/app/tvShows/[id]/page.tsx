@@ -1,6 +1,6 @@
 "use client";
 import { tvShows } from "@/shared/api/api";
-import { Actors } from "@/shared/components/actors/actors";
+import { Actors } from "@/shared/components/actors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Modal } from "@/shared/components/modal/modal";

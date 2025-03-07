@@ -1,10 +1,10 @@
-import "./actors.style.scss";
+import "./sliderActors.style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
 
-export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
+export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
 
     const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
