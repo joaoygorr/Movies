@@ -15,6 +15,8 @@ export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
         speed: 500,
         slidesToShow: filteredImages.length <= 1 ? 1 : 4,
         slidesToScroll: filteredImages.length <= 1 ? 1 : 4,
+        autoplay: true,
+        autoplaySpeed: 4000,
         responsive: [
             {
                 breakpoint: 767,
