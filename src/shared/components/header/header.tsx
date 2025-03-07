@@ -20,7 +20,7 @@ export const Header = () => {
                             <Link href={"/"}>
                                 <i className="pi pi-video" />
                                 <span className="hover:text-gray-300">
-                                    The Movie
+                                    CineScope
                                 </span>
                             </Link>
                         </li>
@@ -34,7 +34,7 @@ export const Header = () => {
                                 href={"/tvShows"}
                                 className="hover:text-gray-300"
                             >
-                                TV Shows
+                                Shows e Séries
                             </Link>
                         </li>
                     </ul>
