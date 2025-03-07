@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 type PropsTvShow = {
     details: ITvShow;
@@ -18,6 +19,7 @@ type PropsTvShow = {
 
 export default function TvShowDetails() {
     const tvShow = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -29,7 +31,7 @@ export default function TvShowDetails() {
                     )
             }
         ],
-        [tvShow.id]
+        [tvShow.id, language]
     );
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const { data, loading } = useFetchData<PropsTvShow>(apiCalls);

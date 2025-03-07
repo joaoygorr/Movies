@@ -8,6 +8,7 @@ import { useFetchData } from "../../shared/hook/useFetchData";
 import { filterGenres } from "../../shared/utils";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 import Pagination from "@/shared/components/pagination/pagination";
+import { useAppContext } from "@/shared/context/context";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;
@@ -19,6 +20,7 @@ export default function PageMovies() {
     const [activeRoute, setActiveRoute] = useState<string>("/now_playing");
     const [items, setItems] = useState<IListMovie[]>([]);
     const [page, setPage] = useState<number>(1);
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -31,7 +33,7 @@ export default function PageMovies() {
                 call: () => genreApi.findAllGenre("/movie/list")
             }
         ],
-        [activeRoute, page]
+        [activeRoute, page, language]
     );
 
     const { data, loading } = useFetchData<Movies>(apiCalls);

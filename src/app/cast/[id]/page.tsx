@@ -8,9 +8,11 @@ import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
 import { useParams } from "next/navigation";
 import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 export default function CastDetails() {
     const cast = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -22,7 +24,7 @@ export default function CastDetails() {
                     )
             }
         ],
-        [cast.id]
+        [cast.id, language]
     );
 
     const [socialMedia, setSocialMedia] = useState<string[]>([]);

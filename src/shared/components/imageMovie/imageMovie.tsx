@@ -3,6 +3,7 @@ import "./imageMovie.style.scss";
 import { imageApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
 import { IImage } from "../../interfaces";
+import { useAppContext } from "@/shared/context/context";
 
 export const ImageMovie = ({
     param,
@@ -12,6 +13,7 @@ export const ImageMovie = ({
     urlApi: string;
 }) => {
     imageApi.setUrl(urlApi);
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -20,7 +22,7 @@ export const ImageMovie = ({
                 call: () => imageApi.findImagesMovie(param, "images")
             }
         ],
-        [param]
+        [param, language]
     );
 
     const { data } = useFetchData<{ posters: IImage }>(apiCalls);

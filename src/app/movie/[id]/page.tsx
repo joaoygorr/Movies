@@ -3,7 +3,7 @@ import { IMovie } from "@/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
@@ -11,6 +11,7 @@ import { movieApi } from "@/shared/api/api";
 import { useFetchData } from "@/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 type PropMovie = {
     details: IMovie;
@@ -18,6 +19,7 @@ type PropMovie = {
 
 export default function MovieDetails() {
     const movie = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -29,7 +31,7 @@ export default function MovieDetails() {
                     )
             }
         ],
-        [movie.id]
+        [movie.id, language]
     );
 
     const { data, loading } = useFetchData<PropMovie>(apiCalls);

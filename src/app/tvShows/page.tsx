@@ -8,6 +8,7 @@ import { useFetchData } from "../../shared/hook/useFetchData";
 import "../../styles/home.style.scss";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 import Pagination from "@/shared/components/pagination/pagination";
+import { useAppContext } from "@/shared/context/context";
 
 type TvShows = {
     genres: { genres: IGenre[] };
@@ -19,6 +20,7 @@ export default function PageTvShows() {
     const [activeRoute, setActiveRoute] = useState<string>("/airing_today");
     const [items, setItems] = useState<IListTvShows[]>([]);
     const [page, setPage] = useState<number>(1);
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -31,7 +33,7 @@ export default function PageTvShows() {
                 call: () => tvShows.listTvShows(`${activeRoute}?page=${page}`)
             }
         ],
-        [activeRoute, page]
+        [activeRoute, page, language]
     );
 
     const { data, loading } = useFetchData<TvShows>(apiCalls);
