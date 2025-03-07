@@ -1,6 +1,6 @@
 "use client";
 import { tvShows } from "@/shared/api/api";
-import { Actors } from "@/shared/components/sliderActors/sliderActors";
+import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Modal } from "@/shared/components/modal/modal";
@@ -105,7 +105,7 @@ export default function TvShowDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.details.credits!} />
+            <SliderActors data={data?.details.credits!} />
             <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
         </div>
     );

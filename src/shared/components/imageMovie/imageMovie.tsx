@@ -17,7 +17,7 @@ export const ImageMovie = ({
         () => [
             {
                 key: "posters",
-                call: () => imageApi.findImagesMovie(param, "/images")
+                call: () => imageApi.findImagesMovie(param, "images")
             }
         ],
         [param]

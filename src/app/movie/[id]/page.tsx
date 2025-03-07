@@ -4,7 +4,7 @@ import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
 import { useMemo, useState } from "react";
-import { Actors } from "@/shared/components/sliderActors/sliderActors";
+import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { movieApi } from "@/shared/api/api";
@@ -25,7 +25,7 @@ export default function MovieDetails() {
                 key: "details",
                 call: () =>
                     movieApi.findByMovie(
-                        `${movie.id}?append_to_response=credits,videos,images`
+                        `${movie.id}?append_to_response=credits,videos`
                     )
             }
         ],
@@ -109,7 +109,7 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.details.credits} />
+            <SliderActors data={data?.details.credits} />
             <ImageMovie param={String(movie.id)} urlApi="/movie" />
         </div>
     );
