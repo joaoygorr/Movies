@@ -2,24 +2,23 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copiar apenas os arquivos de configuração primeiro para fazer cache das dependências
+# Copiar arquivos de configuração primeiro para cache de dependências
 COPY package.json yarn.lock ./
 
-# Instalar apenas as dependências necessárias para produção
-RUN yarn install --frozen-lockfile --silent
+# Instalar dependências de produção
+RUN yarn install --frozen-lockfile --production --silent
 
-# Copiar o restante do código
-COPY . .
+# Copiar o restante do código, exceto arquivos desnecessários
+COPY . ./
 
-# Copiar e renomear o arquivo de ambiente
+# Renomear o arquivo de ambiente
 COPY ./.env.local ./.env
 
-# Construir a aplicação (se necessário)
+# Construir a aplicação
 RUN yarn build
 
-# PORT
+# Expor a porta
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
 CMD ["yarn", "start"]
-
