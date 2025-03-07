@@ -32,6 +32,8 @@ const handleApiError = (error: any): never => {
 export class Api {
     private api: AxiosInstance;
 
+    private url: string;
+
     constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
         this.url = url;
