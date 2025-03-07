@@ -21,15 +21,15 @@
         }
     }
 
-    .box-search {
+    .language {
         align-items: center;
 
-        div>input {
-            width: 16rem;
-            font-size: .875rem;
-            padding: .25rem 1rem;
-            background-color: #2d3748;
-            border-radius: 10rem;
+        .selected-languages {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            cursor: pointer;
         }
+
     }
 }

@@ -1,24 +1,25 @@
 "use client";
-import { ICastResponse, IMovie } from "@/shared/interfaces";
+import { IMovie } from "@/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
-import { useMemo, useState } from "react";
-import { Actors } from "@/shared/components/actors/actors";
+import { useEffect, useMemo, useState } from "react";
+import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { movieApi } from "@/shared/api/api";
 import { useFetchData } from "@/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 type PropMovie = {
-    cast: ICastResponse;
     details: IMovie;
 };
 
 export default function MovieDetails() {
     const movie = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -26,15 +27,11 @@ export default function MovieDetails() {
                 key: "details",
                 call: () =>
                     movieApi.findByMovie(
-                        `${movie.id}?append_to_response=credits,videos,images`
+                        `${movie.id}?append_to_response=credits,videos`
                     )
-            },
-            {
-                key: "cast",
-                call: () => movieApi.findByCast(String(movie.id), "credits")
             }
         ],
-        [movie.id]
+        [movie.id, language]
     );
 
     const { data, loading } = useFetchData<PropMovie>(apiCalls);
@@ -114,7 +111,7 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.cast} />
+            <SliderActors data={data?.details.credits} />
             <ImageMovie param={String(movie.id)} urlApi="/movie" />
         </div>
     );

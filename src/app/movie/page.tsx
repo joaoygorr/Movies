@@ -2,11 +2,13 @@
 import "../../styles/home.style.scss";
 import Banner from "../../shared/components/banner/banner";
 import { genreApi, movieApi } from "../../shared/api/api";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
 import { useFetchData } from "../../shared/hook/useFetchData";
 import { filterGenres } from "../../shared/utils";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
+import Pagination from "@/shared/components/pagination/pagination";
+import { useAppContext } from "@/shared/context/context";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;
@@ -16,24 +18,35 @@ type Movies = {
 export default function PageMovies() {
     const [activeButton, setActiveButton] = useState<number>(0);
     const [activeRoute, setActiveRoute] = useState<string>("/now_playing");
+    const [items, setItems] = useState<IListMovie[]>([]);
+    const [page, setPage] = useState<number>(1);
+    const [search, setSearch] = useState("");
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
             {
                 key: "movies",
-                call: () => movieApi.listMovie(activeRoute)
+                call: () => movieApi.listMovie(`${activeRoute}?page=${page}`)
             },
             {
                 key: "genres",
                 call: () => genreApi.findAllGenre("/movie/list")
             }
         ],
-        [activeRoute]
+        [activeRoute, page, language]
     );
 
     const { data, loading } = useFetchData<Movies>(apiCalls);
 
     const genresResponse = data?.genres!;
+
+    const filteredData =
+        search?.length > 0
+            ? items.filter((movie) =>
+                  movie.title.toLowerCase().includes(search.toLowerCase())
+              )
+            : items;
 
     const buttons = [
         { title: "Em Cartaz", route: "/now_playing" },
@@ -45,6 +58,16 @@ export default function PageMovies() {
     const handleSetValue = (index: number, route: string) => {
         setActiveRoute(route);
         setActiveButton(index);
+    };
+
+    useEffect(() => {
+        if (!data?.movies) return;
+        setItems(data?.movies.results.slice(0, 10));
+    }, [data]);
+
+    const handleSetItems = (e: number) => {
+        if (!data?.movies) return;
+        setItems(data?.movies.results.slice(0, e));
     };
 
     return (
@@ -66,13 +89,21 @@ export default function PageMovies() {
                             </button>
                         ))}
                     </div>
+                    <div className="box-search">
+                        <input
+                            type="search"
+                            placeholder="Pesquisar..."
+                            className="focus:outline-none focus:shadow-outline"
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         {loading &&
                             Array(10)
                                 .fill(0)
                                 .map((_, e) => <SkeletonBanner key={e} />)}
 
-                        {data?.movies.results.map((movie, key) => (
+                        {filteredData.map((movie, key) => (
                             <Banner
                                 prop={movie}
                                 key={key}
@@ -84,6 +115,13 @@ export default function PageMovies() {
                         ))}
                     </div>
                 </section>
+
+                <Pagination
+                    onSet={handleSetItems}
+                    totalItemShow={items.length}
+                    dataPage={data?.movies}
+                    onPageChange={(value) => setPage(value)}
+                />
             </div>
         </main>
     );

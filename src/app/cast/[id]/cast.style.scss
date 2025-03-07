@@ -14,6 +14,12 @@
     align-items: center;
     font-size: .875rem;
     margin-top: .3rem;
+
+    span {
+        i {
+            margin-right: .2rem;
+        }
+    }
 }
 
 .image-cast {
@@ -33,6 +39,10 @@
     .details-peaple {
         span {
             margin: 0;
+
+            i {
+                margin: 0 .3rem;
+            }
         }
     }
 

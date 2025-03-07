@@ -1,6 +1,6 @@
 "use client";
 import { tvShows } from "@/shared/api/api";
-import { Actors } from "@/shared/components/actors/actors";
+import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Modal } from "@/shared/components/modal/modal";
@@ -10,16 +10,16 @@ import { formatDate, formatGenres } from "@/shared/utils";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import "./tvShow.style.scss";
-import { ICastResponse } from "@/shared/interfaces";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 type PropsTvShow = {
     details: ITvShow;
-    cast: ICastResponse;
 };
 
 export default function TvShowDetails() {
     const tvShow = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -29,13 +29,9 @@ export default function TvShowDetails() {
                     tvShows.findByTvShow(
                         `${tvShow.id}?append_to_response=credits,videos,images`
                     )
-            },
-            {
-                key: "cast",
-                call: () => tvShows.findByCast(String(tvShow.id), "credits")
             }
         ],
-        [tvShow.id]
+        [tvShow.id, language]
     );
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const { data, loading } = useFetchData<PropsTvShow>(apiCalls);
@@ -111,7 +107,7 @@ export default function TvShowDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <Actors data={data?.cast} />
+            <SliderActors data={data?.details.credits!} />
             <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
         </div>
     );
