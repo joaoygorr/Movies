@@ -1,11 +1,20 @@
+"use client";
 import Link from "next/link";
 import "./header.style.scss";
+import { useAppContext } from "@/shared/context/context";
 
 export const Header = () => {
+    const { language, handleSetLanguage } = useAppContext();
+    const handleToggle = () => {
+        const newLanguage = language === "en-US" ? "pt-BR" : "en-US";
+
+        handleSetLanguage(newLanguage);
+    };
+
     return (
         <header>
             <nav className="border-b border-gray-800">
-                <div className="container flex flex-col md:flex-row box-nav">
+                <div className="container flex flex-col md:flex-row box-nav gap-3">
                     <ul className="flex flex-col md:flex-row">
                         <li className="md:ml-6 md:mt-0 mt-3 logo">
                             <Link href={"/"}>
@@ -28,16 +37,21 @@ export const Header = () => {
                                 TV Shows
                             </Link>
                         </li>
-                        <li className="md:ml-6 md:mt-0 mt-3">Atores</li>
                     </ul>
 
-                    <div className="flex flex-col md:flex-row box-search">
-                        <div className="relative mt-3 md:mt-0">
-                            <input
-                                type="search"
-                                placeholder="Pesquisar..."
-                                className="focus:outline-none focus:shadow-outline"
+                    <div className="language">
+                        <div
+                            className="selected-languages"
+                            onClick={handleToggle}
+                        >
+                            <img
+                                src={`https://flagsapi.com/${
+                                    language === "en-US" ? "US" : "BR"
+                                }/flat/32.png`}
                             />
+                            <span className="hover:text-gray-300">
+                                {language === "en-US" ? "English" : "Português"}
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -8,9 +8,11 @@ import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
 import { useParams } from "next/navigation";
 import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
+import { useAppContext } from "@/shared/context/context";
 
 export default function CastDetails() {
     const cast = useParams();
+    const { language } = useAppContext();
 
     const apiCalls = useMemo(
         () => [
@@ -22,7 +24,7 @@ export default function CastDetails() {
                     )
             }
         ],
-        [cast.id]
+        [cast.id, language]
     );
 
     const [socialMedia, setSocialMedia] = useState<string[]>([]);
@@ -109,8 +111,8 @@ export default function CastDetails() {
                     </h2>
 
                     <div className="details-peaple text-gray-400">
-                        <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                         <span className="ml-2">
+                            <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                             {formatDate(new Date(details?.birthday!)).modelOne}(
                             {yearsOld} anos) em {details?.place_of_birth}
                         </span>

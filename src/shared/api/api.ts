@@ -2,7 +2,6 @@ import {
     IListMovie,
     IMovie,
     IResponse,
-    ICast,
     IImage,
     IActorDetails,
     IListTvShows,
@@ -34,6 +33,8 @@ export class Api {
 
     private url: string;
 
+    private language: string = "pt-BR";
+
     constructor(url: string = "/movie") {
         this.api = createApiInstance(url);
         this.url = url;
@@ -44,9 +45,17 @@ export class Api {
         this.api = createApiInstance(newUrl);
     }
 
-    private async getRequest<T>(endpoint: string, params = {}): Promise<T> {
+    setLanguage(language: string): void {
+        this.language = language;
+    }
+
+    private async getRequest<T>(endpoint: string): Promise<T> {
         try {
-            const { data } = await this.api.get(endpoint, { params });
+            const { data } = await this.api.get(endpoint, {
+                params: {
+                    language: endpoint.includes("images") ? "" : this.language
+                }
+            });
             return data;
         } catch (error) {
             handleApiError(error);
@@ -55,43 +64,27 @@ export class Api {
     }
 
     async findByMovie(id: string): Promise<IMovie> {
-        return this.getRequest<IMovie>(id, {
-            language: "pt-br"
-        });
+        return this.getRequest<IMovie>(id);
     }
 
     async findByTvShow(id: string): Promise<ITvShow> {
-        return this.getRequest<ITvShow>(id, {
-            language: "pt-br"
-        });
+        return this.getRequest<ITvShow>(id);
     }
 
     async listMovie(url: string): Promise<IResponse<IListMovie[]>> {
-        return this.getRequest<IResponse<IListMovie[]>>(url, {
-            language: "pt-br"
-        });
+        return this.getRequest<IResponse<IListMovie[]>>(url);
     }
 
     async listTvShows(url: string): Promise<IResponse<IListTvShows[]>> {
-        return this.getRequest<IResponse<IListTvShows[]>>(url, {
-            language: "pt-br"
-        });
+        return this.getRequest<IResponse<IListTvShows[]>>(url);
     }
 
     async findByPeaple(url: string): Promise<IActorDetails> {
-        return this.getRequest<IActorDetails>(url, {
-            language: "pt-br"
-        });
+        return this.getRequest<IActorDetails>(url);
     }
 
     async findAllGenre(url: string): Promise<IGenre[]> {
-        return this.getRequest<IGenre[]>(url, {
-            language: "pt-br"
-        });
-    }
-
-    async findByCast(id: string, url: string): Promise<ICast> {
-        return this.getRequest<ICast>(`${id}/${url}`);
+        return this.getRequest<IGenre[]>(url);
     }
 
     async findImagesMovie(id: string, url: string): Promise<IImage> {

@@ -1,3 +1,4 @@
+import { ICastResponse } from "./ICastResponse";
 import { IGenre } from "./IGenre";
 import { IVideo } from "./IVideo";
 
@@ -31,6 +32,7 @@ export interface ITvShow {
     production_companies: ProductionCompany[];
     production_countries: ProductionCountry[];
     seasons: Season[];
+    credits: ICastResponse;
 }
 
 interface Creator {
