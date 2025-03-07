@@ -15,7 +15,7 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
         speed: 500,
         slidesToShow: filteredImages.length <= 1 ? 1 : 4,
         slidesToScroll: filteredImages.length <= 1 ? 1 : 4,
-        autoplay: true,
+        autoplay: filteredImages.length > 4,
         autoplaySpeed: 4000,
         responsive: [
             {
@@ -35,7 +35,7 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
             <div className="container cast-box">
                 <h2>Elenco</h2>
                 <div className="slider-box">
-                    {filteredImages.length >= 4 && (
+                    {filteredImages.length > 1 && (
                         <Slider {...settings}>
                             {filteredImages?.map((c, k) => (
                                 <div className="cast" key={k}>

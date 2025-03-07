@@ -27,7 +27,7 @@ export default function TvShowDetails() {
                 key: "details",
                 call: () =>
                     tvShows.findByTvShow(
-                        `${tvShow.id}?append_to_response=credits,videos,images`
+                        `${tvShow.id}?append_to_response=credits,videos`
                     )
             }
         ],
