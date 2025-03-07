@@ -28,7 +28,6 @@ export const Header = () => {
                                 TV Shows
                             </Link>
                         </li>
-                        <li className="md:ml-6 md:mt-0 mt-3">Atores</li>
                     </ul>
 
                     <div className="flex flex-col md:flex-row box-search">
