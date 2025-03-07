@@ -5,12 +5,16 @@ import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
 
 export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
+    const cast = data?.cast || [];
+
+    const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
+
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: filteredImages.length <= 1 ? 1 : 4,
+        slidesToScroll: filteredImages.length <= 1 ? 1 : 4,
         responsive: [
             {
                 breakpoint: 767,
@@ -24,42 +28,65 @@ export const Actors = ({ data }: { data: ICastResponse | undefined }) => {
         ]
     };
 
-    const cast = data?.cast || [];
-
-    const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
-
     return (
         <div className="movie-cast">
             <div className="container cast-box">
                 <h2>Elenco</h2>
                 <div className="slider-box">
-                    <Slider {...settings}>
-                        {filteredImages?.map((c, k) => (
-                            <div className="cast" key={k}>
-                                <a href={`/cast/${c.id}`}>
-                                    <img
-                                        src={
-                                            "https://image.tmdb.org/t/p/w300" +
-                                            c.profile_path
-                                        }
-                                        alt="poster elenco"
-                                        className="hover:opacity-75 transition ease-in-out duration-150"
-                                    />
-                                </a>
-                                <div className="info-cast">
-                                    <a
-                                        href={`/cast/${c.id}`}
-                                        className="hover:text-gray:300"
-                                    >
-                                        {c.original_name}
+                    {filteredImages.length >= 4 && (
+                        <Slider {...settings}>
+                            {filteredImages?.map((c, k) => (
+                                <div className="cast" key={k}>
+                                    <a href={`/cast/${c.id}`}>
+                                        <img
+                                            src={
+                                                "https://image.tmdb.org/t/p/w300" +
+                                                c.profile_path
+                                            }
+                                            alt="poster elenco"
+                                            className="hover:opacity-75 transition ease-in-out duration-150"
+                                        />
                                     </a>
-                                    <div className="text-gray-400">
-                                        {c.character}
+                                    <div className="info-cast">
+                                        <a
+                                            href={`/cast/${c.id}`}
+                                            className="hover:text-gray:300"
+                                        >
+                                            {c.original_name}
+                                        </a>
+                                        <div className="text-gray-400">
+                                            {c.character}
+                                        </div>
                                     </div>
                                 </div>
+                            ))}
+                        </Slider>
+                    )}
+                    {filteredImages.length <= 1 && (
+                        <div className="cast">
+                            <a href={`/cast/${filteredImages[0]?.id}`}>
+                                <img
+                                    src={
+                                        "https://image.tmdb.org/t/p/w300" +
+                                        filteredImages[0]?.profile_path
+                                    }
+                                    alt="poster elenco"
+                                    className="hover:opacity-75 transition ease-in-out duration-150"
+                                />
+                            </a>
+                            <div className="info-cast">
+                                <a
+                                    href={`/cast/${filteredImages[0]?.id}`}
+                                    className="hover:text-gray:300"
+                                >
+                                    {filteredImages[0]?.original_name}
+                                </a>
+                                <div className="text-gray-400">
+                                    {filteredImages[0]?.character}
+                                </div>
                             </div>
-                        ))}
-                    </Slider>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
