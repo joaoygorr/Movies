@@ -39,7 +39,8 @@
 
 @media(max-width: 767px) {
     .movie {
-        justify-items: center !important;
+        justify-items: center;
+        justify-content: center;
 
         .detail-movie {
             .specification {
