@@ -54,9 +54,18 @@ export default function PageTvShows() {
             : items;
 
     const buttons = [
-        { title: "No Ar Hoje", route: "/airing_today" },
-        { title: "Populares", route: "/popular" },
-        { title: "Melhores Avaliados", route: "/top_rated" }
+        {
+            title: language === "en-US" ? "Airing Today" : "No Ar Hoje",
+            route: "/airing_today"
+        },
+        {
+            title: language === "en-US" ? "Popular" : "Populares",
+            route: "/popular"
+        },
+        {
+            title: language === "en-US" ? "Top Rated" : "Melhores Avaliados",
+            route: "/top_rated"
+        }
     ];
 
     const handleSetValue = (index: number, route: string) => {
@@ -88,7 +97,9 @@ export default function PageTvShows() {
                 <div className="box-search">
                     <input
                         type="search"
-                        placeholder="Pesquisar..."
+                        placeholder={
+                            language === "en-US" ? "Search..." : "Pesquisar..."
+                        }
                         className="focus:outline-none focus:shadow-outline"
                         onChange={(e) => setSearch(e.target.value)}
                     />

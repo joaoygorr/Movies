@@ -26,7 +26,7 @@ export const Header = () => {
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
                             <Link href={"/"} className="hover:text-gray-300">
-                                Filmes
+                                {language === "en-US" ? "Movies" : "Filmes"}
                             </Link>
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
@@ -34,7 +34,9 @@ export const Header = () => {
                                 href={"/tvShows"}
                                 className="hover:text-gray-300"
                             >
-                                Shows e Séries
+                                {language === "en-US"
+                                    ? "Shows and Series"
+                                    : "Shows e Séries"}
                             </Link>
                         </li>
                     </ul>

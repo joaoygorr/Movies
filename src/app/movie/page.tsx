@@ -49,10 +49,22 @@ export default function PageMovies() {
             : items;
 
     const buttons = [
-        { title: "Em Cartaz", route: "/now_playing" },
-        { title: "Populares", route: "/popular" },
-        { title: "Melhores Avaliados", route: "/top_rated" },
-        { title: "Em breve", route: "/upcoming" }
+        {
+            title: language === "en-US" ? "Now playing" : "Em cartaz",
+            route: "/now_playing"
+        },
+        {
+            title: language === "en-US" ? "Popular" : "Populares",
+            route: "/popular"
+        },
+        {
+            title: language === "en-US" ? "Top Rated" : "Melhores Avaliados",
+            route: "/top_rated"
+        },
+        {
+            title: language === "en-US" ? "Upcoming" : "Em breve",
+            route: "/upcoming"
+        }
     ];
 
     const handleSetValue = (index: number, route: string) => {
@@ -92,7 +104,11 @@ export default function PageMovies() {
                     <div className="box-search">
                         <input
                             type="search"
-                            placeholder="Pesquisar..."
+                            placeholder={
+                                language === "en-US"
+                                    ? "Search..."
+                                    : "Pesquisar..."
+                            }
                             className="focus:outline-none focus:shadow-outline"
                             onChange={(e) => setSearch(e.target.value)}
                         />
