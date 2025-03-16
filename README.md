@@ -33,22 +33,3 @@ $ npm run dev or yarn dev
 $ docker-compose up
 
 ```
-
-## Contribuidores
-
-<table>
-  <tr>
-    <td align="center">
-        <a href="https://www.linkedin.com/in/jo%C3%A3o-ygor-ramalho-9b5b18219/">
-            <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/82791430?v=4" width="100px;"/>
-            <br/>
-            <sub><b>João Ygor</b></sub>
-        </a>
-        <br/>
-      <a href="https://github.com/joaoygorr" />
-        @joaoygorr
-      </a>
-        <br/>Developer
-    </td>
-  </tr>
-</table>
