@@ -1,12 +1,12 @@
-### :white_check_mark:  Project Completed :white_check_mark: 
+### :white_check_mark: Projeto Concluído :white_check_mark: 
 
-# Movies
+# Filmes
 
-Project created for study
+CineScope é uma aplicação web que permite aos usuários explorar filmes e séries, buscar por títulos, assistir a trailers e trocar o idioma do conteúdo exibido. A aplicação utiliza a API do The Movie Database (TMDB) para obter dados sobre filmes e séries.
 
-## ✔️ Technologies used
+## ✔️ Tecnologias Utilizadas
 
-The following tools were used in the construction of the project:
+As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Website** ([Nextjs](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/))
 
@@ -14,27 +14,27 @@ The following tools were used in the construction of the project:
 -   **[Axios](https://axios-http.com/ptbr/docs/intro)**
 -   **[Tailwindcss](https://tailwindcss.com/)**
 
-## 🛠️ Open and run the project
+## 🛠️ Como Abrir e Executar o Projeto
 
-#### 🧭 Running the web application (Frontend)
+#### 🧭 Executando a aplicação web (Frontend)
 
 ```bash
 
-# Install the dependencies
+# Instale as dependências
 $ npm install or yarn
 
-# Run the application in development mode
+# Execute a aplicação em modo de desenvolvimento
 $ npm run dev or yarn dev
 
-# The application will open on the port: 3000 - go to http://localhost:3000
+# A aplicação estará disponível na porta 3000 - acesse http://localhost:3000
 
-# Run the application in docker
-# Go to the project root and run:
+# Executar a aplicação via Docker
+# No diretório raiz do projeto, execute:
 $ docker-compose up
 
 ```
 
-## Contributors
+## Contribuidores
 
 <table>
   <tr>
