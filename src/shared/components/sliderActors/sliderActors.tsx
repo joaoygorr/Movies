@@ -3,9 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
+import { useAppContext } from "@/shared/context/context";
 
 export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
+    const { language } = useAppContext();
 
     const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
 
@@ -33,7 +35,7 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
     return (
         <div className="movie-cast">
             <div className="container cast-box">
-                <h2>Elenco</h2>
+                <h2>{language === "en-US" ? "Cast" : "Elenco"}</h2>
                 <div className="slider-box">
                     {filteredImages.length > 1 && (
                         <Slider {...settings}>
