@@ -11,7 +11,7 @@
     "dependencies": {
         "@types/react": "19",
         "@types/react-dom": "19",
-        "axios": "^1.13.5",
+        "axios": "^1.15.0",
         "jquery": "^3.7.1",
         "next": "^15.5.15",
         "primeicons": "^7.0.0",
