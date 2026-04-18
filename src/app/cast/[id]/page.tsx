@@ -95,9 +95,8 @@ export default function CastDetails() {
                         {socialMedia?.map((media, i) => (
                             <li className={i > 0 ? "ml-6" : ""} key={i}>
                                 <a
-                                    href={`https://${media}.com/${
-                                        media === "tiktok" ? "@" : ""
-                                    }${valueSocialMedia[i]}`}
+                                    href={`https://${media}.com/${media === "tiktok" ? "@" : ""
+                                        }${valueSocialMedia[i]}`}
                                 >
                                     <i
                                         className={`pi pi-${media} fill-current text-gray-400 hover:text-white`}
