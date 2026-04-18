@@ -15,7 +15,9 @@ const nextConfig = {
     webpack: (config) => {
         config.resolve.alias["@"] = path.join(process.cwd(), "src");
         return config;
-    }
+    },
+
+    turbopack: {}
 };
 
 export default nextConfig;
