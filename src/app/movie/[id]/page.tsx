@@ -3,7 +3,7 @@ import { IMovie } from "@/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
-import { useEffect, useMemo, useState, Suspense, lazy } from "react";
+import { useMemo, useState, Suspense, lazy } from "react";
 import { Layout } from "@/shared/components/layoutComponent";
 import { movieApi } from "@/shared/api/api";
 import { useFetchData } from "@/shared/hook/useFetchData";
@@ -27,9 +27,10 @@ export default function MovieDetails() {
         () => [
             {
                 key: "details",
-                call: () =>
+                call: (signal?: AbortSignal) =>
                     movieApi.findByMovie(
-                        `${movie.id}?append_to_response=credits,videos`
+                        `${movie.id}?append_to_response=credits,videos`,
+                        signal
                     )
             }
         ],

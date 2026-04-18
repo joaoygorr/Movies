@@ -19,9 +19,10 @@ export default function CastDetails() {
         () => [
             {
                 key: "details",
-                call: () =>
-                    castApi.findByPeaple(
-                        `${cast.id}?append_to_response=external_ids,movie_credits`
+                call: (signal?: AbortSignal) =>
+                    castApi.findByPeople(
+                        `${cast.id}?append_to_response=external_ids,movie_credits`,
+                        signal
                     )
             }
         ],

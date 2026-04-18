@@ -49,12 +49,12 @@ export const Header = memo(() => {
                             onClick={handleToggle}
                         >
                             <Image
-                                src={`https://flagsapi.com/${
-                                    language === "en-US" ? "US" : "BR"
-                                }/flat/32.png`}
+                                src={`https://flagsapi.com/${language === "en-US" ? "US" : "BR"
+                                    }/flat/32.png`}
                                 alt="Language flag"
                                 width={32}
-                                height={24}
+                                height={32}
+                                priority
                             />
                             <span className="hover:text-gray-300">
                                 {language === "en-US" ? "English" : "Português"}

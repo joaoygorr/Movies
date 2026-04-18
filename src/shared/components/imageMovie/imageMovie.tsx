@@ -20,7 +20,7 @@ export const ImageMovie = ({
         () => [
             {
                 key: "posters",
-                call: () => imageApi.findImagesMovie(param, "images")
+                call: (signal?: AbortSignal) => imageApi.findImagesMovie(param, "images", signal)
             }
         ],
         [param, language]

@@ -27,9 +27,10 @@ export default function TvShowDetails() {
         () => [
             {
                 key: "details",
-                call: () =>
+                call: (signal?: AbortSignal) =>
                     tvShows.findByTvShow(
-                        `${tvShow.id}?append_to_response=credits,videos`
+                        `${tvShow.id}?append_to_response=credits,videos`,
+                        signal
                     )
             }
         ],
@@ -41,6 +42,7 @@ export default function TvShowDetails() {
     if (loading) {
         return <SkeletonDetails />;
     }
+    console.log(data);
 
     return (
         <div>

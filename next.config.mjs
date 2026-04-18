@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import { hostname } from "os";
 import path from "path";
 
 const nextConfig = {
@@ -10,6 +11,21 @@ const nextConfig = {
                 permanent: true
             }
         ];
+    },
+
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "image.tmdb.org",
+                pathname: "/t/p/**"
+            },
+            {
+                protocol: "https",
+                hostname: "flagsapi.com",
+                pathname: "/**"
+            }
+        ]
     },
 
     webpack: (config, { isServer }) => {

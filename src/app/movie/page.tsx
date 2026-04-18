@@ -27,11 +27,11 @@ export default function PageMovies() {
         () => [
             {
                 key: "movies",
-                call: () => movieApi.listMovie(`${activeRoute}?page=${page}`)
+                call: (signal?: AbortSignal) => movieApi.listMovie(`${activeRoute}?page=${page}`, signal)
             },
             {
                 key: "genres",
-                call: () => genreApi.findAllGenre("/movie/list")
+                call: (signal?: AbortSignal) => genreApi.findAllGenre("/movie/list", signal)
             }
         ],
         [activeRoute, page, language]

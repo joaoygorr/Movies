@@ -27,11 +27,11 @@ export default function PageTvShows() {
         () => [
             {
                 key: "genres",
-                call: () => genreApi.findAllGenre("/tv/list")
+                call: (signal?: AbortSignal) => genreApi.findAllGenre("/tv/list", signal)
             },
             {
                 key: "series",
-                call: () => tvShows.listTvShows(`${activeRoute}?page=${page}`)
+                call: (signal?: AbortSignal) => tvShows.listTvShows(`${activeRoute}?page=${page}`, signal)
             }
         ],
         [activeRoute, page, language]
