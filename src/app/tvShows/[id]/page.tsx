@@ -6,7 +6,6 @@ import { formatDate, formatGenres } from "@/shared/utils";
 import "./tvShow.style.scss";
 import Image from "next/image";
 import TvShowDetailsClient from "./TvShowDetailsClient";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const SliderActors = lazy(() => import("@/shared/components/sliderActors/sliderActors").then(module => ({ default: module.SliderActors })));
 const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
