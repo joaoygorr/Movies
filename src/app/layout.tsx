@@ -58,10 +58,10 @@ function RootLayout({
 }
 
 export default appWithTranslation(RootLayout);
-                        </SkeletonTheme>
-                    </AppProvider>
-                </ErrorBoundary>
-            </body>
-        </html>
+                        </SkeletonTheme >
+                    </AppProvider >
+                </ErrorBoundary >
+            </body >
+        </html >
     );
 }

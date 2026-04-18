@@ -47,11 +47,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     );
 }
 
-    return (
-        <AppContext.Provider value={{ language, handleSetLanguage }}>
-            {children}
-        </AppContext.Provider>
-    );
+return (
+    <AppContext.Provider value={{ language, handleSetLanguage }}>
+        {children}
+    </AppContext.Provider>
+);
 }
 
 export function useAppContext(): Props {
