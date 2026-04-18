@@ -12,8 +12,19 @@ const nextConfig = {
         ];
     },
 
-    webpack: (config) => {
+    webpack: (config, { isServer }) => {
         config.resolve.alias["@"] = path.join(process.cwd(), "src");
+
+        if (process.env.ANALYZE) {
+            const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+            config.plugins.push(
+                new BundleAnalyzerPlugin({
+                    analyzerMode: 'server',
+                    openAnalyzer: true,
+                })
+            );
+        }
+
         return config;
     },
 

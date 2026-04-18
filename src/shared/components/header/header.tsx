@@ -2,8 +2,10 @@
 import Link from "next/link";
 import "./header.style.scss";
 import { useAppContext } from "@/shared/context/context";
+import { memo } from "react";
+import Image from "next/image";
 
-export const Header = () => {
+export const Header = memo(() => {
     const { language, handleSetLanguage } = useAppContext();
     const handleToggle = () => {
         const newLanguage = language === "en-US" ? "pt-BR" : "en-US";
@@ -46,10 +48,13 @@ export const Header = () => {
                             className="selected-languages"
                             onClick={handleToggle}
                         >
-                            <img
+                            <Image
                                 src={`https://flagsapi.com/${
                                     language === "en-US" ? "US" : "BR"
                                 }/flat/32.png`}
+                                alt="Language flag"
+                                width={32}
+                                height={24}
                             />
                             <span className="hover:text-gray-300">
                                 {language === "en-US" ? "English" : "Português"}
@@ -60,4 +65,4 @@ export const Header = () => {
             </nav>
         </header>
     );
-};
+});

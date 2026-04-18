@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
+import Image from "next/image";
 
 export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
@@ -42,12 +43,14 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
                             {filteredImages?.map((c, k) => (
                                 <div className="cast" key={k}>
                                     <a href={`/cast/${c.id}`}>
-                                        <img
+                                        <Image
                                             src={
                                                 "https://image.tmdb.org/t/p/w300" +
                                                 c.profile_path
                                             }
                                             alt="poster elenco"
+                                            width={200}
+                                            height={300}
                                             className="hover:opacity-75 transition ease-in-out duration-150"
                                         />
                                     </a>
@@ -69,12 +72,14 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
                     {filteredImages.length <= 1 && (
                         <div className="cast">
                             <a href={`/cast/${filteredImages[0]?.id}`}>
-                                <img
+                                <Image
                                     src={
                                         "https://image.tmdb.org/t/p/w300" +
                                         filteredImages[0]?.profile_path
                                     }
                                     alt="poster elenco"
+                                    width={200}
+                                    height={300}
                                     className="hover:opacity-75 transition ease-in-out duration-150"
                                 />
                             </a>

@@ -1,17 +1,19 @@
 "use client";
 import { tvShows } from "@/shared/api/api";
-import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
-import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Modal } from "@/shared/components/modal/modal";
 import { useFetchData } from "@/shared/hook/useFetchData";
 import { ITvShow } from "@/shared/interfaces/ITvShow";
 import { formatDate, formatGenres } from "@/shared/utils";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense, lazy } from "react";
 import "./tvShow.style.scss";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 import { useAppContext } from "@/shared/context/context";
+import Image from "next/image";
+
+const SliderActors = lazy(() => import("@/shared/components/sliderActors/sliderActors").then(module => ({ default: module.SliderActors })));
+const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
 
 type PropsTvShow = {
     details: ITvShow;
@@ -44,12 +46,14 @@ export default function TvShowDetails() {
         <div>
             <Layout.Root>
                 <div className="flex-none image-tv">
-                    <img
+                    <Image
                         src={
                             "https://image.tmdb.org/t/p/w500" +
                             data?.details?.poster_path
                         }
                         alt="poster movie"
+                        width={384}
+                        height={576}
                         className="w-64 lg:w-96"
                     />
                 </div>
@@ -107,8 +111,12 @@ export default function TvShowDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <SliderActors data={data?.details.credits!} />
-            <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
+            <Suspense fallback={<div>Loading...</div>}>
+                <SliderActors data={data?.details.credits!} />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+                <ImageMovie param={String(tvShow.id)} urlApi="/tv" />
+            </Suspense>
         </div>
     );
 }

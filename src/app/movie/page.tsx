@@ -44,8 +44,8 @@ export default function PageMovies() {
     const filteredData =
         search?.length > 0
             ? items.filter((movie) =>
-                  movie.title.toLowerCase().includes(search.toLowerCase())
-              )
+                movie.title.toLowerCase().includes(search.toLowerCase())
+            )
             : items;
 
     const buttons = [
@@ -90,9 +90,8 @@ export default function PageMovies() {
                         {buttons.map((button, index) => (
                             <button
                                 key={index}
-                                className={`${
-                                    activeButton === index ? "active" : ""
-                                }`}
+                                className={`${activeButton === index ? "active" : ""
+                                    }`}
                                 onClick={() =>
                                     handleSetValue(index, button.route)
                                 }

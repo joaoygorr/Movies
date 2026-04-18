@@ -4,6 +4,7 @@ import { imageApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
 import { IImage } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
+import Image from "next/image";
 
 export const ImageMovie = ({
     param,
@@ -37,13 +38,15 @@ export const ImageMovie = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {filteredElements?.map((image, key) => (
                         <div className="image" key={key}>
-                            <img
+                            <Image
                                 key={image.file_path}
                                 src={
                                     "https://image.tmdb.org/t/p/w500" +
                                     image.file_path
                                 }
                                 alt="posters"
+                                width={400}
+                                height={225}
                                 className="hover:opacity-75 transition ease-in-out duration-150"
                             />
                         </div>

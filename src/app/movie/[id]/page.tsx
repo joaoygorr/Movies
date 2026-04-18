@@ -3,15 +3,17 @@ import { IMovie } from "@/shared/interfaces";
 import { formatDate, formatGenres, returnHours } from "@/shared/utils";
 import "./movie.style.scss";
 import { Modal } from "@/shared/components/modal/modal";
-import { useEffect, useMemo, useState } from "react";
-import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
-import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
+import { useEffect, useMemo, useState, Suspense, lazy } from "react";
 import { Layout } from "@/shared/components/layoutComponent";
 import { movieApi } from "@/shared/api/api";
 import { useFetchData } from "@/shared/hook/useFetchData";
 import { useParams } from "next/navigation";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 import { useAppContext } from "@/shared/context/context";
+import Image from "next/image";
+
+const SliderActors = lazy(() => import("@/shared/components/sliderActors/sliderActors").then(module => ({ default: module.SliderActors })));
+const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
 
 type PropMovie = {
     details: IMovie;
@@ -45,12 +47,14 @@ export default function MovieDetails() {
         <div>
             <Layout.Root>
                 <div className="flex-none image-movie">
-                    <img
+                    <Image
                         src={
                             "https://image.tmdb.org/t/p/w500" +
                             data?.details?.poster_path
                         }
                         alt="poster movie"
+                        width={384}
+                        height={576}
                         className="w-64 lg:w-96"
                     />
                 </div>
@@ -111,8 +115,12 @@ export default function MovieDetails() {
                     </Modal>
                 )}
             </Layout.Root>
-            <SliderActors data={data?.details.credits} />
-            <ImageMovie param={String(movie.id)} urlApi="/movie" />
+            <Suspense fallback={<div>Loading...</div>}>
+                <SliderActors data={data?.details.credits} />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+                <ImageMovie param={String(movie.id)} urlApi="/movie" />
+            </Suspense>
         </div>
     );
 }

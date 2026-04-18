@@ -2,13 +2,15 @@ import { formatDate } from "@/shared/utils";
 import "./banner.style.scss";
 import Link from "next/link";
 import { IListMovie, IListTvShows } from "../../interfaces";
+import { memo } from "react";
+import Image from "next/image";
 
 type BannerProps<T> = {
     prop: T;
     genre: string;
 };
 
-export default function Banner<T extends IListMovie | IListTvShows>({
+function BannerComponent<T extends IListMovie | IListTvShows>({
     prop,
     genre
 }: BannerProps<T>) {
@@ -17,9 +19,11 @@ export default function Banner<T extends IListMovie | IListTvShows>({
             <Link
                 href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
             >
-                <img
+                <Image
                     src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
                     alt="Poster"
+                    width={300}
+                    height={450}
                 />
             </Link>
             <div className="detail-movie">
@@ -54,3 +58,5 @@ export default function Banner<T extends IListMovie | IListTvShows>({
         </div>
     );
 }
+
+export default memo(BannerComponent);

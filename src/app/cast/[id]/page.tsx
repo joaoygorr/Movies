@@ -9,6 +9,7 @@ import "./cast.style.scss";
 import { useParams } from "next/navigation";
 import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
 import { useAppContext } from "@/shared/context/context";
+import Image from "next/image";
 
 export default function CastDetails() {
     const cast = useParams();
@@ -80,12 +81,14 @@ export default function CastDetails() {
         <div>
             <Layout.Root>
                 <div className="flex-none image-cast">
-                    <img
+                    <Image
                         src={
                             "https://image.tmdb.org/t/p/w300" +
                             details?.profile_path
                         }
                         alt="poster cast"
+                        width={304}
+                        height={456}
                         className="w-76"
                     />
                     <ul className="info-social-media">

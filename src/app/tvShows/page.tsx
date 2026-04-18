@@ -49,8 +49,8 @@ export default function PageTvShows() {
     const filteredData =
         search?.length > 0
             ? items.filter((serie) =>
-                  serie.name.toLowerCase().includes(search.toLowerCase())
-              )
+                serie.name.toLowerCase().includes(search.toLowerCase())
+            )
             : items;
 
     const buttons = [
@@ -85,9 +85,8 @@ export default function PageTvShows() {
                     {buttons.map((button, index) => (
                         <button
                             key={index}
-                            className={`${
-                                activeButton === index ? "active" : ""
-                            }`}
+                            className={`${activeButton === index ? "active" : ""
+                                }`}
                             onClick={() => handleSetValue(index, button.route)}
                         >
                             {button.title}
