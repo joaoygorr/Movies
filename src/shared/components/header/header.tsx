@@ -15,7 +15,7 @@ export const Header = memo(() => {
 
     return (
         <header>
-            <nav className="border-b border-gray-800">
+            <nav className="border-b border-gray-800" aria-label="Navegação principal">
                 <div className="container flex flex-col md:flex-row box-nav gap-3">
                     <ul className="flex flex-col md:flex-row">
                         <li className="md:ml-6 md:mt-0 mt-3 logo">

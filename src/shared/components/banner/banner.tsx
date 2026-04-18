@@ -14,15 +14,18 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
     prop,
     genre
 }: BannerProps<T>) {
+    const title = "title" in prop ? prop.title : prop.name;
+    
     return (
         <div className="movie">
             <Link
                 href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
+                aria-label={`Ver detalhes de ${title}`}
             >
                 {prop?.poster_path ? (
                     <Image
                         src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
-                        alt="Poster"
+                        alt={`Pôster de ${title}`}
                         width={300}
                         height={450}
                     />
@@ -37,7 +40,7 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
                     }`}
                     className="title-movie"
                 >
-                    {"title" in prop ? prop.title : prop.name}
+                    {title}
                 </Link>
                 <div className="specification">
                     <i className="pi pi-star-fill" />

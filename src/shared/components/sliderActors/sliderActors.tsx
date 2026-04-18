@@ -3,8 +3,9 @@ import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
 import Image from "next/image";
+import { memo } from "react";
 
-export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
+const SliderActorsComponent = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
     const { language } = useAppContext();
 
@@ -101,3 +102,5 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
         </div>
     );
 };
+
+export const SliderActors = memo(SliderActorsComponent);

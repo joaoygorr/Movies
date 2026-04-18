@@ -87,8 +87,8 @@ export class Api {
         return this.getRequest<IActorDetails>(url, signal);
     }
 
-    async findAllGenre(url: string, signal?: AbortSignal): Promise<IGenre[]> {
-        return this.getRequest<IGenre[]>(url, signal);
+    async findAllGenre(url: string, signal?: AbortSignal): Promise<{ genres: IGenre[] }> {
+        return this.getRequest<{ genres: IGenre[] }>(url, signal);
     }
 
     async findImagesMovie(id: string, url: string, signal?: AbortSignal): Promise<IImage> {
