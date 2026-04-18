@@ -36,11 +36,18 @@ export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
                 });
                 setData(newData as T);
             } catch (error) {
-                if (error instanceof Error && error.name === 'AbortError') {
-                    // Request was cancelled, do nothing
-                    return;
+                // Check if request was cancelled (AbortError or Axios CanceledError)
+                if (error instanceof Error) {
+                    if (error.name === 'AbortError' || error.name === 'CanceledError') {
+                        // Request was cancelled, do nothing
+                        return;
+                    }
+                    if (error.message === 'canceled') {
+                        // Axios cancel
+                        return;
+                    }
                 }
-                console.log(error);
+                console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }

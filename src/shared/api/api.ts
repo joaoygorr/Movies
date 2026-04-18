@@ -22,9 +22,12 @@ const createApiInstance = (url: string): AxiosInstance => {
 };
 
 const handleApiError = (error: any): never => {
-    console.error(error);
+    // Don't log canceled requests
+    if (error?.message !== 'canceled' && error?.code !== 'ERR_CANCELED') {
+        console.error('API Error:', error);
+    }
     throw new Error(
-        error.response?.data?.message || "An unexpected error occurred"
+        error.response?.data?.message || error.message || "An unexpected error occurred"
     );
 };
 

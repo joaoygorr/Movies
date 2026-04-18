@@ -48,16 +48,18 @@ export default function MovieDetails() {
         <div>
             <Layout.Root>
                 <div className="flex-none image-movie">
-                    <Image
-                        src={
-                            "https://image.tmdb.org/t/p/w500" +
-                            data?.details?.poster_path
-                        }
-                        alt="poster movie"
-                        width={384}
-                        height={576}
-                        className="w-64 lg:w-96"
-                    />
+                    {data?.details?.poster_path && (
+                        <Image
+                            src={
+                                "https://image.tmdb.org/t/p/w500" +
+                                data?.details?.poster_path
+                            }
+                            alt="poster movie"
+                            width={384}
+                            height={576}
+                            className="w-64 lg:w-96"
+                        />
+                    )}
                 </div>
 
                 <Layout.Details>

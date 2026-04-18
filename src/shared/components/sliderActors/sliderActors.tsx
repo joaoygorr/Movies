@@ -8,7 +8,7 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
     const { language } = useAppContext();
 
-    const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null);
+    const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null && i.profile_path !== undefined);
 
     const settings = {
         dots: true,
@@ -69,18 +69,20 @@ export const SliderActors = ({ data }: { data: ICastResponse | undefined }) => {
                     )}
                     {filteredImages.length <= 1 && (
                         <div className="cast">
-                            <a href={`/cast/${filteredImages[0]?.id}`}>
-                                <Image
-                                    src={
-                                        "https://image.tmdb.org/t/p/w300" +
-                                        filteredImages[0]?.profile_path
-                                    }
-                                    alt="poster elenco"
-                                    width={200}
-                                    height={300}
-                                    className="hover:opacity-75 transition ease-in-out duration-150"
-                                />
-                            </a>
+                            {filteredImages[0]?.id && filteredImages[0]?.profile_path && (
+                                <a href={`/cast/${filteredImages[0]?.id}`}>
+                                    <Image
+                                        src={
+                                            "https://image.tmdb.org/t/p/w300" +
+                                            filteredImages[0]?.profile_path
+                                        }
+                                        alt="poster elenco"
+                                        width={200}
+                                        height={300}
+                                        className="hover:opacity-75 transition ease-in-out duration-150"
+                                    />
+                                </a>
+                            )}
                             <div className="info-cast">
                                 <a
                                     href={`/cast/${filteredImages[0]?.id}`}

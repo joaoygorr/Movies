@@ -42,22 +42,23 @@ export default function TvShowDetails() {
     if (loading) {
         return <SkeletonDetails />;
     }
-    console.log(data);
 
     return (
         <div>
             <Layout.Root>
                 <div className="flex-none image-tv">
-                    <Image
-                        src={
-                            "https://image.tmdb.org/t/p/w500" +
-                            data?.details?.poster_path
-                        }
-                        alt="poster movie"
-                        width={384}
-                        height={576}
-                        className="w-64 lg:w-96"
-                    />
+                    {data?.details?.poster_path && (
+                        <Image
+                            src={
+                                "https://image.tmdb.org/t/p/w500" +
+                                data?.details?.poster_path
+                            }
+                            alt="poster movie"
+                            width={384}
+                            height={576}
+                            className="w-64 lg:w-96"
+                        />
+                    )}
                 </div>
                 <Layout.Details>
                     <h2 className="title md:mt-0">{data?.details?.name}</h2>

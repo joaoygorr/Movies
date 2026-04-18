@@ -19,12 +19,16 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
             <Link
                 href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
             >
-                <Image
-                    src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
-                    alt="Poster"
-                    width={300}
-                    height={450}
-                />
+                {prop?.poster_path ? (
+                    <Image
+                        src={"https://image.tmdb.org/t/p/w500" + prop?.poster_path}
+                        alt="Poster"
+                        width={300}
+                        height={450}
+                    />
+                ) : (
+                    <div style={{ width: 300, height: 450, backgroundColor: '#e5e7eb' }} />
+                )}
             </Link>
             <div className="detail-movie">
                 <Link
