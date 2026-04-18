@@ -15,7 +15,7 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
     genre
 }: BannerProps<T>) {
     const title = "title" in prop ? prop.title : prop.name;
-    
+
     return (
         <div className="movie">
             <Link
@@ -35,9 +35,8 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
             </Link>
             <div className="detail-movie">
                 <Link
-                    href={`/${"title" in prop ? "movie" : "tvShows"}/${
-                        prop?.id
-                    }`}
+                    href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id
+                        }`}
                     className="title-movie"
                 >
                     {title}
