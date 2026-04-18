@@ -1,0 +1,13 @@
+{
+  "nowPlaying": "Now playing",
+  "popular": "Popular",
+  "topRated": "Top rated",
+  "upcoming": "Upcoming",
+  "playTrailer": "Play Trailer",
+  "searchMovies": "Search movies...",
+  "noMoviesFound": "No movies found",
+  "loadingMovies": "Loading movies...",
+  "movieDetails": "Movie details",
+  "similarMovies": "Similar movies",
+  "movieRecommendations": "Movie recommendations"
+}

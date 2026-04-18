@@ -1,0 +1,13 @@
+{
+  "nowPlaying": "Em cartaz",
+  "popular": "Populares",
+  "topRated": "Melhores Avaliados",
+  "upcoming": "Em breve",
+  "playTrailer": "Reproduzir Trailer",
+  "searchMovies": "Pesquisar filmes...",
+  "noMoviesFound": "Nenhum filme encontrado",
+  "loadingMovies": "Carregando filmes...",
+  "movieDetails": "Detalhes do filme",
+  "similarMovies": "Filmes similares",
+  "movieRecommendations": "Recomendações de filmes"
+}

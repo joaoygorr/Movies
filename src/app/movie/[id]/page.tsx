@@ -8,6 +8,7 @@ import { movieApi } from "@/shared/api/api";
 import { SkeletonDetails } from "@/shared/components/skeletonLoading";
 import Image from "next/image";
 import MovieDetailsClient from "./MovieDetailsClient";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const SliderActors = lazy(() => import("@/shared/components/sliderActors/sliderActors").then(module => ({ default: module.SliderActors })));
 const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));

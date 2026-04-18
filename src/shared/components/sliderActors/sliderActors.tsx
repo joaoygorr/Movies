@@ -2,12 +2,14 @@ import "./sliderActors.style.scss";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 import Image from "next/image";
 import { memo } from "react";
 
 const SliderActorsComponent = ({ data }: { data: ICastResponse | undefined }) => {
     const cast = data?.cast || [];
     const { language } = useAppContext();
+    const { t } = useTranslation('cast');
 
     const filteredImages = cast?.filter((i: ICast) => i.profile_path !== null && i.profile_path !== undefined);
 
@@ -35,7 +37,7 @@ const SliderActorsComponent = ({ data }: { data: ICastResponse | undefined }) =>
     return (
         <div className="movie-cast">
             <div className="container cast-box">
-                <h2>{language === "en-US" ? "Cast" : "Elenco"}</h2>
+                <h2>{t('cast')}</h2>
                 <div className="slider-box">
                     {filteredImages.length > 1 && (
                         <Slider {...settings}>

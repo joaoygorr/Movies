@@ -8,6 +8,7 @@ import Pagination from "@/shared/components/pagination/pagination";
 import { useAppContext } from "@/shared/context/context";
 import Banner from "../../shared/components/banner/banner";
 import { movieApi, genreApi } from "../../shared/api/api";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;
@@ -25,6 +26,7 @@ export default function MovieClient({ initialData }: MovieClientProps) {
     const [page, setPage] = useState<number>(1);
     const [search, setSearch] = useState("");
     const { language } = useAppContext();
+    const { t } = useTranslation('movie');
 
     const apiCalls = useMemo(
         () => [
@@ -53,19 +55,19 @@ export default function MovieClient({ initialData }: MovieClientProps) {
 
     const buttons = [
         {
-            title: language === "en-US" ? "Now playing" : "Em cartaz",
+            title: t('nowPlaying'),
             route: "/now_playing"
         },
         {
-            title: language === "en-US" ? "Popular" : "Populares",
+            title: t('popular'),
             route: "/popular"
         },
         {
-            title: language === "en-US" ? "Top Rated" : "Melhores Avaliados",
+            title: t('topRated'),
             route: "/top_rated"
         },
         {
-            title: language === "en-US" ? "Upcoming" : "Em breve",
+            title: t('upcoming'),
             route: "/upcoming"
         }
     ];
@@ -104,11 +106,7 @@ export default function MovieClient({ initialData }: MovieClientProps) {
                 <div className="box-search">
                     <input
                         type="search"
-                        placeholder={
-                            language === "en-US"
-                                ? "Search..."
-                                : "Pesquisar..."
-                        }
+                        placeholder={t('searchMovies')}
                         className="focus:outline-none focus:shadow-outline"
                         onChange={(e) => setSearch(e.target.value)}
                     />

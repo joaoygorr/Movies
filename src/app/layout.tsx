@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { AppProvider } from "@/shared/context/context";
 import { ErrorBoundary } from "@/shared/components/errorBoundary/ErrorBoundary";
 import { ServiceWorkerInit } from "@/shared/components/serviceWorkerInit/ServiceWorkerInit";
+import { appWithTranslation } from 'next-i18next';
 
 export const metadata: Metadata = {
     title: "CineScope - Movie & TV Show Discovery",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     themeColor: "#1e40af",
 };
 
-export default function RootLayout({
+function RootLayout({
     children
 }: Readonly<{
     children: React.ReactNode;
@@ -48,6 +49,15 @@ export default function RootLayout({
                         <Header />
                         <SkeletonTheme baseColor="#202020" highlightColor="#444">
                             {children}
+                        </SkeletonTheme>
+                    </AppProvider>
+                </ErrorBoundary>
+            </body>
+        </html>
+    );
+}
+
+export default appWithTranslation(RootLayout);
                         </SkeletonTheme>
                     </AppProvider>
                 </ErrorBoundary>

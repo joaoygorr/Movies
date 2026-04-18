@@ -8,6 +8,7 @@ import Pagination from "@/shared/components/pagination/pagination";
 import { useAppContext } from "@/shared/context/context";
 import { Suspense } from "react";
 import MovieClient from "./MovieClient";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Server component for SSR
 async function getServerSideData(route: string = "/now_playing", page: number = 1) {

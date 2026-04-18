@@ -10,10 +10,12 @@ import { useParams } from "next/navigation";
 import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
 import { useAppContext } from "@/shared/context/context";
 import Image from "next/image";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 export default function CastDetails() {
     const cast = useParams();
     const { language } = useAppContext();
+    const { t } = useTranslation('cast');
 
     const apiCalls = useMemo(
         () => [
@@ -117,7 +119,7 @@ export default function CastDetails() {
                         <span className="ml-2">
                             <i className="pi pi-gift fill-current text-gray-400 hover:text-white w-4" />
                             {formatDate(new Date(details?.birthday!)).modelOne}(
-                            {yearsOld} anos) em {details?.place_of_birth}
+                            {yearsOld} {t('yearsOld')}) em {details?.place_of_birth}
                         </span>
                     </div>
 
@@ -127,7 +129,7 @@ export default function CastDetails() {
 
             <div className="credits border-b border-gray-800">
                 <div className="container mx-auto px-4 py-16">
-                    <h2 className="text-4xl font-semibold">Créditos</h2>
+                    <h2 className="text-4xl font-semibold">{t('credits')}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
                         {filteredDates?.map((c, i) => (
                             <span key={i}>

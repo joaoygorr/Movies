@@ -9,6 +9,7 @@ import "../../styles/home.style.scss";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 import Pagination from "@/shared/components/pagination/pagination";
 import { useAppContext } from "@/shared/context/context";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 type TvShows = {
     genres: { genres: IGenre[] };
@@ -26,6 +27,7 @@ export default function TvShowsClient({ initialData }: TvShowsClientProps) {
     const [page, setPage] = useState<number>(1);
     const [search, setSearch] = useState("");
     const { language } = useAppContext();
+    const { t } = useTranslation('tvshow');
 
     const apiCalls = useMemo(
         () => [
@@ -54,15 +56,15 @@ export default function TvShowsClient({ initialData }: TvShowsClientProps) {
 
     const buttons = [
         {
-            title: language === "en-US" ? "Airing Today" : "No Ar Hoje",
+            title: t('airingToday'),
             route: "/airing_today"
         },
         {
-            title: language === "en-US" ? "Popular" : "Populares",
+            title: t('popular'),
             route: "/popular"
         },
         {
-            title: language === "en-US" ? "Top Rated" : "Melhores Avaliados",
+            title: t('topRated'),
             route: "/top_rated"
         }
     ];
@@ -101,9 +103,7 @@ export default function TvShowsClient({ initialData }: TvShowsClientProps) {
                 <div className="box-search">
                     <input
                         type="search"
-                        placeholder={
-                            language === "en-US" ? "Search..." : "Pesquisar..."
-                        }
+                        placeholder={t('searchTvShows')}
                         className="focus:outline-none focus:shadow-outline"
                         onChange={(e) => setSearch(e.target.value)}
                     />

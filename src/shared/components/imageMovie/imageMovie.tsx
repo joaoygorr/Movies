@@ -4,6 +4,7 @@ import { imageApi } from "../../api/api";
 import { useFetchData } from "../../hook/useFetchData";
 import { IImage } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 import Image from "next/image";
 
 export const ImageMovie = ({
@@ -15,6 +16,7 @@ export const ImageMovie = ({
 }) => {
     imageApi.setUrl(urlApi);
     const { language } = useAppContext();
+    const { t } = useTranslation('common');
 
     const apiCalls = useMemo(
         () => [
@@ -34,7 +36,7 @@ export const ImageMovie = ({
     return (
         <div className="movie-image">
             <div className="container image-box">
-                <h2>{language === "en-US" ? "Images" : "Imagens"}</h2>
+                <h2>{t('images')}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {filteredElements?.map((image, key) => (
                         image.file_path && (

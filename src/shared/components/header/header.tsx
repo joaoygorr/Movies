@@ -4,12 +4,14 @@ import "./header.style.scss";
 import { useAppContext } from "@/shared/context/context";
 import { memo } from "react";
 import Image from "next/image";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 export const Header = memo(() => {
     const { language, handleSetLanguage } = useAppContext();
+    const { t } = useTranslation('header');
+
     const handleToggle = () => {
         const newLanguage = language === "en-US" ? "pt-BR" : "en-US";
-
         handleSetLanguage(newLanguage);
     };
 
@@ -28,7 +30,7 @@ export const Header = memo(() => {
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
                             <Link href={"/"} className="hover:text-gray-300">
-                                {language === "en-US" ? "Movies" : "Filmes"}
+                                {t('movies')}
                             </Link>
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
@@ -36,9 +38,7 @@ export const Header = memo(() => {
                                 href={"/tvShows"}
                                 className="hover:text-gray-300"
                             >
-                                {language === "en-US"
-                                    ? "Shows and Series"
-                                    : "Shows e Séries"}
+                                {t('tvShows')}
                             </Link>
                         </li>
                     </ul>
@@ -57,7 +57,7 @@ export const Header = memo(() => {
                                 priority
                             />
                             <span className="hover:text-gray-300">
-                                {language === "en-US" ? "English" : "Português"}
+                                {language === "en-US" ? t('switchToEnglish') : t('switchToPortuguese')}
                             </span>
                         </div>
                     </div>

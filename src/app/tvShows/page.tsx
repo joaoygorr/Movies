@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import TvShowsClient from "./TvShowsClient";
 import { genreApi, tvShows } from "../../shared/api/api";
 import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Server component for SSR
 async function getServerSideData(route: string = "/airing_today", page: number = 1) {
