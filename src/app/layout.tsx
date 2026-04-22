@@ -7,7 +7,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { AppProvider } from "@/shared/context/context";
 import { ErrorBoundary } from "@/shared/components/errorBoundary/ErrorBoundary";
 import { ServiceWorkerInit } from "@/shared/components/serviceWorkerInit/ServiceWorkerInit";
-import { appWithTranslation } from 'next-i18next';
 
 export const metadata: Metadata = {
     title: "CineScope - Movie & TV Show Discovery",
@@ -57,11 +56,4 @@ function RootLayout({
     );
 }
 
-export default appWithTranslation(RootLayout);
-                        </SkeletonTheme >
-                    </AppProvider >
-                </ErrorBoundary >
-            </body >
-        </html >
-    );
-}
+export default RootLayout;

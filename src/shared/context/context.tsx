@@ -7,7 +7,8 @@ import {
     useState
 } from "react";
 import { castApi, genreApi, imageApi, movieApi, tvShows } from "../api/api";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '../hooks/useTranslation';
+import i18n from '../i18n';
 
 type Props = {
     language: string;
@@ -17,7 +18,6 @@ type Props = {
 const AppContext = createContext<Props>({} as Props);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-    const { i18n } = useTranslation();
     const [language, setLanguage] = useState<string>("pt-BR");
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const savedLanguage = sessionStorage.getItem("language") || i18n.language || "pt-BR";
         setLanguage(savedLanguage);
         i18n.changeLanguage(savedLanguage);
-    }, [i18n]);
+    }, []);
 
     const handleSetLanguage = (value: string) => {
         sessionStorage.setItem("language", value);
@@ -45,13 +45,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
             {children}
         </AppContext.Provider>
     );
-}
-
-return (
-    <AppContext.Provider value={{ language, handleSetLanguage }}>
-        {children}
-    </AppContext.Provider>
-);
 }
 
 export function useAppContext(): Props {

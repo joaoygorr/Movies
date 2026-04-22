@@ -1,5 +1,5 @@
-import { useTranslation as useNextTranslation } from 'next-i18next';
+import { useTranslation as useReactTranslation } from 'react-i18next';
 
 export const useTranslation = (ns?: string) => {
-    return useNextTranslation(ns);
+    return useReactTranslation(ns);
 };
