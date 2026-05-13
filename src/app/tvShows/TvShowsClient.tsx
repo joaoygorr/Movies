@@ -72,7 +72,7 @@ export default function TvShowsClient({ initialData }: TvShowsClientProps) {
     const handleSetValue = (index: number, route: string) => {
         setActiveRoute(route);
         setActiveButton(index);
-        setPage(1); // Reset to first page when changing category
+        setPage(1);
     };
 
     useEffect(() => {

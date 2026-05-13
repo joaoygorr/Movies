@@ -1,16 +1,13 @@
 import { tvShows } from "@/shared/api/api";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Suspense, lazy } from "react";
-import { ITvShow } from "@/shared/interfaces/ITvShow";
 import { formatDate, formatGenres } from "@/shared/utils";
 import "./tvShow.style.scss";
 import Image from "next/image";
 import TvShowDetailsClient from "./TvShowDetailsClient";
 
-const SliderActors = lazy(() => import("@/shared/components/sliderActors/sliderActors").then(module => ({ default: module.SliderActors })));
 const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
 
-// Server component for SSR
 async function getServerSideTvShowData(id: string) {
     try {
         const details = await tvShows.findByTvShow(`${id}?append_to_response=credits,videos`);
@@ -22,7 +19,6 @@ async function getServerSideTvShowData(id: string) {
 }
 
 export default async function TvShowDetails({ params }: { params: { id: string } }) {
-    // Fetch data on server
     const { details } = await getServerSideTvShowData(params.id);
 
     if (!details) {

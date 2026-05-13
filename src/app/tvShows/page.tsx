@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 import TvShowsClient from "./TvShowsClient";
 import { genreApi, tvShows } from "../../shared/api/api";
-import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
 
-// Server component for SSR
 async function getServerSideData(route: string = "/airing_today", page: number = 1) {
     try {
         const [genresResponse, seriesResponse] = await Promise.all([
@@ -25,7 +23,6 @@ async function getServerSideData(route: string = "/airing_today", page: number =
 }
 
 export default async function PageTvShows() {
-    // Fetch initial data on server
     const initialData = await getServerSideData();
 
     return (
@@ -35,8 +32,5 @@ export default async function PageTvShows() {
     );
 }
 
-// Enable ISR (Incremental Static Regeneration)
-export const revalidate = 3600; // Revalidate every hour
-
-// Force dynamic rendering to avoid build-time API calls
+export const revalidate = 3600;
 export const dynamic = 'force-dynamic';

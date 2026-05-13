@@ -75,7 +75,7 @@ export default function MovieClient({ initialData }: MovieClientProps) {
     const handleSetValue = (index: number, route: string) => {
         setActiveRoute(route);
         setActiveButton(index);
-        setPage(1); // Reset to first page when changing category
+        setPage(1);
     };
 
     useEffect(() => {
