@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
-import { Header } from "../shared/components/header/header";
 import "primeicons/primeicons.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { AppProvider } from "@/shared/context/context";
 import { ErrorBoundary } from "@/shared/components/errorBoundary/ErrorBoundary";
 import { ServiceWorkerInit } from "@/shared/components/serviceWorkerInit/ServiceWorkerInit";
+import { Header } from "@/shared/components/header/header";
 
 export const dynamic = 'force-dynamic';
 
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     },
     icons: [
         { rel: "icon", url: "/favicon.ico" },
-        { rel: "apple-touch-icon", url: "/logo-192.png" },
     ],
 };
 

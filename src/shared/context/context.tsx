@@ -19,12 +19,22 @@ const AppContext = createContext<Props>({} as Props);
 
 export function AppProvider({ children }: { children: ReactNode }) {
     const [language, setLanguage] = useState<string>("pt-BR");
+    const [isI18nReady, setIsI18nReady] = useState(false);
 
     useEffect(() => {
-        // Initialize language from i18n or sessionStorage
-        const savedLanguage = sessionStorage.getItem("language") || i18n.language || "pt-BR";
-        setLanguage(savedLanguage);
-        i18n.changeLanguage(savedLanguage);
+        // Wait for i18n to be ready
+        const checkI18nReady = () => {
+            if (i18n.isInitialized) {
+                const savedLanguage = sessionStorage.getItem("language") || i18n.language || "pt-BR";
+                setLanguage(savedLanguage);
+                setIsI18nReady(true);
+            } else {
+                // Retry after a short delay
+                setTimeout(checkI18nReady, 50);
+            }
+        };
+
+        checkI18nReady();
     }, []);
 
     const handleSetLanguage = (value: string) => {
@@ -39,6 +49,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
         imageApi.setLanguage(value);
         tvShows.setLanguage(value);
     };
+
+    // Don't render children until i18n is ready to prevent hydration mismatches
+    if (!isI18nReady) {
+        return null;
+    }
+
+    return (
+        <AppContext.Provider value={{ language, handleSetLanguage }}>
+            {children}
+        </AppContext.Provider>
+    );
 
     return (
         <AppContext.Provider value={{ language, handleSetLanguage }}>

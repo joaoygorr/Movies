@@ -1,18 +1,14 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
-
-// Conditionally import browser detector only on client
-let LanguageDetector;
-if (typeof window !== 'undefined') {
-  LanguageDetector = require('i18next-browser-languagedetector').default;
-}
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
   .use(Backend)
-  .use(LanguageDetector || { type: 'languageDetector', init: () => { }, detect: () => 'pt-BR', cacheUserLanguage: () => { } })
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: 'pt-BR',
     fallbackLng: 'pt-BR',
     debug: process.env.NODE_ENV === 'development',
 
@@ -21,15 +17,24 @@ i18n
     },
 
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      loadPath: typeof window !== 'undefined' 
+        ? `${window.location.origin}/locales/{{lng}}/{{ns}}.json`
+        : '/locales/{{lng}}/{{ns}}.json',
     },
 
-    detection: typeof window !== 'undefined' ? {
+    supportedLngs: ['pt-BR', 'en-US'],
+
+    detection: {
       order: ['cookie', 'localStorage', 'navigator', 'htmlTag'],
       caches: ['cookie', 'localStorage'],
       lookupCookie: 'next-i18next',
       lookupLocalStorage: 'i18nextLng',
-    } : {},
+      convertDetectedLanguage: (lng) => {
+        if (lng === 'pt') return 'pt-BR';
+        if (lng === 'en') return 'en-US';
+        return lng;
+      },
+    },
 
     ns: ['common', 'header', 'movie', 'tvshow', 'cast'],
     defaultNS: 'common',

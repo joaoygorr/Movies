@@ -5,6 +5,7 @@ import { useAppContext } from "@/shared/context/context";
 import { memo } from "react";
 import Image from "next/image";
 import { useTranslation } from "@/shared/hooks/useTranslation";
+import i18n from "@/i18n";
 
 export const Header = memo(() => {
     const { language, handleSetLanguage } = useAppContext();
@@ -14,6 +15,10 @@ export const Header = memo(() => {
         const newLanguage = language === "en-US" ? "pt-BR" : "en-US";
         handleSetLanguage(newLanguage);
     };
+
+    if (!i18n.isInitialized) {
+        return null; // or a loading skeleton
+    }
 
     return (
         <header>
