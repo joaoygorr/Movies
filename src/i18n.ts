@@ -14,7 +14,7 @@ i18n
     supportedLngs: ['pt-BR', 'en-US'],
     load: 'currentOnly',
 
-    debug: process.env.NODE_ENV === 'development',
+    debug: false,
 
     interpolation: {
       escapeValue: false,
