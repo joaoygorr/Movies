@@ -16,7 +16,6 @@ export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
     const abortControllerRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
-        // Cancel previous request
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
         }
@@ -36,14 +35,11 @@ export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
                 });
                 setData(newData as T);
             } catch (error) {
-                // Check if request was cancelled (AbortError or Axios CanceledError)
                 if (error instanceof Error) {
                     if (error.name === 'AbortError' || error.name === 'CanceledError') {
-                        // Request was cancelled, do nothing
                         return;
                     }
                     if (error.message === 'canceled') {
-                        // Axios cancel
                         return;
                     }
                 }

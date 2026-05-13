@@ -17,7 +17,7 @@ export const Header = memo(() => {
     };
 
     if (!i18n.isInitialized) {
-        return null; // or a loading skeleton
+        return null;
     }
 
     return (
@@ -34,7 +34,7 @@ export const Header = memo(() => {
                             </Link>
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
-                            <Link href={"/"} className="hover:text-gray-300">
+                            <Link href={"/movies"} className="hover:text-gray-300">
                                 {t('movies')}
                             </Link>
                         </li>

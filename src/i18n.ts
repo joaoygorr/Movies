@@ -17,12 +17,13 @@ i18n
     },
 
     backend: {
-      loadPath: typeof window !== 'undefined' 
+      loadPath: typeof window !== 'undefined'
         ? `${window.location.origin}/locales/{{lng}}/{{ns}}.json`
         : '/locales/{{lng}}/{{ns}}.json',
     },
 
-    supportedLngs: ['pt-BR', 'en-US'],
+    supportedLngs: ['pt-BR', 'en-US', 'cimode'],
+    nonExplicitSupportedLngs: false,
 
     detection: {
       order: ['cookie', 'localStorage', 'navigator', 'htmlTag'],
@@ -30,8 +31,8 @@ i18n
       lookupCookie: 'next-i18next',
       lookupLocalStorage: 'i18nextLng',
       convertDetectedLanguage: (lng) => {
-        if (lng === 'pt') return 'pt-BR';
-        if (lng === 'en') return 'en-US';
+        if (lng.startsWith('pt')) return 'pt-BR';
+        if (lng.startsWith('en')) return 'en-US';
         return lng;
       },
     },

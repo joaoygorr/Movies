@@ -1,15 +1,8 @@
 import "../../styles/home.style.scss";
-import Banner from "../../shared/components/banner/banner";
 import { genreApi, movieApi } from "../../shared/api/api";
-import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
-import { filterGenres } from "../../shared/utils";
-import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
-import Pagination from "@/shared/components/pagination/pagination";
-import { useAppContext } from "@/shared/context/context";
 import { Suspense } from "react";
 import MovieClient from "./MovieClient";
 
-// Server component for SSR
 async function getServerSideData(route: string = "/now_playing", page: number = 1) {
     try {
         const [moviesResponse, genresResponse] = await Promise.all([
@@ -31,7 +24,6 @@ async function getServerSideData(route: string = "/now_playing", page: number = 
 }
 
 export default async function PageMovies() {
-    // Fetch initial data on server
     const initialData = await getServerSideData();
 
     return (
@@ -43,8 +35,5 @@ export default async function PageMovies() {
     );
 }
 
-// Enable ISR (Incremental Static Regeneration)
-export const revalidate = 3600; // Revalidate every hour
-
-// Force dynamic rendering to avoid build-time API calls
+export const revalidate = 3600;
 export const dynamic = 'force-dynamic';

@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Movie schemas
 const MovieSchema = z.object({
     id: z.number(),
     title: z.string(),
@@ -36,7 +35,6 @@ const MovieDetailsSchema = MovieSchema.extend({
     }).optional(),
 });
 
-// TV Show schemas
 const TVShowSchema = z.object({
     id: z.number(),
     name: z.string(),
@@ -71,7 +69,6 @@ const TVShowDetailsSchema = TVShowSchema.extend({
     }).optional(),
 });
 
-// Actor/Person schemas
 const ActorDetailsSchema = z.object({
     id: z.number(),
     name: z.string(),
@@ -90,7 +87,6 @@ const ActorDetailsSchema = z.object({
     }).optional(),
 });
 
-// Cast/Crew schemas
 const CastSchema = z.object({
     id: z.number(),
     name: z.string(),
@@ -106,7 +102,6 @@ const CastResponseSchema = z.object({
     id: z.number(),
 });
 
-// Genre schemas
 const GenreSchema = z.object({
     id: z.number(),
     name: z.string(),
@@ -116,7 +111,6 @@ const GenreListSchema = z.object({
     genres: z.array(GenreSchema),
 });
 
-// Image schemas
 const ImageSchema = z.object({
     backdrops: z.array(z.object({
         file_path: z.string(),
@@ -137,7 +131,6 @@ const ImageSchema = z.object({
     id: z.number(),
 });
 
-// Video schemas
 const VideoSchema = z.object({
     id: z.string(),
     key: z.string(),
@@ -146,7 +139,6 @@ const VideoSchema = z.object({
     type: z.string(),
 });
 
-// Export validators
 export const validateMovieList = (data: unknown) => MovieListSchema.parse(data);
 export const validateMovieDetails = (data: unknown) => MovieDetailsSchema.parse(data);
 export const validateTVShowList = (data: unknown) => TVShowListSchema.parse(data);
@@ -156,7 +148,6 @@ export const validateCastResponse = (data: unknown) => CastResponseSchema.parse(
 export const validateGenreList = (data: unknown) => GenreListSchema.parse(data);
 export const validateImageData = (data: unknown) => ImageSchema.parse(data);
 
-// Safe parsing (returns result object)
 export const safeValidateMovieList = (data: unknown) => MovieListSchema.safeParse(data);
 export const safeValidateMovieDetails = (data: unknown) => MovieDetailsSchema.safeParse(data);
 export const safeValidateTVShowList = (data: unknown) => TVShowListSchema.safeParse(data);

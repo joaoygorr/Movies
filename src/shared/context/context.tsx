@@ -7,7 +7,6 @@ import {
     useState
 } from "react";
 import { castApi, genreApi, imageApi, movieApi, tvShows } from "../api/api";
-import { useTranslation } from '../hooks/useTranslation';
 import i18n from '../../i18n';
 
 type Props = {
@@ -22,14 +21,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const [isI18nReady, setIsI18nReady] = useState(false);
 
     useEffect(() => {
-        // Wait for i18n to be ready
         const checkI18nReady = () => {
             if (i18n.isInitialized) {
                 const savedLanguage = sessionStorage.getItem("language") || i18n.language || "pt-BR";
                 setLanguage(savedLanguage);
                 setIsI18nReady(true);
             } else {
-                // Retry after a short delay
                 setTimeout(checkI18nReady, 50);
             }
         };
@@ -42,7 +39,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setLanguage(value);
         i18n.changeLanguage(value);
 
-        // Update API instances with new language
         movieApi.setLanguage(value);
         genreApi.setLanguage(value);
         castApi.setLanguage(value);
@@ -50,16 +46,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         tvShows.setLanguage(value);
     };
 
-    // Don't render children until i18n is ready to prevent hydration mismatches
     if (!isI18nReady) {
         return null;
     }
-
-    return (
-        <AppContext.Provider value={{ language, handleSetLanguage }}>
-            {children}
-        </AppContext.Provider>
-    );
 
     return (
         <AppContext.Provider value={{ language, handleSetLanguage }}>
@@ -75,6 +64,5 @@ export function useAppContext(): Props {
             "useAppContext deve ser usado dentro de um AppProvider"
         );
     }
-
     return context;
 }
