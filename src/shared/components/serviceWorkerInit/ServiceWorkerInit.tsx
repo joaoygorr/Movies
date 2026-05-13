@@ -21,7 +21,6 @@ export const ServiceWorkerInit = () => {
                 if ('Notification' in window && Notification.permission === 'granted') {
                     new Notification('CineScope Updated', {
                         body: 'A nova versão está disponível!',
-                        icon: '/logo-192.png',
                     });
                 }
             });

@@ -3,9 +3,7 @@ const OFFLINE_URL = '/offline.html';
 
 const urlsToCache = [
     '/',
-    '/offline.html',
-    '/logo-192.png',
-    '/logo-512.png',
+    '/offline.html'
 ];
 
 self.addEventListener('install', (event) => {
@@ -113,8 +111,6 @@ self.addEventListener('push', (event) => {
     const title = data.title || 'CineScope';
     const options = {
         body: data.body || 'New content available!',
-        icon: '/logo-192.png',
-        badge: '/logo-192.png',
         tag: 'cinescope-notification',
         requireInteraction: false,
     };
