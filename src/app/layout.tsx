@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
 import { Header } from "../shared/components/header/header";
 import "primeicons/primeicons.css";
@@ -24,6 +24,9 @@ export const metadata: Metadata = {
         { rel: "icon", url: "/favicon.ico" },
         { rel: "apple-touch-icon", url: "/logo-192.png" },
     ],
+};
+
+export const viewport: Viewport = {
     themeColor: "#1e40af",
 };
 
