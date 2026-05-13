@@ -67,6 +67,8 @@ export class Api {
     }
 
     async findByMovie(id: string, signal?: AbortSignal): Promise<IMovie> {
+        console.log('apiId, ', id);
+
         return this.getRequest<IMovie>(id, signal);
     }
 

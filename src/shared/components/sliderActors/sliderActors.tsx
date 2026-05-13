@@ -1,3 +1,4 @@
+'use client'
 import "./sliderActors.style.scss";
 import Slider from "react-slick";
 import { ICast, ICastResponse } from "../../interfaces";

@@ -1,3 +1,4 @@
+'use client'
 import { useMemo } from "react";
 import "./imageMovie.style.scss";
 import { imageApi } from "../../api/api";
