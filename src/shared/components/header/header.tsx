@@ -26,7 +26,7 @@ export const Header = memo(() => {
                 <div className="container flex flex-col md:flex-row box-nav gap-3">
                     <ul className="flex flex-col md:flex-row">
                         <li className="md:ml-6 md:mt-0 mt-3 logo">
-                            <Link href={"/"}>
+                            <Link href={"/movie"}>
                                 <i className="pi pi-video" />
                                 <span className="hover:text-gray-300">
                                     CineScope
@@ -34,7 +34,7 @@ export const Header = memo(() => {
                             </Link>
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
-                            <Link href={"/movies"} className="hover:text-gray-300">
+                            <Link href={"/movie"} className="hover:text-gray-300">
                                 {t('movies')}
                             </Link>
                         </li>

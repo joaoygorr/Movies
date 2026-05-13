@@ -18,8 +18,13 @@ async function getServerSideTvShowData(id: string) {
     }
 }
 
-export default async function TvShowDetails({ params }: { params: { id: string } }) {
-    const { details } = await getServerSideTvShowData(params.id);
+export default async function TvShowDetails({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await params;
+    const { details } = await getServerSideTvShowData(id);
 
     if (!details) {
         return <div>TV Show not found</div>;
@@ -70,14 +75,14 @@ export default async function TvShowDetails({ params }: { params: { id: string }
                     <div className="box-button">
                         <div>
                             {details?.videos.results.length! > 0 && (
-                                <TvShowDetailsClient tvShowId={params.id} videos={details.videos} />
+                                <TvShowDetailsClient tvShowId={id} videos={details.videos} />
                             )}
                         </div>
                     </div>
                 </Layout.Details>
             </Layout.Root>
             <Suspense fallback={<div>Loading...</div>}>
-                <ImageMovie param={params.id} urlApi="/tv" />
+                <ImageMovie param={id} urlApi="/tv" />
             </Suspense>
         </div>
     );
