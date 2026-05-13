@@ -8,6 +8,8 @@ import { AppProvider } from "@/shared/context/context";
 import { ErrorBoundary } from "@/shared/components/errorBoundary/ErrorBoundary";
 import { ServiceWorkerInit } from "@/shared/components/serviceWorkerInit/ServiceWorkerInit";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
     title: "CineScope - Movie & TV Show Discovery",
     description: "Discover your favorite movies and TV shows with CineScope",
