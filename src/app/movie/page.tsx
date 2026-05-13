@@ -45,3 +45,6 @@ export default async function PageMovies() {
 
 // Enable ISR (Incremental Static Regeneration)
 export const revalidate = 3600; // Revalidate every hour
+
+// Force dynamic rendering to avoid build-time API calls
+export const dynamic = 'force-dynamic';
