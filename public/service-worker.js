@@ -1,7 +1,6 @@
 const CACHE_NAME = 'cinescope-cache-v1';
 const OFFLINE_URL = '/offline.html';
 
-// Files to cache on install
 const urlsToCache = [
     '/',
     '/offline.html',
@@ -9,7 +8,6 @@ const urlsToCache = [
     '/logo-512.png',
 ];
 
-// Install event
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -22,7 +20,6 @@ self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
@@ -39,19 +36,15 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Fetch event - network first, fallback to cache
 self.addEventListener('fetch', (event) => {
-    // Skip non-GET requests
     if (event.request.method !== 'GET') {
         return;
     }
 
-    // Handle API requests differently
     if (event.request.url.includes('/api/') || event.request.url.includes('tmdb')) {
         event.respondWith(
             fetch(event.request)
                 .then((response) => {
-                    // Cache successful responses
                     if (response.ok) {
                         const cache = caches.open(CACHE_NAME);
                         cache.then((c) => c.put(event.request, response.clone()));
@@ -59,12 +52,10 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 })
                 .catch(() => {
-                    // Return cached response if network fails
                     return caches.match(event.request);
                 })
         );
     } else {
-        // For static assets, use cache first strategy
         event.respondWith(
             caches
                 .match(event.request)
@@ -87,7 +78,6 @@ self.addEventListener('fetch', (event) => {
                             return response;
                         })
                         .catch(() => {
-                            // Return offline page if both cache and network fail
                             if (event.request.mode === 'navigate') {
                                 return caches.match(OFFLINE_URL);
                             }
@@ -104,7 +94,6 @@ self.addEventListener('fetch', (event) => {
     }
 });
 
-// Background sync event (future enhancement)
 self.addEventListener('sync', (event) => {
     if (event.tag === 'sync-favorites') {
         event.waitUntil(syncFavorites());
@@ -113,14 +102,12 @@ self.addEventListener('sync', (event) => {
 
 async function syncFavorites() {
     try {
-        // Implement sync logic here
         console.log('Syncing favorites...');
     } catch (error) {
         console.error('Sync failed:', error);
     }
 }
 
-// Push notification event (future enhancement)
 self.addEventListener('push', (event) => {
     const data = event.data?.json() ?? {};
     const title = data.title || 'CineScope';
