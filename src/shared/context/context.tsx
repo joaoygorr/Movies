@@ -8,7 +8,7 @@ import {
 } from "react";
 import { castApi, genreApi, imageApi, movieApi, tvShows } from "../api/api";
 import { useTranslation } from '../hooks/useTranslation';
-import i18n from '../i18n';
+import i18n from '../../i18n';
 
 type Props = {
     language: string;
