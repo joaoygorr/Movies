@@ -2,7 +2,7 @@
     "name": "CineScope - Movie & TV Show Discovery",
     "short_name": "CineScope",
     "description": "Discover your favorite movies and TV shows with CineScope. Powered by TMDB API.",
-    "start_url": "/",
+    "start_url": "/movie",
     "display": "standalone",
     "background_color": "#111827",
     "theme_color": "#1e40af",

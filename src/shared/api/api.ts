@@ -22,7 +22,6 @@ const createApiInstance = (url: string): AxiosInstance => {
 };
 
 const handleApiError = (error: any): never => {
-    // Don't log canceled requests
     if (error?.message !== 'canceled' && error?.code !== 'ERR_CANCELED') {
         console.error('API Error:', error);
     }
