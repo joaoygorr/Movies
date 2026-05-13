@@ -14,10 +14,10 @@
     "dependencies": {
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
-        "axios": "^1.15.0",
+        "axios": "^1.15.2",
         "i18next": "^26.0.6",
         "jquery": "^4.0.0",
-        "next": "^16.2.4",
+        "next": "^16.2.6",
         "next-i18next": "^16.0.5",
         "primeicons": "^7.0.0",
         "react": "^19.2.5",
