@@ -1,7 +1,7 @@
 "use client";
 import { castApi } from "@/shared/api/api";
 import { Layout } from "@/shared/components/layoutComponent";
-import { useFetchData } from "@/shared/hook/useFetchData";
+import { useFetchData } from "@/shared/hooks/useFetchData";
 import { IActorDetails } from "@/shared/interfaces";
 import { formatDate } from "@/shared/utils";
 import { useEffect, useMemo, useState } from "react";

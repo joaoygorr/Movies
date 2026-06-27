@@ -1,4 +1,6 @@
+"use client";
 import { IListMovie, IListTvShows, IResponse } from "@/shared/interfaces";
+import { useTranslation } from "@/shared/hooks/useTranslation";
 
 type Props = {
     dataPage?: IResponse<IListMovie[] | IListTvShows[]>;
@@ -13,6 +15,8 @@ export default function Pagination({
     dataPage,
     onPageChange
 }: Props) {
+    const { t } = useTranslation('common');
+
     if (!dataPage) return;
 
     const lastPage = Math.min(dataPage?.total_pages ?? 1, 500);
@@ -40,12 +44,12 @@ export default function Pagination({
     return (
         <div className="pagination text-zinc-500">
             <span>
-                Exibindo {totalItemShow} de {dataPage?.results.length} itens
+                {t('showing')} {totalItemShow} {t('of')} {dataPage?.results.length} {t('items')}
             </span>
 
             <div className="pagination-body">
                 <div className="select-items">
-                    <span>Itens</span>
+                    <span>{t('itemsPerPage')}</span>
 
                     <select onChange={(e) => onSet(Number(e.target.value))}>
                         <option value="10">10</option>
@@ -55,7 +59,7 @@ export default function Pagination({
                 </div>
 
                 <span className="hidden lg:block">
-                    Página {dataPage?.page} de {lastPage}
+                    {t('pageOf', { current: dataPage?.page, total: lastPage })}
                 </span>
 
                 <div className="arrows space-x-1.5">
@@ -64,7 +68,7 @@ export default function Pagination({
                         onClick={goToFirsPage}
                     >
                         <i className="pi pi-angle-double-left" />
-                        <span className="sr-only">First page</span>
+                        <span className="sr-only">{t('page')} 1</span>
                     </button>
 
                     <button
@@ -72,11 +76,11 @@ export default function Pagination({
                         onClick={goToPreviousPage}
                     >
                         <i className="pi pi-angle-left" />
-                        <span className="sr-only">Previous page</span>
+                        <span className="sr-only">{t('previous')}</span>
                     </button>
 
                     <span className="lg:hidden">
-                        {dataPage?.page} de {lastPage}
+                        {dataPage?.page} {t('of')} {lastPage}
                     </span>
 
                     <button
@@ -84,7 +88,7 @@ export default function Pagination({
                         onClick={goToNextPage}
                     >
                         <i className="pi pi-angle-right" />
-                        <span className="sr-only">Next page</span>
+                        <span className="sr-only">{t('next')}</span>
                     </button>
 
                     <button
@@ -92,7 +96,7 @@ export default function Pagination({
                         onClick={goToLastPage}
                     >
                         <i className="pi pi-angle-double-right" />
-                        <span className="sr-only">Last page</span>
+                        <span className="sr-only">{t('page')} {lastPage}</span>
                     </button>
                 </div>
             </div>
