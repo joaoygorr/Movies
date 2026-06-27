@@ -1,4 +1,3 @@
-import "../../styles/home.style.scss";
 import { genreApi, movieApi } from "../../shared/api/api";
 import { Suspense } from "react";
 import MovieClient from "./MovieClient";
