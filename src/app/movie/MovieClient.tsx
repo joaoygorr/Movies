@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
-import { useFetchData } from "../../shared/hook/useFetchData";
+import { useFetchData } from "../../shared/hooks/useFetchData";
 import { filterGenres } from "../../shared/utils";
 import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
 import Pagination from "@/shared/components/pagination/pagination";
