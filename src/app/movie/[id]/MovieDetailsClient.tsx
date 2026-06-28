@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Modal } from "@/shared/components/modal/modal";
-import { IVideo } from "@/shared/interfaces";
+import { Modal } from "@/components/modal/modal";
+import { IVideo } from "@/types";
 
 type MovieDetailsClientProps = {
     movieId: string;

@@ -1,7 +1,7 @@
-import { formatDate } from "@/shared/utils";
+import { formatDate } from "@/utils";
 import "./banner.style.scss";
 import Link from "next/link";
-import { IListMovie, IListTvShows } from "../../interfaces";
+import { IListMovie, IListTvShows } from "@/types";
 import { memo } from "react";
 import Image from "next/image";
 
@@ -19,7 +19,7 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
     return (
         <div className="movie">
             <Link
-                href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id}`}
+                href={`/${"title" in prop ? "movie" : "tv-shows"}/${prop?.id}`}
                 aria-label={`Ver detalhes de ${title}`}
             >
                 {prop?.poster_path ? (
@@ -35,7 +35,7 @@ function BannerComponent<T extends IListMovie | IListTvShows>({
             </Link>
             <div className="detail-movie">
                 <Link
-                    href={`/${"title" in prop ? "movie" : "tvShows"}/${prop?.id
+                    href={`/${"title" in prop ? "movie" : "tv-shows"}/${prop?.id
                         }`}
                     className="title-movie"
                 >

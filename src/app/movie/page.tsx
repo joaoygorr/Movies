@@ -1,4 +1,4 @@
-import { genreApi, movieApi } from "../../shared/api/api";
+import { genreApi, movieApi } from "@/lib/api";
 import { Suspense } from "react";
 import MovieClient from "./MovieClient";
 

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import TvShowsClient from "./TvShowsClient";
-import { genreApi, tvShowsApi } from "../../shared/api/api";
+import { genreApi, tvShowsApi } from "@/lib/api";
 
 async function getServerSideData(route: string = "/airing_today", page: number = 1) {
     try {

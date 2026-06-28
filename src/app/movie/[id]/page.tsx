@@ -1,11 +1,11 @@
-import { formatDate, formatGenres, returnHours } from "@/shared/utils";
+import { formatDate, formatGenres, returnHours } from "@/utils";
 import "./movie.style.scss";
-import { Layout } from "@/shared/components/layoutComponent";
-import { movieApi } from "@/shared/api/api";
+import { Layout } from "@/components/layoutComponent";
+import { movieApi } from "@/lib/api";
 import Image from "next/image";
 import MovieDetailsClient from "./MovieDetailsClient";
-import { SliderActors } from "@/shared/components/sliderActors/sliderActors";
-import { ImageMovie } from "@/shared/components/imageMovie/imageMovie";
+import { SliderActors } from "@/components/sliderActors/sliderActors";
+import { ImageMovie } from "@/components/imageMovie/imageMovie";
 
 async function getServerSideMovieData(id: string) {
     try {

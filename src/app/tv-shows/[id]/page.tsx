@@ -1,12 +1,12 @@
-import { tvShowsApi } from "@/shared/api/api";
-import { Layout } from "@/shared/components/layoutComponent";
+import { tvShowsApi } from "@/lib/api";
+import { Layout } from "@/components/layoutComponent";
 import { Suspense, lazy } from "react";
-import { formatDate, formatGenres } from "@/shared/utils";
+import { formatDate, formatGenres } from "@/utils";
 import "./tvShow.style.scss";
 import Image from "next/image";
 import TvShowDetailsClient from "./TvShowDetailsClient";
 
-const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
+const ImageMovie = lazy(() => import("@/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
 
 async function getServerSideTvShowData(id: string) {
     try {

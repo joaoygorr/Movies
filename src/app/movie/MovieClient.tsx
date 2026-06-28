@@ -1,9 +1,9 @@
 "use client";
 import { useMemo } from "react";
-import { IGenre, IListMovie, IResponse } from "../../shared/interfaces";
-import { movieApi, genreApi } from "../../shared/api/api";
-import { useTranslation } from "@/shared/hooks/useTranslation";
-import MediaListClient from "@/shared/components/mediaList/MediaListClient";
+import { IGenre, IListMovie, IResponse } from "@/types";
+import { movieApi, genreApi } from "@/lib/api";
+import { useTranslation } from "@/hooks/useTranslation";
+import MediaListClient from "@/components/mediaList/MediaListClient";
 
 type Movies = {
     movies: IResponse<IListMovie[]>;

@@ -1,16 +1,16 @@
 "use client";
-import { castApi } from "@/shared/api/api";
-import { Layout } from "@/shared/components/layoutComponent";
-import { useFetchData } from "@/shared/hooks/useFetchData";
-import { IActorDetails } from "@/shared/interfaces";
-import { formatDate } from "@/shared/utils";
+import { castApi } from "@/lib/api";
+import { Layout } from "@/components/layoutComponent";
+import { useFetchData } from "@/hooks/useFetchData";
+import { IActorDetails } from "@/types";
+import { formatDate } from "@/utils";
 import { useEffect, useMemo, useState } from "react";
 import "./cast.style.scss";
 import { useParams } from "next/navigation";
-import { SkeletonDetailsActors } from "@/shared/components/skeletonLoading";
-import { useAppContext } from "@/shared/context/context";
+import { SkeletonDetailsActors } from "@/components/skeletonLoading";
+import { useAppContext } from "@/context/context";
 import Image from "next/image";
-import { useTranslation } from "@/shared/hooks/useTranslation";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function CastDetails() {
     const cast = useParams();

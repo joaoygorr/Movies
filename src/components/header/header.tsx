@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import "./header.style.scss";
-import { useAppContext } from "@/shared/context/context";
+import { useAppContext } from "@/context/context";
 import { memo } from "react";
 import Image from "next/image";
-import { useTranslation } from "@/shared/hooks/useTranslation";
-import i18n from "@/i18n";
+import { useTranslation } from "@/hooks/useTranslation";
+import i18n from "@/lib/i18n";
 
 export const Header = memo(() => {
     const { language, handleSetLanguage } = useAppContext();
@@ -40,7 +40,7 @@ export const Header = memo(() => {
                         </li>
                         <li className="md:ml-6 md:mt-0 mt-3">
                             <Link
-                                href={"/tvShows"}
+                                href={"/tv-shows"}
                                 className="hover:text-gray-300"
                             >
                                 {t('tvShows')}

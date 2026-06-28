@@ -1,11 +1,11 @@
 'use client'
 import { useMemo } from "react";
 import "./imageMovie.style.scss";
-import { Api } from "../../api/api";
-import { useFetchData } from "../../hooks/useFetchData";
-import { IImage } from "../../interfaces";
-import { useAppContext } from "@/shared/context/context";
-import { useTranslation } from "@/shared/hooks/useTranslation";
+import { Api } from "@/lib/api";
+import { useFetchData } from "@/hooks/useFetchData";
+import { IImage } from "@/types";
+import { useAppContext } from "@/context/context";
+import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
 
 export const ImageMovie = ({

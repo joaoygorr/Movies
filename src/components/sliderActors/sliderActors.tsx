@@ -1,8 +1,8 @@
 'use client'
 import "./sliderActors.style.scss";
 import Slider from "react-slick";
-import { ICast, ICastResponse } from "../../interfaces";
-import { useTranslation } from "@/shared/hooks/useTranslation";
+import { ICast, ICastResponse } from "@/types";
+import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
 import { memo } from "react";
 
