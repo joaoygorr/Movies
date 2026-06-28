@@ -11,7 +11,7 @@ export async function GET(
     const endpoint = "/" + path.join("/");
     const searchParams = request.nextUrl.searchParams;
 
-    const url = new URL(endpoint, TMDB_BASE_URL);
+    const url = new URL(TMDB_BASE_URL + endpoint);
     searchParams.forEach((value, key) => {
         url.searchParams.set(key, value);
     });
