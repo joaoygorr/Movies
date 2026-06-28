@@ -1,35 +1,81 @@
 .box-nav {
-    margin: auto;
-    padding: 1.5rem 1rem;
-    justify-content: space-between;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: auto;
 
-    ul {
+    .nav-left {
+        display: flex;
         align-items: center;
+        gap: 1.5rem;
 
         .logo {
-            a {
-                display: flex;
-                align-items: center;
-                gap: .5rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-weight: 600;
 
-                .pi-video {
-                    font-size: 2rem;
-                    color: #f97316;
-                }
+            .pi-video {
+                font-size: 1.5rem;
+                color: #f97316;
             }
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
         }
     }
 
-    .language {
+    .language-toggle {
+        display: flex;
         align-items: center;
+        gap: .4rem;
+        padding: .4rem .8rem;
+        border-radius: .5rem;
+        background-color: #1f2937;
+        cursor: pointer;
+        transition: background-color 150ms ease-in-out;
 
-        .selected-languages {
-            display: flex;
-            align-items: center;
-            gap: .3rem;
-            cursor: pointer;
+        &:hover {
+            background-color: #374151;
         }
 
+        .language-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .box-nav {
+        padding: .75rem 1rem;
+
+        .nav-left {
+            gap: 1rem;
+
+            .logo {
+                span {
+                    display: none;
+                }
+
+                .pi-video {
+                    font-size: 1.3rem;
+                }
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+            }
+        }
+
+        .language-toggle {
+            padding: .3rem .6rem;
+
+            .language-label {
+                font-size: 0.75rem;
+            }
+        }
     }
 }

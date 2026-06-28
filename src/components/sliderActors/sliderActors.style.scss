@@ -59,12 +59,21 @@
         .cast-box {
             text-align: center;
 
+            h2 {
+                font-size: 1.5rem;
+            }
+
             .slider-box {
                 .cast {
                     display: flex !important;
                     flex-direction: column !important;
                     align-items: center !important;
                     justify-content: center !important;
+
+                    .cast-image-wrapper {
+                        width: 160px;
+                        height: 240px;
+                    }
 
                     a {
                         text-decoration: underline;

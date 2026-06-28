@@ -23,49 +23,37 @@ export const Header = memo(() => {
     return (
         <header>
             <nav className="border-b border-gray-800" aria-label="Navegação principal">
-                <div className="container flex flex-col md:flex-row box-nav gap-3">
-                    <ul className="flex flex-col md:flex-row">
-                        <li className="md:ml-6 md:mt-0 mt-3 logo">
-                            <Link href={"/movie"}>
-                                <i className="pi pi-video" />
-                                <span className="hover:text-gray-300">
-                                    CineScope
-                                </span>
-                            </Link>
-                        </li>
-                        <li className="md:ml-6 md:mt-0 mt-3">
-                            <Link href={"/movie"} className="hover:text-gray-300">
-                                {t('movies')}
-                            </Link>
-                        </li>
-                        <li className="md:ml-6 md:mt-0 mt-3">
-                            <Link
-                                href={"/tv-shows"}
-                                className="hover:text-gray-300"
-                            >
-                                {t('tvShows')}
-                            </Link>
-                        </li>
-                    </ul>
-
-                    <div className="language">
-                        <div
-                            className="selected-languages"
-                            onClick={handleToggle}
-                        >
-                            <Image
-                                src={`https://flagsapi.com/${language === "en-US" ? "US" : "BR"
-                                    }/flat/32.png`}
-                                alt="Language flag"
-                                width={32}
-                                height={32}
-                                priority
-                            />
-                            <span className="hover:text-gray-300">
-                                {language === "en-US" ? t('switchToEnglish') : t('switchToPortuguese')}
-                            </span>
-                        </div>
+                <div className="container box-nav">
+                    <div className="nav-left">
+                        <Link href={"/movie"} className="logo">
+                            <i className="pi pi-video" />
+                            <span>CineScope</span>
+                        </Link>
+                        <Link href={"/movie"} className="nav-link hover:text-gray-300">
+                            {t('movies')}
+                        </Link>
+                        <Link href={"/tv-shows"} className="nav-link hover:text-gray-300">
+                            {t('tvShows')}
+                        </Link>
                     </div>
+
+                    <button
+                        className="language-toggle"
+                        onClick={handleToggle}
+                        aria-label="Trocar idioma"
+                        type="button"
+                    >
+                        <Image
+                            src={`https://flagsapi.com/${language === "en-US" ? "US" : "BR"}/flat/24.png`}
+                            alt="Language flag"
+                            width={24}
+                            height={24}
+                            priority
+                        />
+                        <span className="language-label">
+                            {language === "en-US" ? "EN" : "PT"}
+                        </span>
+                    </button>
                 </div>
             </nav>
         </header>
