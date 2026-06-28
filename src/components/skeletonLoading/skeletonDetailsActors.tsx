@@ -1,3 +1,4 @@
+"use client";
 import { Layout } from "../layoutComponent";
 import Skeleton from "react-loading-skeleton";
 

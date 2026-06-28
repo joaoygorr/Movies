@@ -21,14 +21,29 @@ import {
 
 const DEFAULT_LANGUAGE = "pt-BR";
 
+const getBaseUrl = (url: string) => {
+    if (typeof window !== "undefined") {
+        // Client-side: usa o proxy route handler pra não expor o token
+        return "/api/tmdb" + url;
+    }
+    // Server-side: chama a TMDB diretamente (token seguro no servidor)
+    return (process.env.TMDB_BASE_URL || "https://api.themoviedb.org/3") + url;
+};
+
+const getHeaders = () => {
+    if (typeof window !== "undefined") {
+        return { Accept: "application/json" };
+    }
+    return {
+        Accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_READ_API_TOKEN}`
+    };
+};
+
 const createApiInstance = (url: string): AxiosInstance => {
     return axios.create({
-        baseURL: process.env.NEXT_PUBLIC_URL + url,
-
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_READ_API}`
-        }
+        baseURL: getBaseUrl(url),
+        headers: getHeaders()
     });
 };
 
@@ -47,7 +62,7 @@ const logValidationWarning = (context: string, errors: unknown) => {
     }
 };
 
-type RequestOptions = {
+export type RequestOptions = {
     signal?: AbortSignal;
     language?: string;
 };

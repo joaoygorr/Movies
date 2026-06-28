@@ -1,6 +1,4 @@
-﻿const path = require('path');
-
-const nextConfig = {
+﻿const nextConfig = {
   images: {
     remotePatterns: [
       {

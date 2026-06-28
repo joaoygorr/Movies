@@ -1,5 +1,4 @@
 import { genreApi, movieApi } from "@/lib/api";
-import { Suspense } from "react";
 import MovieClient from "./MovieClient";
 
 async function getServerSideData(route: string = "/now_playing", page: number = 1) {
@@ -27,9 +26,7 @@ export default async function PageMovies() {
 
     return (
         <main>
-            <Suspense fallback={<div>Loading...</div>}>
-                <MovieClient initialData={initialData} />
-            </Suspense>
+            <MovieClient initialData={initialData} />
         </main>
     );
 }

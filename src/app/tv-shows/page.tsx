@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import TvShowsClient from "./TvShowsClient";
 import { genreApi, tvShowsApi } from "@/lib/api";
 
@@ -25,11 +24,7 @@ async function getServerSideData(route: string = "/airing_today", page: number =
 export default async function PageTvShows() {
     const initialData = await getServerSideData();
 
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <TvShowsClient initialData={initialData} />
-        </Suspense>
-    );
+    return <TvShowsClient initialData={initialData} />;
 }
 
 export const dynamic = 'force-dynamic';
