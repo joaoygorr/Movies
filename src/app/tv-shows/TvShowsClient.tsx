@@ -1,9 +1,9 @@
 "use client";
 import { useMemo } from "react";
-import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
-import { genreApi, tvShowsApi } from "../../shared/api/api";
-import { useTranslation } from "@/shared/hooks/useTranslation";
-import MediaListClient from "@/shared/components/mediaList/MediaListClient";
+import { IGenre, IResponse, IListTvShows } from "@/types";
+import { genreApi, tvShowsApi } from "@/lib/api";
+import { useTranslation } from "@/hooks/useTranslation";
+import MediaListClient from "@/components/mediaList/MediaListClient";
 
 type TvShows = {
     genres: { genres: IGenre[] };

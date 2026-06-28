@@ -6,9 +6,9 @@ import {
     IActorDetails,
     IListTvShows,
     IGenre
-} from "@/shared/interfaces";
+} from "@/types";
 import axios, { AxiosInstance } from "axios";
-import { ITvShow } from "../interfaces/ITvShow";
+import { ITvShow } from "@/types/ITvShow";
 import {
     safeValidateMovieList,
     safeValidateMovieDetails,
@@ -17,7 +17,7 @@ import {
     safeValidateActorDetails,
     safeValidateGenreList,
     safeValidateImageData
-} from "@/shared/validators/validators";
+} from "@/lib/validators";
 
 const DEFAULT_LANGUAGE = "pt-BR";
 

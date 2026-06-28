@@ -1,6 +1,6 @@
 "use client";
-import { IListMovie, IListTvShows, IResponse } from "@/shared/interfaces";
-import { useTranslation } from "@/shared/hooks/useTranslation";
+import { IListMovie, IListTvShows, IResponse } from "@/types";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type Props = {
     dataPage?: IResponse<IListMovie[] | IListTvShows[]>;

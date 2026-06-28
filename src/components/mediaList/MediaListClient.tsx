@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { IGenre, IListMovie, IListTvShows, IResponse } from "../../interfaces";
-import { useFetchData } from "../../hooks/useFetchData";
-import { filterGenres } from "../../utils";
-import SkeletonBanner from "@/shared/components/skeletonLoading/skeletonBanner";
-import Pagination from "@/shared/components/pagination/pagination";
-import { useAppContext } from "@/shared/context/context";
-import Banner from "../../components/banner/banner";
-import "../../../styles/home.style.scss";
+import { IGenre, IListMovie, IListTvShows, IResponse } from "@/types";
+import { useFetchData } from "@/hooks/useFetchData";
+import { filterGenres } from "@/utils";
+import SkeletonBanner from "@/components/skeletonLoading/skeletonBanner";
+import Pagination from "@/components/pagination/pagination";
+import { useAppContext } from "@/context/context";
+import Banner from "@/components/banner/banner";
+import "./mediaList.style.scss";
 
 type MediaItem = IListMovie | IListTvShows;
 
