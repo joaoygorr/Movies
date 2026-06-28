@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 
-type ApiCall<K extends string, V> = {
-    key: K;
-    call: (signal?: AbortSignal) => Promise<V>;
+type ApiCall = {
+    key: string;
+    call: (signal?: AbortSignal) => Promise<unknown>;
 };
 
-type ApiCallEntry = ApiCall<string, unknown>;
-
 export const useFetchData = <T extends Record<string, unknown>>(
-    apiCalls: { [K in keyof T]: ApiCall<K & string, T[K]> }[keyof T][]
+    apiCalls: ApiCall[]
 ) => {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -26,13 +24,12 @@ export const useFetchData = <T extends Record<string, unknown>>(
         const fetchData = async () => {
             setLoading(true);
             try {
-                const calls = apiCalls as ApiCallEntry[];
                 const results = await Promise.all(
-                    calls.map((api) => api.call(abortController.signal))
+                    apiCalls.map((api) => api.call(abortController.signal))
                 );
                 const newData = {} as Record<string, unknown>;
                 results.forEach((result, index) => {
-                    newData[calls[index].key] = result;
+                    newData[apiCalls[index].key] = result;
                 });
                 setData(newData as T);
             } catch (error) {
