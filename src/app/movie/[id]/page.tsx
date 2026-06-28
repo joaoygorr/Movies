@@ -1,3 +1,6 @@
+"use client";
+import { useMemo } from "react";
+import { useParams } from "next/navigation";
 import { formatDate, formatGenres, returnHours } from "@/utils";
 import "./movie.style.scss";
 import { Layout } from "@/components/layoutComponent";
@@ -6,28 +9,35 @@ import Image from "next/image";
 import MovieDetailsClient from "./MovieDetailsClient";
 import { SliderActors } from "@/components/sliderActors/sliderActors";
 import { ImageMovie } from "@/components/imageMovie/imageMovie";
+import { useFetchData } from "@/hooks/useFetchData";
+import { useAppContext } from "@/context/context";
+import { IMovie } from "@/types";
+import { SkeletonDetails } from "@/components/skeletonLoading";
 
-async function getServerSideMovieData(id: string) {
-    try {
-        const details = await movieApi.findByMovie(
-            `${id}?append_to_response=credits,videos`
-        );
-        return { details };
-    } catch (error) {
-        console.error("Erro ao buscar filme:", error);
-        return { details: null };
+export default function MovieDetails() {
+    const { id } = useParams<{ id: string }>();
+    const { language } = useAppContext();
+
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "details",
+                call: (signal?: AbortSignal) =>
+                    movieApi.findByMovie(
+                        `${id}?append_to_response=credits,videos`,
+                        { signal, language }
+                    )
+            }
+        ],
+        [id, language]
+    );
+
+    const { data, loading } = useFetchData<{ details: IMovie }>(apiCalls);
+    const details = data?.details;
+
+    if (loading || !details) {
+        return <SkeletonDetails />;
     }
-}
-
-export default async function MovieDetails({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
-    const { details } = await getServerSideMovieData(id);
-
-    if (!details) return <div>Movie not found</div>;
 
     return (
         <div>
@@ -39,7 +49,7 @@ export default async function MovieDetails({
                                 "https://image.tmdb.org/t/p/w500" +
                                 details.poster_path
                             }
-                            alt="poster movie"
+                            alt={`Pôster de ${details.title}`}
                             width={384}
                             height={576}
                             className="w-64 lg:w-96"
@@ -60,10 +70,7 @@ export default async function MovieDetails({
                         <span className="mx-2">|</span>
 
                         <span>
-                            {
-                                formatDate(new Date(details.release_date))
-                                    .modelOne
-                            }
+                            {formatDate(new Date(details.release_date)).modelOne}
                         </span>
 
                         <span className="mx-2">|</span>
@@ -94,7 +101,6 @@ export default async function MovieDetails({
                 </Layout.Details>
             </Layout.Root>
 
-            {/* 👇 CLIENT COMPONENTS PUROS */}
             <SliderActors data={details.credits} />
             <ImageMovie param={id} urlApi="/movie" />
         </div>
