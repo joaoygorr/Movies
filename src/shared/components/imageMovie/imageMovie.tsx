@@ -1,8 +1,8 @@
 'use client'
 import { useMemo } from "react";
 import "./imageMovie.style.scss";
-import { imageApi } from "../../api/api";
-import { useFetchData } from "../../hook/useFetchData";
+import { Api } from "../../api/api";
+import { useFetchData } from "../../hooks/useFetchData";
 import { IImage } from "../../interfaces";
 import { useAppContext } from "@/shared/context/context";
 import { useTranslation } from "@/shared/hooks/useTranslation";
@@ -15,18 +15,19 @@ export const ImageMovie = ({
     param: string;
     urlApi: string;
 }) => {
-    imageApi.setUrl(urlApi);
     const { language } = useAppContext();
     const { t } = useTranslation('common');
+
+    const api = useMemo(() => new Api(urlApi), [urlApi]);
 
     const apiCalls = useMemo(
         () => [
             {
                 key: "posters",
-                call: (signal?: AbortSignal) => imageApi.findImagesMovie(param, "images", signal)
+                call: (signal?: AbortSignal) => api.findImagesMovie(param, "images", { signal, language })
             }
         ],
-        [param, language]
+        [param, language, api]
     );
 
     const { data } = useFetchData<{ posters: IImage }>(apiCalls);

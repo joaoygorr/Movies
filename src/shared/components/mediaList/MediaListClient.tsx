@@ -16,9 +16,14 @@ type ButtonConfig = {
     route: string;
 };
 
+type RequestOptions = {
+    signal?: AbortSignal;
+    language?: string;
+};
+
 type ApiCallConfig = {
-    mediaCall: (route: string, page: number, signal?: AbortSignal) => Promise<IResponse<MediaItem[]>>;
-    genreCall: (signal?: AbortSignal) => Promise<{ genres: IGenre[] }>;
+    mediaCall: (route: string, page: number, options?: RequestOptions) => Promise<IResponse<MediaItem[]>>;
+    genreCall: (options?: RequestOptions) => Promise<{ genres: IGenre[] }>;
 };
 
 type MediaListData = {
@@ -57,11 +62,11 @@ export default function MediaListClient({
         () => [
             {
                 key: "media",
-                call: (signal?: AbortSignal) => apiConfig.mediaCall(activeRoute, page, signal)
+                call: (signal?: AbortSignal) => apiConfig.mediaCall(activeRoute, page, { signal, language })
             },
             {
                 key: "genres",
-                call: (signal?: AbortSignal) => apiConfig.genreCall(signal)
+                call: (signal?: AbortSignal) => apiConfig.genreCall({ signal, language })
             }
         ],
         [activeRoute, page, language, apiConfig]

@@ -6,7 +6,6 @@ import {
     useEffect,
     useState
 } from "react";
-import { castApi, genreApi, imageApi, movieApi, tvShows } from "../api/api";
 import i18n from '../../i18n';
 
 type Props = {
@@ -38,12 +37,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         sessionStorage.setItem("language", value);
         setLanguage(value);
         i18n.changeLanguage(value);
-
-        movieApi.setLanguage(value);
-        genreApi.setLanguage(value);
-        castApi.setLanguage(value);
-        imageApi.setLanguage(value);
-        tvShows.setLanguage(value);
     };
 
     if (!isI18nReady) {
