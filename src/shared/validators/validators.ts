@@ -131,23 +131,6 @@ const ImageSchema = z.object({
     id: z.number(),
 });
 
-const VideoSchema = z.object({
-    id: z.string(),
-    key: z.string(),
-    name: z.string(),
-    site: z.string(),
-    type: z.string(),
-});
-
-export const validateMovieList = (data: unknown) => MovieListSchema.parse(data);
-export const validateMovieDetails = (data: unknown) => MovieDetailsSchema.parse(data);
-export const validateTVShowList = (data: unknown) => TVShowListSchema.parse(data);
-export const validateTVShowDetails = (data: unknown) => TVShowDetailsSchema.parse(data);
-export const validateActorDetails = (data: unknown) => ActorDetailsSchema.parse(data);
-export const validateCastResponse = (data: unknown) => CastResponseSchema.parse(data);
-export const validateGenreList = (data: unknown) => GenreListSchema.parse(data);
-export const validateImageData = (data: unknown) => ImageSchema.parse(data);
-
 export const safeValidateMovieList = (data: unknown) => MovieListSchema.safeParse(data);
 export const safeValidateMovieDetails = (data: unknown) => MovieDetailsSchema.safeParse(data);
 export const safeValidateTVShowList = (data: unknown) => TVShowListSchema.safeParse(data);
