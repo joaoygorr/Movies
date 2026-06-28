@@ -1,33 +1,41 @@
-import { tvShowsApi } from "@/lib/api";
-import { Layout } from "@/components/layoutComponent";
-import { Suspense, lazy } from "react";
+"use client";
+import { useMemo } from "react";
+import { useParams } from "next/navigation";
 import { formatDate, formatGenres } from "@/utils";
 import "./tvShow.style.scss";
+import { Layout } from "@/components/layoutComponent";
+import { tvShowsApi } from "@/lib/api";
 import Image from "next/image";
 import TvShowDetailsClient from "./TvShowDetailsClient";
+import { ImageMovie } from "@/components/imageMovie/imageMovie";
+import { useFetchData } from "@/hooks/useFetchData";
+import { useAppContext } from "@/context/context";
+import { ITvShow } from "@/types/ITvShow";
+import { SkeletonDetails } from "@/components/skeletonLoading";
 
-const ImageMovie = lazy(() => import("@/components/imageMovie/imageMovie").then(module => ({ default: module.ImageMovie })));
+export default function TvShowDetails() {
+    const { id } = useParams<{ id: string }>();
+    const { language } = useAppContext();
 
-async function getServerSideTvShowData(id: string) {
-    try {
-        const details = await tvShowsApi.findByTvShow(`${id}?append_to_response=credits,videos`);
-        return { details };
-    } catch (error) {
-        console.error("Error fetching TV show details:", error);
-        return { details: null };
-    }
-}
+    const apiCalls = useMemo(
+        () => [
+            {
+                key: "details",
+                call: (signal?: AbortSignal) =>
+                    tvShowsApi.findByTvShow(
+                        `${id}?append_to_response=credits,videos`,
+                        { signal, language }
+                    )
+            }
+        ],
+        [id, language]
+    );
 
-export default async function TvShowDetails({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
-    const { details } = await getServerSideTvShowData(id);
+    const { data, loading } = useFetchData<{ details: ITvShow }>(apiCalls);
+    const details = data?.details;
 
-    if (!details) {
-        return <div>TV Show not found</div>;
+    if (loading || !details) {
+        return <SkeletonDetails />;
     }
 
     return (
@@ -38,9 +46,9 @@ export default async function TvShowDetails({
                         <Image
                             src={
                                 "https://image.tmdb.org/t/p/w500" +
-                                details?.poster_path
+                                details.poster_path
                             }
-                            alt="poster movie"
+                            alt={`Pôster de ${details.name}`}
                             width={384}
                             height={576}
                             className="w-64 lg:w-96"
@@ -48,42 +56,36 @@ export default async function TvShowDetails({
                     )}
                 </div>
                 <Layout.Details>
-                    <h2 className="title md:mt-0">{details?.name}</h2>
+                    <h2 className="title md:mt-0">{details.name}</h2>
                     <div className="detail-genre-date">
                         <i className="pi pi-star-fill" />
                         <span className="ml-1">
-                            {Math.trunc(details?.vote_average! * 10) +
-                                "%"}
+                            {Math.trunc(details.vote_average * 10)}%
                         </span>
                         <span className="mx-2">|</span>
                         <span>
-                            {
-                                formatDate(
-                                    new Date(details?.first_air_date!)
-                                ).modelOne
-                            }
+                            {formatDate(new Date(details.first_air_date)).modelOne}
                         </span>
                         <span className="mx-2">|</span>
-                        <span>{formatGenres(details?.genres!)}</span>
+                        <span>{formatGenres(details.genres)}</span>
                     </div>
-                    {details?.tagline && (
+                    {details.tagline && (
                         <span className="text-gray-400 mt-8">
-                            {details?.tagline}
+                            {details.tagline}
                         </span>
                     )}
-                    <p>{details?.overview || "Sem Informação"}</p>
+                    <p>{details.overview || "Sem Informação"}</p>
                     <div className="box-button">
                         <div>
-                            {details?.videos.results.length! > 0 && (
+                            {details?.videos?.results?.length > 0 && (
                                 <TvShowDetailsClient tvShowId={id} videos={details.videos} />
                             )}
                         </div>
                     </div>
                 </Layout.Details>
             </Layout.Root>
-            <Suspense fallback={<div>Loading...</div>}>
-                <ImageMovie param={id} urlApi="/tv" />
-            </Suspense>
+
+            <ImageMovie param={id} urlApi="/tv" />
         </div>
     );
 }
