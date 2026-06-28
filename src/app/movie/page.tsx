@@ -34,5 +34,4 @@ export default async function PageMovies() {
     );
 }
 
-export const revalidate = 3600;
 export const dynamic = 'force-dynamic';

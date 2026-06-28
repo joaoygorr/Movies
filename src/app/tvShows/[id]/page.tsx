@@ -1,4 +1,4 @@
-import { tvShows } from "@/shared/api/api";
+import { tvShowsApi } from "@/shared/api/api";
 import { Layout } from "@/shared/components/layoutComponent";
 import { Suspense, lazy } from "react";
 import { formatDate, formatGenres } from "@/shared/utils";
@@ -10,7 +10,7 @@ const ImageMovie = lazy(() => import("@/shared/components/imageMovie/imageMovie"
 
 async function getServerSideTvShowData(id: string) {
     try {
-        const details = await tvShows.findByTvShow(`${id}?append_to_response=credits,videos`);
+        const details = await tvShowsApi.findByTvShow(`${id}?append_to_response=credits,videos`);
         return { details };
     } catch (error) {
         console.error("Error fetching TV show details:", error);

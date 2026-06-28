@@ -1,7 +1,7 @@
 "use client";
 import { useMemo } from "react";
 import { IGenre, IResponse, IListTvShows } from "../../shared/interfaces";
-import { genreApi, tvShows } from "../../shared/api/api";
+import { genreApi, tvShowsApi } from "../../shared/api/api";
 import { useTranslation } from "@/shared/hooks/useTranslation";
 import MediaListClient from "@/shared/components/mediaList/MediaListClient";
 
@@ -24,10 +24,10 @@ export default function TvShowsClient({ initialData }: TvShowsClientProps) {
     ], [t]);
 
     const apiConfig = useMemo(() => ({
-        mediaCall: (route: string, page: number, signal?: AbortSignal) =>
-            tvShows.listTvShows(`${route}?page=${page}`, signal),
-        genreCall: (signal?: AbortSignal) =>
-            genreApi.findAllGenre("/tv/list", signal)
+        mediaCall: (route: string, page: number, options?: { signal?: AbortSignal; language?: string }) =>
+            tvShowsApi.listTvShows(`${route}?page=${page}`, options),
+        genreCall: (options?: { signal?: AbortSignal; language?: string }) =>
+            genreApi.findAllGenre("/tv/list", options)
     }), []);
 
     return (

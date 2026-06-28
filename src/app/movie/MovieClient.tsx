@@ -25,10 +25,10 @@ export default function MovieClient({ initialData }: MovieClientProps) {
     ], [t]);
 
     const apiConfig = useMemo(() => ({
-        mediaCall: (route: string, page: number, signal?: AbortSignal) =>
-            movieApi.listMovie(`${route}?page=${page}`, signal),
-        genreCall: (signal?: AbortSignal) =>
-            genreApi.findAllGenre("/movie/list", signal)
+        mediaCall: (route: string, page: number, options?: { signal?: AbortSignal; language?: string }) =>
+            movieApi.listMovie(`${route}?page=${page}`, options),
+        genreCall: (options?: { signal?: AbortSignal; language?: string }) =>
+            genreApi.findAllGenre("/movie/list", options)
     }), []);
 
     return (

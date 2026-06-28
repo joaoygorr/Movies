@@ -24,7 +24,7 @@ export default function CastDetails() {
                 call: (signal?: AbortSignal) =>
                     castApi.findByPeople(
                         `${cast.id}?append_to_response=external_ids,movie_credits`,
-                        signal
+                        { signal, language }
                     )
             }
         ],

@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import TvShowsClient from "./TvShowsClient";
-import { genreApi, tvShows } from "../../shared/api/api";
+import { genreApi, tvShowsApi } from "../../shared/api/api";
 
 async function getServerSideData(route: string = "/airing_today", page: number = 1) {
     try {
         const [genresResponse, seriesResponse] = await Promise.all([
             genreApi.findAllGenre("/tv/list"),
-            tvShows.listTvShows(`${route}?page=${page}`)
+            tvShowsApi.listTvShows(`${route}?page=${page}`)
         ]);
 
         return {
@@ -32,5 +32,4 @@ export default async function PageTvShows() {
     );
 }
 
-export const revalidate = 3600;
 export const dynamic = 'force-dynamic';
