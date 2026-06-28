@@ -1,18 +1,18 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 
-type Data = {
-    [key: string]: any;
+type ApiCall<K extends string, V> = {
+    key: K;
+    call: (signal?: AbortSignal) => Promise<V>;
 };
 
-type ApiCall<T> = {
-    key: string;
-    call: (signal?: AbortSignal) => Promise<T>;
-};
+type ApiCallEntry = ApiCall<string, unknown>;
 
-export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
+export const useFetchData = <T extends Record<string, unknown>>(
+    apiCalls: { [K in keyof T]: ApiCall<K & string, T[K]> }[keyof T][]
+) => {
     const [data, setData] = useState<T | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const abortControllerRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
@@ -26,12 +26,13 @@ export const useFetchData = <T extends Data>(apiCalls: ApiCall<any>[]) => {
         const fetchData = async () => {
             setLoading(true);
             try {
+                const calls = apiCalls as ApiCallEntry[];
                 const results = await Promise.all(
-                    apiCalls.map((api) => api.call(abortController.signal))
+                    calls.map((api) => api.call(abortController.signal))
                 );
-                const newData: Data = {};
+                const newData = {} as Record<string, unknown>;
                 results.forEach((result, index) => {
-                    newData[apiCalls[index].key] = result;
+                    newData[calls[index].key] = result;
                 });
                 setData(newData as T);
             } catch (error) {

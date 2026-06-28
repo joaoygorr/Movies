@@ -1,9 +1,9 @@
 "use client";
-import { IListMovie, IListTvShows, IResponse } from "@/types";
+import { IResponse } from "@/types";
 import { useTranslation } from "@/hooks/useTranslation";
 
 type Props = {
-    dataPage?: IResponse<IListMovie[] | IListTvShows[]>;
+    dataPage?: IResponse<unknown[]>;
     totalItemShow?: number;
     onSet: (item: number) => void;
     onPageChange: (value: number) => void;
