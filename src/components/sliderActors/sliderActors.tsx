@@ -42,15 +42,15 @@ const SliderActorsComponent = ({ data }: { data: ICastResponse | undefined }) =>
                         <Slider {...settings}>
                             {filteredImages?.map((c, k) => (
                                 <div className="cast" key={k}>
-                                    <a href={`/cast/${c.id}`}>
+                                    <a href={`/cast/${c.id}`} className="cast-image-wrapper">
                                         <Image
                                             src={
                                                 "https://image.tmdb.org/t/p/w300" +
                                                 c.profile_path
                                             }
-                                            alt="poster elenco"
-                                            width={200}
-                                            height={300}
+                                            alt={`Foto de ${c.original_name}`}
+                                            fill
+                                            sizes="200px"
                                             className="hover:opacity-75 transition ease-in-out duration-150"
                                         />
                                     </a>
@@ -72,15 +72,15 @@ const SliderActorsComponent = ({ data }: { data: ICastResponse | undefined }) =>
                     {filteredImages.length <= 1 && (
                         <div className="cast">
                             {filteredImages[0]?.id && filteredImages[0]?.profile_path && (
-                                <a href={`/cast/${filteredImages[0]?.id}`}>
+                                <a href={`/cast/${filteredImages[0]?.id}`} className="cast-image-wrapper">
                                     <Image
                                         src={
                                             "https://image.tmdb.org/t/p/w300" +
                                             filteredImages[0]?.profile_path
                                         }
-                                        alt="poster elenco"
-                                        width={200}
-                                        height={300}
+                                        alt={`Foto de ${filteredImages[0]?.original_name}`}
+                                        fill
+                                        sizes="200px"
                                         className="hover:opacity-75 transition ease-in-out duration-150"
                                     />
                                 </a>

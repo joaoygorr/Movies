@@ -1,6 +1,8 @@
 {
   "cast": "Elenco",
   "crew": "Equipe",
+  "credits": "Créditos",
+  "yearsOld": "anos",
   "actorDetails": "Detalhes do ator",
   "knownFor": "Conhecido por",
   "birthday": "Data de nascimento",

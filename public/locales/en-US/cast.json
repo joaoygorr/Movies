@@ -1,6 +1,8 @@
 {
   "cast": "Cast",
   "crew": "Crew",
+  "credits": "Credits",
+  "yearsOld": "years old",
   "actorDetails": "Actor details",
   "knownFor": "Known for",
   "birthday": "Birthday",
